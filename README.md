@@ -3,7 +3,6 @@
 Your designated shopping  buddy
 
 # Specification:
-- as a user i want to login with google account or mail signup
 - as a user i want to have a listing of all shopping lists (each shopping list card has a number of items bought/total, color of the category and category name, name of the shopping list)
 - as a user i want to see items from my shopping list
 - as a user i want to be able to check/uncheck if item i bought
