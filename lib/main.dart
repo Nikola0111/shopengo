@@ -18,35 +18,36 @@ class Shopengo extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AppBloc()..add(LoadApp()),
-      child: BlocBuilder<AppBloc, AppState>(builder: (context, state) {
-        if (state is AppInitial) {
-          // show splash screen here if needed
+      child: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          if (state is AppInitial) {
+            // show splash screen here if needed
+            return const SizedBox.shrink();
+          }
+
+          if (state is AppLoaded) {
+            // we can get theme and other app settings from app bloc
+            final router = KiwiContainer().resolve<RouterService>().router;
+            return EasyLocalization(
+              supportedLocales: const [Locale('sr'), Locale('en')],
+              fallbackLocale: const Locale('en'),
+              path: 'assets/localization',
+              child: Builder(
+                builder: (context) {
+                  return MaterialApp.router(
+                    title: 'Shopengo',
+                    // theme: appProvider.themeData,
+                    routerConfig: router,
+                    debugShowCheckedModeBanner: false,
+                  );
+                },
+              ),
+            );
+          }
+
           return const SizedBox.shrink();
-        }
-
-        if (state is AppLoaded) {
-          // we can get theme and other app settings from app bloc
-          final router = KiwiContainer().resolve<RouterService>().router;
-          return EasyLocalization(
-            supportedLocales: const [Locale('en'), Locale('en')],
-            fallbackLocale: const Locale('en'),
-            path: 'assets/localization',
-            child: Builder(
-              builder: (context) {
-                // theme is set in RouterService
-                return MaterialApp.router(
-                  title: 'Shopengo',
-                  // theme: appProvider.themeData,
-                  routerConfig: router,
-                  debugShowCheckedModeBanner: false,
-                );
-              },
-            ),
-          );
-        }
-
-        return const SizedBox.shrink();
-      }),
+        },
+      ),
     );
   }
 }

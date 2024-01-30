@@ -15,12 +15,9 @@ class RouterService {
   void _buildRouter() {
     _goRouter = GoRouter(
       navigatorKey: _rootNavigatorKey,
-      // initialLocation: '/${LoginPage.pageName}',
-      redirect: (context, state) {
-        return null;
-      },
       routes: [
         ShellRoute(
+          navigatorKey: _shellNavigatorKey,
           routes: [],
         ),
       ],
