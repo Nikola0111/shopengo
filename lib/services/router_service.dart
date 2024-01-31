@@ -16,6 +16,7 @@ class RouterService {
 
   void _buildRouter() {
     _goRouter = GoRouter(
+      initialLocation: '/${HomePage.pageName}',
       navigatorKey: _rootNavigatorKey,
       routes: [
         ShellRoute(

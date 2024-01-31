@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopengo/extensions/custom_colors.dart';
 
 class HomePage extends StatelessWidget {
   static const pageName = 'home-page';
@@ -6,6 +7,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      backgroundColor: context.primary,
+    );
   }
 }
