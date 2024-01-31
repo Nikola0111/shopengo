@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shopengo/pages/bottom_navigation_container.dart';
+import 'package:shopengo/pages/shopping_lists.dart';
 
 class RouterService {
   late final GoRouter _goRouter;
@@ -14,11 +16,18 @@ class RouterService {
 
   void _buildRouter() {
     _goRouter = GoRouter(
+      initialLocation: '/${HomePage.pageName}',
       navigatorKey: _rootNavigatorKey,
       routes: [
         ShellRoute(
           navigatorKey: _shellNavigatorKey,
-          routes: [],
+          builder: (context, state, child) => BottomNavigationContainer(child: child),
+          routes: [
+            GoRoute(
+              path: '/${HomePage.pageName}',
+              builder: (context, state) => const HomePage(),
+            ),
+          ],
         ),
       ],
     );

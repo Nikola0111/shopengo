@@ -1,5 +1,5 @@
 name: shopengo
-description: Your designated shopping  buddy
+description: Your designated shopping buddy
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -15,11 +15,11 @@ dependencies:
     sdk: flutter
 
   flutter_bloc: ^8.1.3
-  easy_localization: ^3.0.2
+  easy_localization: ^3.0.3
   kiwi: ^4.1.0
-  go_router: ^10.0.0
+  go_router: ^13.1.0
   easy_logger: ^0.0.2
-  shared_preferences: ^2.2.0
+  shared_preferences: ^2.2.2
   equatable: ^2.0.5
 
 dev_dependencies:
