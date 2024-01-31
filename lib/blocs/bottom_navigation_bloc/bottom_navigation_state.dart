@@ -18,9 +18,9 @@ class BottomNavigationInitial extends BottomNavigationState {
   bool? get stringify => false;
 }
 
-class ThemeRebuilt extends BottomNavigationState {
+class ThemeUpdated extends BottomNavigationState {
   final ThemeData themeData;
-  const ThemeRebuilt({required this.themeData});
+  const ThemeUpdated({required this.themeData});
 
   @override
   List get props => [themeData];

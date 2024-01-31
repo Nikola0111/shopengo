@@ -26,11 +26,6 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
   @override
   CustomTextStyleScheme copyWith({
     TextStyle? regular18,
-    TextStyle? regular20,
-    TextStyle? regular25,
-    TextStyle? medium16,
-    TextStyle? medium24,
-    TextStyle? bold18,
   }) {
     return CustomTextStyleScheme(
       regular18: regular18 ?? this.regular18,

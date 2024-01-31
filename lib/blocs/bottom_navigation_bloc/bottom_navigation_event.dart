@@ -17,8 +17,8 @@ class InitializeTheme extends BottomNavigationEvent {
   bool? get stringify => false;
 }
 
-class BuildTheme extends BottomNavigationEvent {
-  const BuildTheme();
+class ToggleTheme extends BottomNavigationEvent {
+  const ToggleTheme();
 
   @override
   List<Object> get props => [];

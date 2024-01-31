@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            context.read<BottomNavigationBloc>().add(const BuildTheme());
+            context.read<BottomNavigationBloc>().add(const ToggleTheme());
           },
           child: Text('Toggle theme'),
         ),

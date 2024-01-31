@@ -28,10 +28,6 @@ enum AppearanceEvent { themeChanged }
 
 class AppearanceService with SubscriptionMixin<AppearanceEvent>, LoggerMixin {
   AppThemeMode _appTheme = AppThemeMode.light;
-  AppThemeMode get appTheme => _appTheme;
-  Color? _customColor;
-
-  Color? get customColor => _customColor;
 
   ThemeData buildTheme() {
     final ThemeData theme;
@@ -71,13 +67,6 @@ class AppearanceService with SubscriptionMixin<AppearanceEvent>, LoggerMixin {
     }
 
     return buildTheme();
-  }
-
-  Future<void> switchTheme(AppThemeMode newTheme) async {
-    if (_appTheme == newTheme) return;
-    _appTheme = newTheme;
-    logI('switch theme to: ${_appTheme.value}');
-    sendEvent(AppearanceEvent.themeChanged, params: [newTheme]);
   }
 
   @override

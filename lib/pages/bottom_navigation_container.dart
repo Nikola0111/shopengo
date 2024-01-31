@@ -11,10 +11,10 @@ class BottomNavigationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BottomNavigationBloc()..add(const BuildTheme()),
+      create: (context) => BottomNavigationBloc()..add(const ToggleTheme()),
       child: BlocSelector<BottomNavigationBloc, BottomNavigationState, ThemeData?>(
         selector: (state) {
-          if (state is ThemeRebuilt) {
+          if (state is ThemeUpdated) {
             return state.themeData;
           }
           return null;
