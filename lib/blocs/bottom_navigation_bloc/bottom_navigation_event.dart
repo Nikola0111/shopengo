@@ -7,9 +7,21 @@ abstract class BottomNavigationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class BuildTheme implements BottomNavigationEvent {
+class InitializeTheme extends BottomNavigationEvent {
+  const InitializeTheme();
+
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [];
+
+  @override
+  bool? get stringify => false;
+}
+
+class BuildTheme extends BottomNavigationEvent {
+  const BuildTheme();
+
+  @override
+  List<Object> get props => [];
 
   @override
   bool? get stringify => false;

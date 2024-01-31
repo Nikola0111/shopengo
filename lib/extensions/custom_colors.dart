@@ -21,7 +21,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   });
 
   const CustomColorScheme.dark({
-    this.primary = const Color(0xffca7e44),
+    this.primary = Colors.black,
     this.background = const Color(0xffca7e44),
   });
 

@@ -11,9 +11,14 @@ class BottomNavigationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BottomNavigationBloc()..add(BuildTheme()),
+      create: (context) => BottomNavigationBloc()..add(const BuildTheme()),
       child: BlocSelector<BottomNavigationBloc, BottomNavigationState, ThemeData?>(
-        selector: (state) => state.themeData,
+        selector: (state) {
+          if (state is ThemeRebuilt) {
+            return state.themeData;
+          }
+          return null;
+        },
         builder: (context, themeData) {
           if (themeData == null) return Container(); // splash screen
           return Theme(data: themeData, child: child);

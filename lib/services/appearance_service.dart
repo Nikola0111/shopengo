@@ -33,12 +33,10 @@ class AppearanceService with SubscriptionMixin<AppearanceEvent>, LoggerMixin {
 
   Color? get customColor => _customColor;
 
-  ThemeData buildTheme({AppThemeMode? appThemeMode}) {
+  ThemeData buildTheme() {
     final ThemeData theme;
 
-    _appTheme = appThemeMode ?? _extractTheme();
-
-    switch (appThemeMode ?? _appTheme) {
+    switch (_appTheme) {
       case AppThemeMode.light:
         const colorScheme = CustomColorScheme.light();
         final textStyleScheme = CustomTextStyleScheme.fromPrimaryTextColor(primaryTextColor: colorScheme.primary!);
@@ -62,10 +60,17 @@ class AppearanceService with SubscriptionMixin<AppearanceEvent>, LoggerMixin {
     return theme;
   }
 
-  AppThemeMode _extractTheme() {
-    final brightness = MediaQueryData.fromView(WidgetsBinding.instance.platformDispatcher.views.first).platformBrightness;
-    final themeMode = brightness == Brightness.light ? AppThemeMode.light : AppThemeMode.dark;
-    return themeMode;
+  ThemeData toggleTheme() {
+    switch (_appTheme) {
+      case AppThemeMode.light:
+        _appTheme = AppThemeMode.dark;
+        break;
+      case AppThemeMode.dark:
+        _appTheme = AppThemeMode.light;
+        break;
+    }
+
+    return buildTheme();
   }
 
   Future<void> switchTheme(AppThemeMode newTheme) async {
