@@ -9,11 +9,11 @@ class BottomNavigationBloc extends Bloc<BottomNavigationEvent, BottomNavigationS
   final _appearanceService = KiwiContainer().resolve<AppearanceService>();
 
   BottomNavigationBloc() : super(const BottomNavigationInitial()) {
-    on<InitializeTheme>((event, emit) async {
+    on<InitializeTheme>((event, emit) {
       emit(ThemeUpdated(themeData: _appearanceService.buildTheme()));
     });
 
-    on<ToggleTheme>((event, emit) async {
+    on<ToggleTheme>((event, emit) {
       emit(ThemeUpdated(themeData: _appearanceService.toggleTheme()));
     });
   }
