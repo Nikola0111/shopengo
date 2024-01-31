@@ -1,13 +1,18 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 abstract class BottomNavigationState extends Equatable {
-  const BottomNavigationState();
+  final ThemeData themeData;
+
+  const BottomNavigationState({required this.themeData});
 
   @override
   List<Object> get props => [];
 }
 
-class BottomNavigationInitial implements BottomNavigationState {
+class BottomNavigationInitial extends BottomNavigationState {
+  const BottomNavigationInitial({required super.themeData});
+
   @override
   List<Object> get props => [];
 
@@ -15,7 +20,9 @@ class BottomNavigationInitial implements BottomNavigationState {
   bool? get stringify => false;
 }
 
-class ThemeRebuilt implements BottomNavigationState {
+class ThemeRebuilt extends BottomNavigationState {
+  const ThemeRebuilt({required super.themeData});
+
   @override
   List<Object> get props => [];
 

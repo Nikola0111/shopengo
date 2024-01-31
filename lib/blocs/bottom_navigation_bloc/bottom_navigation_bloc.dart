@@ -12,10 +12,10 @@ class BottomNavigationBloc extends Bloc<BottomNavigationEvent, BottomNavigationS
 
   ThemeData get theme => _theme;
 
-  BottomNavigationBloc() : super(BottomNavigationInitial()) {
+  BottomNavigationBloc() : super(BottomNavigationInitial(themeData: _theme)) {
     on<BuildTheme>((event, emit) async {
       _theme = _appearanceService.buildTheme();
-      emit(ThemeRebuilt());
+      emit(ThemeRebuilt(themeData: _theme));
     });
   }
 
