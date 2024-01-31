@@ -44,8 +44,10 @@ class Shopengo extends StatelessWidget {
                 builder: (context) {
                   return MaterialApp.router(
                     title: 'Shopengo',
-                    // theme: appProvider.themeData,
                     routerConfig: router,
+                    locale: context.locale,
+                    supportedLocales: context.supportedLocales,
+                    localizationsDelegates: context.localizationDelegates,
                     debugShowCheckedModeBanner: false,
                   );
                 },
