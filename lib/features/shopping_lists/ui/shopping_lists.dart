@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_bloc.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_event.dart';
-import 'package:shopengo/extensions/custom_colors.dart';
+import 'package:shopengo/core/extensions/custom_colors.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_bloc.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_event.dart';
 
 class HomePage extends StatelessWidget {
   static const pageName = 'home-page';

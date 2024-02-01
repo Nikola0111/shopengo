@@ -7,7 +7,7 @@ abstract class AppEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadApp implements AppEvent {
+class LoadApp extends AppEvent {
   @override
   List<Object> get props => throw UnimplementedError();
 

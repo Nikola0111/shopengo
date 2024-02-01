@@ -1,4 +1,4 @@
-import 'package:shopengo/services/environment_service.dart';
+import 'package:shopengo/core/services/environment_service.dart';
 
 enum _LogSeverity { info, debug, warning, error }
 

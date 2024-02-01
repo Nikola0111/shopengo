@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:shopengo/blocs/app_bloc/app_bloc.dart';
-import 'package:shopengo/blocs/app_bloc/app_event.dart';
-import 'package:shopengo/blocs/app_bloc/app_state.dart';
+import 'package:shopengo/core/services/environment_service.dart';
+import 'package:shopengo/core/services/router_service.dart';
+import 'package:shopengo/features/app_bloc/app_bloc.dart';
+import 'package:shopengo/features/app_bloc/app_event.dart';
+import 'package:shopengo/features/app_bloc/app_state.dart';
 import 'package:shopengo/kiwi_container.dart';
-import 'package:shopengo/services/environment_service.dart';
-import 'package:shopengo/services/router_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

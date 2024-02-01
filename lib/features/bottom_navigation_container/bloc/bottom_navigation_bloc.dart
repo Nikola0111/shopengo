@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_event.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_state.dart';
-import 'package:shopengo/mixins/logger_mixin.dart';
-import 'package:shopengo/services/appearance_service.dart';
+import 'package:shopengo/core/mixins/logger_mixin.dart';
+import 'package:shopengo/core/services/appearance_service.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_event.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_state.dart';
 
 class BottomNavigationBloc extends Bloc<BottomNavigationEvent, BottomNavigationState> with LoggerMixin {
   final _appearanceService = KiwiContainer().resolve<AppearanceService>();

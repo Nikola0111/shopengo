@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_bloc.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_event.dart';
-import 'package:shopengo/blocs/bottom_navigation_bloc/bottom_navigation_state.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_bloc.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_event.dart';
+import 'package:shopengo/features/bottom_navigation_container/bloc/bottom_navigation_state.dart';
 
 class BottomNavigationContainer extends StatelessWidget {
   final Widget child;

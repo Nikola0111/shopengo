@@ -7,7 +7,7 @@ abstract class AppState extends Equatable {
   List<Object> get props => [];
 }
 
-class AppInitial implements AppState {
+class AppInitial extends AppState {
   @override
   List<Object> get props => [];
 
@@ -15,7 +15,7 @@ class AppInitial implements AppState {
   bool? get stringify => false;
 }
 
-class AppLoaded implements AppState {
+class AppLoaded extends AppState {
   @override
   List<Object> get props => [];
 

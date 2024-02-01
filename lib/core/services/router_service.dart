@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shopengo/pages/bottom_navigation_container.dart';
-import 'package:shopengo/pages/shopping_lists.dart';
+import 'package:shopengo/features/bottom_navigation_container/ui/bottom_navigation_container.dart';
+import 'package:shopengo/features/shopping_lists/ui/shopping_lists.dart';
 
 class RouterService {
   late final GoRouter _goRouter;

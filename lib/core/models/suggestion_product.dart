@@ -1,4 +1,4 @@
-import 'package:shopengo/models/product.dart';
+import 'package:shopengo/core/models/product.dart';
 
 class SuggestionProduct extends Product {
   final int purchasedCount;

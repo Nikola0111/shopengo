@@ -1,4 +1,4 @@
-import 'package:shopengo/mixins/logger_mixin.dart';
+import 'package:shopengo/core/mixins/logger_mixin.dart';
 
 enum Environment { dev, test, prod }
 

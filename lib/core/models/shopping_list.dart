@@ -1,4 +1,4 @@
-import 'package:shopengo/models/product.dart';
+import 'package:shopengo/core/models/product.dart';
 
 class ShoppingList {
   final String uuid;

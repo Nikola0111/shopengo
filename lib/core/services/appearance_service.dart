@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shopengo/extensions/custom_colors.dart';
-import 'package:shopengo/extensions/custom_text_styles.dart';
-import 'package:shopengo/mixins/logger_mixin.dart';
-import 'package:shopengo/mixins/subscription_mixin.dart';
+import 'package:shopengo/core/extensions/custom_colors.dart';
+import 'package:shopengo/core/extensions/custom_text_styles.dart';
+import 'package:shopengo/core/mixins/logger_mixin.dart';
+import 'package:shopengo/core/mixins/subscription_mixin.dart';
 
 enum AppThemeMode {
   light('light'),
