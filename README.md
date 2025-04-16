@@ -10,3 +10,9 @@ Your designated shopping  buddy
 - as a user i want to filter my shopping lists based on if they've been finished or not (sort, search)
 - as a user i want to add a friend to my shopping list
 - as a user i want to have a chronological history of my shoppings and spendings
+
+# Technical
+
+- flutter version: 3.29.3
+- localization gen command: dart run easy_localization:generate --source-dir assets/localization && dart run easy_localization:generate -S assets/localization -f keys -o locale_keys.g.dart
+- command for codegen dart run build_runner build --output lib/generated

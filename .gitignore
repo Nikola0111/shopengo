@@ -30,7 +30,6 @@
 .pub-cache/
 .pub/
 /build/
-assets/service_account
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -45,4 +44,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/assets/service_account/inclusio-doo*
+
+lib/generated/*
