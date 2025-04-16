@@ -9,10 +9,10 @@ class ThemeRepository {
   String? get appLogoSvgUrl => _appLogoSvgUrl;
 
   ThemeData buildTheme() {
-    final textStyleScheme = CustomTextStyleScheme.fromPrimaryTextColor(primaryTextColor: _colorScheme.primary!);
+    final textStyleScheme = CustomTextStyleScheme.fromPrimaryTextColor(primaryTextColor: _colorScheme.primaryText!);
     return ThemeData(
       brightness: Brightness.light,
-      appBarTheme: AppBarTheme(color: _colorScheme.primary),
+      appBarTheme: AppBarTheme(color: _colorScheme.background),
       extensions: <ThemeExtension<dynamic>>[_colorScheme, textStyleScheme],
     );
   }
