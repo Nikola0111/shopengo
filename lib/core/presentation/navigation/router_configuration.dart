@@ -11,7 +11,7 @@ class RouterConfiguration {
 
   final _rootNavigationKey = GlobalKey<NavigatorState>(debugLabel: 'makeBookingKey');
 
-  void init() {
+  RouterConfiguration() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
     _goRouter = GoRouter(
       navigatorKey: _rootNavigationKey,
