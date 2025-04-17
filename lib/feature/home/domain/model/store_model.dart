@@ -4,8 +4,8 @@ part '../../../../generated/feature/home/domain/model/store_model.freezed.dart';
 
 @freezed
 class StoreModel with _$StoreModel {
-  StoreModel({required this.productCode});
+  StoreModel({required this.storeName});
 
   @override
-  final String productCode;
+  final String storeName;
 }
