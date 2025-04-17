@@ -1,0 +1,19 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          # Tells Freezed not to format .freezed.dart files.
+          # This can significantly speed up code-generation.
+          format: false
+      source_gen|combining_builder:
+        generate_for:
+          - lib/**.dart
+        options:
+          build_extensions:
+            'lib/{{path}}/{{file}}.dart': 'lib/generated/{{path}}/{{file}}.g.dart'
+      freezed|freezed:
+        enabled: true
+        options:
+          build_extensions:
+            'lib/{{path}}/{{file}}.dart': 'lib/generated/{{path}}/{{file}}.freezed.dart'
