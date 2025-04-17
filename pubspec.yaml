@@ -1,27 +1,32 @@
 name: shopengo
-description: "A new Flutter project."
+description: "Your designated shopping buddy"
 version: 1.0.0+1
 
 environment:
   sdk: ^3.7.2
 
 dependencies:
-  flutter:
-    sdk: flutter
   drift: ^2.26.0
   drift_flutter: ^0.2.4
-  kiwi: ^5.0.1
-  go_router: ^14.8.1
   easy_localization: ^3.0.7+1
-  flutter_bloc: ^9.1.0
   equatable: ^2.0.7
-  cupertino_icons: ^1.0.8
-  build_runner: ^2.4.15
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.0
+  freezed_annotation: ^3.0.0
+  go_router: ^14.8.1
+  kiwi: ^5.0.1
+  path_provider: ^2.1.5
+
+dependency_overrides:
+  analyzer: 7.3.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
+  build_runner: ^2.4.15
+  drift_dev: ^2.26.0
   flutter_lints: ^5.0.0
+  freezed: ^3.0.6
+  very_good_analysis: ^7.0.0
 
 flutter:
   uses-material-design: true

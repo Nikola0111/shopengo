@@ -5,6 +5,7 @@ import 'package:shopengo/core/presentation/navigation/router_configuration.dart'
 final container = KiwiContainer();
 
 void initDI() {
-  container.registerSingleton((container) => ThemeRepository());
-  container.registerSingleton((container) => RouterConfiguration());
+  container
+    ..registerSingleton((container) => ThemeRepository())
+    ..registerSingleton((container) => RouterConfiguration());
 }

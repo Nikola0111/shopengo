@@ -4,8 +4,7 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shopengo/core/domain/repository/di.dart' show initDI;
-
-import 'generated/codegen_loader.g.dart';
+import 'package:shopengo/generated/codegen_loader.g.dart';
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
