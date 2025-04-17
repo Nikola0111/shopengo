@@ -18,7 +18,7 @@ class StoreRepositoryImpl implements StoreRepository {
             currency: e.currency,
             previousShoppingAmountSpent: e.previousShoppingAmountSpent,
             previousShoppingArticlesBought: e.previousShoppingArticlesBought,
-            previousShoppingDate: e.previousShoppingDate!,
+            previousShoppingDate: e.previousShoppingDate,
           ),
         )
         .toList();
