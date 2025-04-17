@@ -20,7 +20,11 @@ mixin LoggerMixin {
   }
 
   void logE(String message, {String? debugText}) {
-    _printWithSeverity(_LogSeverity.error, '$className: $message', debugText: debugText);
+    _printWithSeverity(
+      _LogSeverity.error,
+      '$className: $message',
+      debugText: debugText,
+    );
   }
 
   static void logDebug(String name, String message) {
@@ -39,13 +43,18 @@ mixin LoggerMixin {
     _printWithSeverity(_LogSeverity.debug, '$name: $message');
   }
 
-  static void _printWithSeverity(_LogSeverity severity, String message, {String? debugText}) {
+  static void _printWithSeverity(
+    _LogSeverity severity,
+    String message, {
+    String? debugText,
+  }) {
     var output = '${DateTime.now()}: $message';
     if (debugText != null) {
       output += ', error: $debugText';
     }
     // don't print if it's prod
     if (kDebugMode) {
+      // This is a logger, therefor we want the print there in debug mode
       // ignore: avoid_print
       print(output);
     }
