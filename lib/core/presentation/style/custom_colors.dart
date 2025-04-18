@@ -14,9 +14,9 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   const CustomColorScheme({required this.primary, required this.background, required this.primaryText});
 
   const CustomColorScheme.classic({
-    this.primary = const Color(0xFFD84E56),
+    this.primary = const Color(0xFF6A5AE0),
     this.background = const Color(0xFFFFFFFF),
-    this.primaryText = Colors.grey,
+    this.primaryText = const Color(0xFFFFFFFF),
   });
 
   final Color? primary;

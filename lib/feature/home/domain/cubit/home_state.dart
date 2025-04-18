@@ -6,13 +6,13 @@ abstract class HomeState extends Equatable {
   List<Object?> get props => [];
 }
 
-class LoadingState extends HomeState {
+class HomeLoadingState extends HomeState {
   @override
   List<Object?> get props => [];
 }
 
-class StoresReadyEvent extends HomeState {
-  StoresReadyEvent(this.stores);
+class HomeStoresReadyState extends HomeState {
+  HomeStoresReadyState({required this.stores});
   final List<StoreModel> stores;
 
   @override

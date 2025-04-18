@@ -1,0 +1,10 @@
+{
+  "title": "Welcome to shopengo!",
+  "home": {
+    "goodMorning": "Dobro Jutro!",
+    "goodAfternoon": "Dobar Dan!",
+    "goodEvening": "Dobro Veče!",
+
+    "numOfStores": "Radnje ({storesAmount})"
+  }
+}

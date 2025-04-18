@@ -1,3 +1,10 @@
 {
-  "title": "Welcome to shopengo!"
+  "title": "Welcome to shopengo!",
+  "home": {
+    "goodMorning": "Good Morning!",
+    "goodAfternoon": "Good Afternoon!",
+    "goodEvening": "Good Evening!",
+
+    "numOfStores": "Stores ({storesAmount})"
+  }
 }
