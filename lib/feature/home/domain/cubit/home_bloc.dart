@@ -9,6 +9,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final stores = await _storeRepository.getAllStores();
       emit(HomeStoresReadyState(stores: stores));
     });
+
+    on<HomeCreatingStoreEvent>((event, emit) async {
+      final currState = state;
+      if (currState is HomeStoresReadyState) {
+        emit(HomeCreatingStoreState(stores: currState.stores));
+      }
+    });
+
+    on<HomeSubmitNewStoreEvent>((event, emit) async {
+      await _storeRepository.createStore(event.storeName);
+      add(LoadStoresEvent());
+    });
   }
 
   final StoreRepository _storeRepository;

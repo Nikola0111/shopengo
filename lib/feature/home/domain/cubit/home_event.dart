@@ -14,3 +14,16 @@ class StoresFetchedEvent extends HomeEvent {
   @override
   List<Object?> get props => [];
 }
+
+class HomeCreatingStoreEvent extends HomeEvent {
+  @override
+  List<Object?> get props => [];
+}
+
+class HomeSubmitNewStoreEvent extends HomeEvent {
+  HomeSubmitNewStoreEvent({required this.storeName});
+  final String storeName;
+
+  @override
+  List<Object?> get props => [];
+}
