@@ -9,6 +9,7 @@ class RoundedButton extends StatelessWidget {
     required this.onPressed,
     super.key,
   });
+
   final IconData icon;
   final Color backgroundColor;
   final Color iconColor;
@@ -22,7 +23,7 @@ class RoundedButton extends StatelessWidget {
       child: TextButton(
         style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(backgroundColor)),
         onPressed: onPressed,
-        child: Icon(icon, color: iconColor),
+        child: Icon(icon, color: iconColor, size: 24),
       ),
     );
   }

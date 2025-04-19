@@ -23,6 +23,7 @@ class StoreTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get storeName => text().withLength(min: 0, max: 32)();
   TextColumn get currency => text().withLength(min: 0, max: 10).nullable()();
+  DateTimeColumn get createdAt => dateTime()();
   DateTimeColumn get previousShoppingDate => dateTime().nullable()();
   RealColumn get previousShoppingAmountSpent => real().nullable()();
   IntColumn get previousShoppingArticlesBought => integer().nullable()();

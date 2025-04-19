@@ -5,11 +5,11 @@ class StoreDatasource {
 
   Future<List<StoreTableData>> getAllStores() => _database.select(_database.storeTable).get();
 
-  Future<StoreTableData> createStore(String storeName) async {
+  Future<int> createStore(String storeName) async {
     final newStoreID = await _database
         .into(_database.storeTable)
-        .insert(StoreTableCompanion.insert(storeName: storeName));
+        .insert(StoreTableCompanion.insert(storeName: storeName, createdAt: DateTime.now()));
 
-    return StoreTableData(id: newStoreID, storeName: storeName);
+    return newStoreID;
   }
 }

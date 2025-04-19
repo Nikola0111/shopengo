@@ -5,6 +5,9 @@
     "goodAfternoon": "Good Afternoon!",
     "goodEvening": "Good Evening!",
 
-    "numOfStores": "Stores ({storesAmount})"
+    "numOfStores": "Stores ({storesAmount})",
+
+    "noMoneySpend": "No Money Spent",
+    "numOfArticles": "Number of articles: {articlesAmount}"
   }
 }

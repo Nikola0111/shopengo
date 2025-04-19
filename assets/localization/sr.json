@@ -5,6 +5,9 @@
     "goodAfternoon": "Dobar Dan!",
     "goodEvening": "Dobro Veče!",
 
-    "numOfStores": "Radnje ({storesAmount})"
+    "numOfStores": "Radnje ({storesAmount})",
+
+    "noMoneySpend": "Nije potrošen novac",
+    "numOfArticles": "Broj artikala: {articlesAmount}"
   }
 }

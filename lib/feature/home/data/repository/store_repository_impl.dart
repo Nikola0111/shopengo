@@ -16,7 +16,7 @@ class StoreRepositoryImpl implements StoreRepository {
             id: e.id,
             storeName: e.storeName,
             currency: e.currency,
-            previousShoppingAmountSpent: e.previousShoppingAmountSpent,
+            totalAmountSpentAtStore: e.previousShoppingAmountSpent,
             previousShoppingArticlesBought: e.previousShoppingArticlesBought,
             previousShoppingDate: e.previousShoppingDate,
           ),
@@ -25,8 +25,8 @@ class StoreRepositoryImpl implements StoreRepository {
   }
 
   @override
-  Future<StoreModel> createStore(String storeName) async {
-    final store = await _storeDatasource.createStore(storeName);
-    return StoreModel(id: store.id, storeName: store.storeName);
+  Future<int> createStore(String storeName) async {
+    final id = await _storeDatasource.createStore(storeName);
+    return id;
   }
 }

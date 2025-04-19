@@ -8,6 +8,7 @@ import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
+import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,6 +55,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         onDone: () {},
                         controller: _homeTextFieldController,
                         onChanged: (value) {},
+                      ),
+                      const SizedBox(height: 12),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.stores.length,
+                          itemBuilder: (context, index) {
+                            final store = state.stores[index];
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: StoreCard(store: store),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

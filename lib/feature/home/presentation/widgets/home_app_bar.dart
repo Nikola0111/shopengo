@@ -94,7 +94,7 @@ class _InfoSection extends StatelessWidget {
                 ),
                 alignment: PlaceholderAlignment.middle,
               ),
-              TextSpan(text: welcomeSign.tr(), style: CustomTextStyles.of(context).medium12),
+              TextSpan(text: welcomeSign.tr().toUpperCase(), style: CustomTextStyles.of(context).medium12),
             ],
           ),
         ),
