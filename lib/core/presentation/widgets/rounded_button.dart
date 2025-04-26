@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({

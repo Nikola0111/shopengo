@@ -1,0 +1,31 @@
+import 'package:drift/native.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:shopengo/core/presentation/utils/app_database.dart';
+import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
+
+@GenerateMocks([AppDatabase])
+void main() {
+  late StoreDatasource datasource;
+  late AppDatabase database;
+
+  setUpAll(() {
+    TestWidgetsFlutterBinding.ensureInitialized();
+    database = AppDatabase.forTesting(NativeDatabase.memory());
+    datasource = StoreDatasource(database);
+  });
+
+  test('return list should be empty', () async {
+    final stores = await datasource.getAllStores();
+    expect(stores, isEmpty);
+  });
+
+  test('creating a store', () async {
+    const mercatorStoreName = 'Mercator';
+
+    await datasource.createStore(mercatorStoreName);
+    final stores = await datasource.getAllStores();
+
+    expect(stores.length, 1);
+  });
+}

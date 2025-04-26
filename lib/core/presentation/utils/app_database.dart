@@ -8,6 +8,9 @@ part '../../../generated/core/presentation/utils/app_database.g.dart';
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
+  // Named constructor for creating in-memory database
+  AppDatabase.forTesting(super.e);
+
   static QueryExecutor _openConnection() {
     return driftDatabase(
       name: 'shopengo_database',

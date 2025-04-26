@@ -1,9 +1,11 @@
+import 'package:drift/drift.dart';
 import 'package:shopengo/core/presentation/utils/app_database.dart';
 
 class StoreDatasource {
-  final _database = AppDatabase();
+  const StoreDatasource(this._database);
+  final AppDatabase _database;
 
-  Future<List<StoreTableData>> getAllStores() => _database.select(_database.storeTable).get();
+  Future<List<StoreTableData>> getAllStores() => _database.storeTable.all().get();
 
   Future<int> createStore(String storeName) async {
     final newStoreID = await _database
