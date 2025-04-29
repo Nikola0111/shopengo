@@ -4,16 +4,16 @@ import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc(this._storeRepository) : super(HomeLoadingState()) {
+  HomeBloc(this._storeRepository) : super(const HomeState.loading(stores: [])) {
     on<LoadStoresEvent>((event, emit) async {
       final stores = await _storeRepository.getAllStores();
-      emit(HomeStoresReadyState(stores: stores));
+      emit(HomeState.storesReady(stores: stores));
     });
 
     on<HomeCreatingStoreEvent>((event, emit) async {
       final currState = state;
       if (currState is HomeStoresReadyState) {
-        emit(HomeCreatingStoreState(stores: currState.stores));
+        emit(HomeState.creatingStore(stores: currState.stores));
       }
     });
 
