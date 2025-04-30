@@ -16,17 +16,35 @@ void main() {
     datasource = StoreDatasource(database);
   });
 
-  test('return list should be empty', () async {
-    final stores = await datasource.getAllStores();
-    expect(stores, isEmpty);
+  group('basic crud operations', () {
+    test('return list should be empty', () async {
+      final stores = await datasource.getAllStores();
+      expect(stores, isEmpty);
+    });
+
+    test('creating a store', () async {
+      const mercatorStoreName = 'Mercator';
+
+      await datasource.createStore(mercatorStoreName);
+      final stores = await datasource.getAllStores();
+
+      expect(stores.length, 1);
+    });
   });
 
-  test('creating a store', () async {
-    const mercatorStoreName = 'Mercator';
+  group('searching stores', () {
+    test('searching a store should return 0 stores', () async {
+      final stores = await datasource.searchByQuery('mer');
+      expect(stores.length, 1);
+    });
 
-    await datasource.createStore(mercatorStoreName);
-    final stores = await datasource.getAllStores();
+    test('searching a store should return 1 store', () async {
+      const mercatorStoreName = 'Mercator';
 
-    expect(stores.length, 1);
+      await datasource.createStore(mercatorStoreName);
+      final stores = await datasource.searchByQuery('mer');
+
+      expect(stores.length, 2);
+    });
   });
 }

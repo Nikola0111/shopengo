@@ -56,4 +56,40 @@ void main() {
     act: (bloc) => bloc.add(HomeSubmitNewStoreEvent(storeName: 'merkator')),
     verify: (bloc) => expect(bloc.state, HomeState.storesReady(stores: [StoreModel(id: 1, storeName: 'merkator')])),
   );
+
+  blocTest<HomeBloc, HomeState>(
+    'should search the store table and return 1 item',
+    setUp: () {
+      when(storeRepository.createStore('merkator')).thenAnswer((_) async => 1);
+      when(storeRepository.searchByQuery('m')).thenAnswer((_) async => [StoreModel(id: 1, storeName: 'merkator')]);
+    },
+    build: () => HomeBloc(storeRepository),
+    act: (bloc) => bloc.add(HomeQueryStoresEvent(query: 'm')),
+    verify: (bloc) => expect(bloc.state, HomeState.searchingStores(stores: [StoreModel(id: 1, storeName: 'merkator')])),
+  );
+
+  blocTest<HomeBloc, HomeState>(
+    'searching by no criteria should return the whole list',
+    setUp: () {
+      when(storeRepository.createStore('merkator')).thenAnswer((_) async => 1);
+      when(storeRepository.createStore('idea')).thenAnswer((_) async => 2);
+      when(storeRepository.searchByQuery('')).thenAnswer(
+        (_) async => [
+          StoreModel(id: 1, storeName: 'merkator'),
+          StoreModel(id: 2, storeName: 'idea'),
+        ],
+      );
+    },
+    build: () => HomeBloc(storeRepository),
+    act: (bloc) => bloc.add(HomeQueryStoresEvent(query: '')),
+    verify: (bloc) => expect(
+      bloc.state,
+      HomeState.searchingStores(
+        stores: [
+          StoreModel(id: 1, storeName: 'merkator'),
+          StoreModel(id: 2, storeName: 'idea'),
+        ],
+      ),
+    ),
+  );
 }
