@@ -25,5 +25,13 @@ class HomeSubmitNewStoreEvent extends HomeEvent {
   final String storeName;
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [storeName];
+}
+
+class HomeQueryStoresEvent extends HomeEvent {
+  HomeQueryStoresEvent({required this.query});
+  final String? query;
+
+  @override
+  List<Object?> get props => [query];
 }

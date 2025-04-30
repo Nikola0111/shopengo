@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
           },
           builder: (context, state) {
-            if (state is HomeStoresReadyState || state is HomeCreatingStoreState) {
+            if (state is HomeStoresReadyState || state is HomeCreatingStoreState || state is HomeSearchingStoresState) {
               return SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -45,16 +45,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         isCreating: state is HomeCreatingStoreState,
                         isSearching: state is HomeSearchingStoresState,
                         onAddPressed: () => context.read<HomeBloc>().add(HomeCreatingStoreEvent()),
-                        onSearchPressed: () {},
+                        onSearchPressed: () => context.read<HomeBloc>().add(HomeQueryStoresEvent(query: null)),
                         onCancel: () => _onCancel(context),
                         onCreateStore: () => _onCreateStore(context),
                       ),
                       const SizedBox(height: 12),
                       HomeTextField(
-                        isVisible: state is HomeCreatingStoreState,
+                        isVisible: state is HomeCreatingStoreState || state is HomeSearchingStoresState,
                         onDone: () {},
                         controller: _homeTextFieldController,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          context.read<HomeBloc>().add(HomeQueryStoresEvent(query: value));
+                        },
                       ),
                       const SizedBox(height: 12),
                       Expanded(

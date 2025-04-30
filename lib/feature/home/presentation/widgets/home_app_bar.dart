@@ -57,7 +57,7 @@ class HomeAppBar extends StatelessWidget {
             width: 48,
             height: 48,
             child: TextButton(
-              onPressed: () {},
+              onPressed: onSearchPressed,
               child: Assets.icon.search.svg(),
             ),
           ),

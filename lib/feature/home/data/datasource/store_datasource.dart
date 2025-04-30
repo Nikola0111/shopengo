@@ -14,4 +14,11 @@ class StoreDatasource {
 
     return newStoreID;
   }
+
+  // TODO(vaneleey): Implement proper search with where keyword
+  Future<List<StoreTableData>> searchByQuery(String query) async {
+    final data = await _database.storeTable.all().get();
+    data.removeWhere((e) => !e.storeName.toUpperCase().contains(query.toUpperCase()));
+    return data;
+  }
 }
