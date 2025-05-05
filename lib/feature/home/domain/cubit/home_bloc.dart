@@ -30,11 +30,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<HomeQueryStoresEvent>((event, emit) async {
       final q = event.query;
-      // if (q == null || q.isEmpty) {
-      //   add(LoadStoresEvent());
-      //   return;
-      // }
-
       final stores = await _storeRepository.searchByQuery(q ?? '');
       emit(HomeState.searchingStores(stores: stores));
     });
