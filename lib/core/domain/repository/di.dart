@@ -9,8 +9,8 @@ final container = KiwiContainer();
 
 void initDI() {
   container
-    ..registerFactory((container) => StoreDatasource(AppDatabase()))
-    ..registerFactory((container) => ThemeRepository())
+    ..registerSingleton((container) => StoreDatasource(AppDatabase()))
+    ..registerSingleton((container) => ThemeRepository())
     ..registerSingleton((container) => RouterConfiguration())
     ..registerSingleton((container) => StoreRepositoryImpl(container.resolve<StoreDatasource>()));
 }
