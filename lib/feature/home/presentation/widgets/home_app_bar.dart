@@ -51,7 +51,14 @@ class HomeAppBar extends StatelessWidget {
             onPressed: onCreateStore,
           ),
         ],
-        if (isSearching) ...[],
+        if (isSearching) ...[
+          RoundedButton(
+            icon: Icons.undo,
+            backgroundColor: CustomColors.of(context).undoColor,
+            iconColor: CustomColors.of(context).background,
+            onPressed: onCancel,
+          ),
+        ],
         if (!isCreating && !isSearching) ...[
           SizedBox(
             width: 48,

@@ -12,6 +12,7 @@ class CustomColors {
   Color get confirm => Theme.of(_context).extension<CustomColorScheme>()!.confirm!;
   Color get storeCardGradientStart => Theme.of(_context).extension<CustomColorScheme>()!.storeCardGradientStart!;
   Color get storeCardGradientEnd => Theme.of(_context).extension<CustomColorScheme>()!.storeCardGradientEnd!;
+  Color get undoColor => Theme.of(_context).extension<CustomColorScheme>()!.undoColor!;
 }
 
 @immutable
@@ -25,6 +26,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     required this.confirm,
     required this.storeCardGradientStart,
     required this.storeCardGradientEnd,
+    required this.undoColor,
   });
 
   const CustomColorScheme.classic({
@@ -36,6 +38,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     this.confirm = const Color(0xFF16A34A),
     this.storeCardGradientStart = const Color(0xFF9A8FFF),
     this.storeCardGradientEnd = const Color(0xFF847BD9),
+    this.undoColor = Colors.grey,
   });
 
   final Color? primary;
@@ -46,6 +49,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   final Color? confirm;
   final Color? storeCardGradientStart;
   final Color? storeCardGradientEnd;
+  final Color? undoColor;
 
   @override
   ThemeExtension<CustomColorScheme> copyWith({
@@ -57,6 +61,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     Color? confirm,
     Color? storeCardGradientStart,
     Color? storeCardGradientEnd,
+    Color? undoColor,
   }) {
     return CustomColorScheme(
       primary: primary ?? this.primary,
@@ -67,6 +72,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       confirm: confirm ?? this.confirm,
       storeCardGradientStart: storeCardGradientStart ?? this.storeCardGradientStart,
       storeCardGradientEnd: storeCardGradientEnd ?? this.storeCardGradientEnd,
+      undoColor: undoColor ?? this.undoColor,
     );
   }
 
@@ -84,6 +90,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       confirm: Color.lerp(confirm, other.confirm, t),
       storeCardGradientStart: Color.lerp(storeCardGradientStart, other.storeCardGradientStart, t),
       storeCardGradientEnd: Color.lerp(storeCardGradientEnd, other.storeCardGradientEnd, t),
+      undoColor: Color.lerp(undoColor, other.undoColor, t),
     );
   }
 }
