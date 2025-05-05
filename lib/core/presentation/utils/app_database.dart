@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 
 part '../../../generated/core/presentation/utils/app_database.g.dart';
 
-@DriftDatabase(tables: [StoreTable])
+@DriftDatabase(tables: [StoreTable, ShoppingItem, ShoppingListEntry])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
@@ -22,12 +22,27 @@ class AppDatabase extends _$AppDatabase {
   int get schemaVersion => 1;
 }
 
+typedef ShoppingListOfStore = ({
+  StoreTable store,
+  List<ShoppingItem> items,
+});
+
 class StoreTable extends Table {
-  IntColumn get id => integer().autoIncrement()();
-  TextColumn get storeName => text().withLength(min: 0, max: 32)();
-  TextColumn get currency => text().withLength(min: 0, max: 10).nullable()();
-  DateTimeColumn get createdAt => dateTime()();
-  DateTimeColumn get previousShoppingDate => dateTime().nullable()();
-  RealColumn get previousShoppingAmountSpent => real().nullable()();
-  IntColumn get previousShoppingArticlesBought => integer().nullable()();
+  late final id = integer().autoIncrement()();
+  late final storeName = text().withLength(min: 0, max: 32)();
+  late final currency = text().withLength(min: 0, max: 10).nullable()();
+  late final createdAt = dateTime()();
+  late final previousShoppingDate = dateTime().nullable()();
+  late final previousShoppingAmountSpent = real().nullable()();
+  late final previousShoppingArticlesBought = integer().nullable()();
+}
+
+class ShoppingItem extends Table {
+  late final id = integer().autoIncrement()();
+  late final name = text().withLength(min: 0, max: 32)();
+}
+
+class ShoppingListEntry extends Table {
+  late final storeID = integer().references(StoreTable, #id)();
+  late final shoppingItemID = integer().references(ShoppingItem, #id)();
 }

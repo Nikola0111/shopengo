@@ -17,8 +17,8 @@ class StoreDatasource {
 
   // TODO(vaneleey): Implement proper search with where keyword
   Future<List<StoreTableData>> searchByQuery(String query) async {
-    final data = await _database.storeTable.all().get();
-    data.removeWhere((e) => !e.storeName.toUpperCase().contains(query.toUpperCase()));
+    final q = '%${query.toLowerCase()}%';
+    final data = await (_database.storeTable.select()..where((e) => e.storeName.lower().like(q))).get();
     return data;
   }
 }
