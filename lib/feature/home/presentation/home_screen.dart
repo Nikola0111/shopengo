@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/domain/repository/di.dart' show container;
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository_impl.dart';
@@ -9,6 +10,7 @@ import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
 import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
+import 'package:shopengo/feature/shopping_list/presentation/shopping_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -55,7 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         onDone: () {},
                         controller: _homeTextFieldController,
                         onChanged: (value) {
-                          context.read<HomeBloc>().add(HomeQueryStoresEvent(query: value));
+                          if (state is HomeSearchingStoresState) {
+                            context.read<HomeBloc>().add(HomeQueryStoresEvent(query: value));
+                          }
                         },
                       ),
                       const SizedBox(height: 12),
@@ -66,7 +70,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             final store = state.stores[index];
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 12),
-                              child: StoreCard(store: store),
+                              child: StoreCard(
+                                store: store,
+                                onStorePressed: () => context.pushNamed(
+                                  ShoppingListScreen.path,
+                                  pathParameters: {'storeID': store.id.toString()},
+                                ),
+                              ),
                             );
                           },
                         ),

@@ -1,11 +1,10 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class ShoppingListEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+part '../../../../generated/feature/shopping_list/domain/cubit/shopping_list_event.freezed.dart';
 
-class LoadDataEvent extends ShoppingListEvent {
-  @override
-  List<Object?> get props => [];
+@freezed
+class ShoppingListEvent with _$ShoppingListEvent {
+  const factory ShoppingListEvent.loadData() = ShoppingListLoadDataEvent;
+  const factory ShoppingListEvent.createAndAddGrocery({required String groceryName}) = ShoppingListCreateAddGrocery;
+  const factory ShoppingListEvent.queryListAndItems({required String query}) = ShoppingListQueryEvent;
 }

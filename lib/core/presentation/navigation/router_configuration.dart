@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopengo/feature/home/presentation/home_screen.dart';
+import 'package:shopengo/feature/shopping_list/presentation/shopping_list_screen.dart';
 
 class RouterConfiguration {
   RouterConfiguration() {
@@ -10,16 +11,28 @@ class RouterConfiguration {
     _goRouter = GoRouter(
       navigatorKey: _rootNavigationKey,
       initialLocation: '/${HomeScreen.path}',
-      redirect: (context, state) {
-        return null;
-      },
+      redirect: (context, state) => null,
       routes: <RouteBase>[
         GoRoute(
           path: '/${HomeScreen.path}',
           name: HomeScreen.path,
-          pageBuilder:
-              (context, state) =>
-                  _getPage(key: state.pageKey, child: const HomeScreen()),
+          pageBuilder: (context, state) => _getPage(
+            key: state.pageKey,
+            child: const HomeScreen(),
+          ),
+          routes: [
+            GoRoute(
+              path: ShoppingListScreen.path,
+              name: ShoppingListScreen.path,
+              pageBuilder: (context, state) {
+                final storeIDString = state.pathParameters['storeID']!;
+                return _getPage(
+                  key: state.pageKey,
+                  child: ShoppingListScreen(storeID: int.parse(storeIDString)),
+                );
+              },
+            ),
+          ],
         ),
       ],
     );

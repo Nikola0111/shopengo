@@ -9,8 +9,9 @@ class ShoppingListRepositoryImpl extends ShoppingListRepository {
   final ShoppingListDatasource _datasource;
 
   @override
-  Future<void> createShoppingItem(String name) async {
-    await _datasource.createShoppingItem(name);
+  Future<int> createShoppingItem(String name) async {
+    final id = await _datasource.createShoppingItem(name);
+    return id;
   }
 
   @override
@@ -25,5 +26,10 @@ class ShoppingListRepositoryImpl extends ShoppingListRepository {
     final shoppingItems = await _datasource.getRandomShoppingItems();
     final models = shoppingItems.map((e) => ShoppingItemModel(id: e.id, name: e.name)).toList();
     return models;
+  }
+
+  @override
+  Future<void> addShoppingItemToShoppingList({required int storeID, required int shoppingItemID}) async {
+    await _datasource.insertShoppingItemEntry(shoppingItemID: shoppingItemID, storeID: storeID);
   }
 }

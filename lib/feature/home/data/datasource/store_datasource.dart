@@ -7,6 +7,9 @@ class StoreDatasource {
 
   Future<List<StoreTableData>> getAllStores() => _database.storeTable.all().get();
 
+  Future<StoreTableData> getStoreByID(int id) =>
+      (_database.storeTable.select()..where((e) => e.id.equals(id))).getSingle();
+
   Future<int> createStore(String storeName) async {
     final newStoreID = await _database
         .into(_database.storeTable)

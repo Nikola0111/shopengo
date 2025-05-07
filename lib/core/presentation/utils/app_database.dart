@@ -8,7 +8,6 @@ part '../../../generated/core/presentation/utils/app_database.g.dart';
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
-  // Named constructor for creating in-memory database
   AppDatabase.forTesting(super.e);
 
   static QueryExecutor _openConnection() {
@@ -21,11 +20,6 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 }
-
-typedef ShoppingListOfStore = ({
-  StoreTable store,
-  List<ShoppingItem> items,
-});
 
 class StoreTable extends Table {
   late final id = integer().autoIncrement()();

@@ -9,5 +9,8 @@
 
     "noMoneySpend": "Nije potrošen novac",
     "numOfArticles": "Broj artikala: {articlesAmount}"
+  },
+  "shoppingList": {
+    "subtitle": "Shopping List"
   }
 }

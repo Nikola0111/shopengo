@@ -9,5 +9,9 @@
 
     "noMoneySpend": "No Money Spent",
     "numOfArticles": "Number of articles: {articlesAmount}"
+  },
+  "shoppingList": {
+    "subtitle": "List of groceries",
+    "otherShoppingItems": "Other shopping items"
   }
 }

@@ -40,4 +40,10 @@ class StoreRepositoryImpl implements StoreRepository {
         )
         .toList();
   }
+
+  @override
+  Future<StoreModel> getStoreByID(int storeID) async {
+    final storeData = await _storeDatasource.getStoreByID(storeID);
+    return StoreModel(id: storeData.id, storeName: storeData.storeName);
+  }
 }

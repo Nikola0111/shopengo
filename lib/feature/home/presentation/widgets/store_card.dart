@@ -7,28 +7,32 @@ import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class StoreCard extends StatelessWidget {
-  const StoreCard({required this.store, super.key});
+  const StoreCard({required this.store, required this.onStorePressed, super.key});
   final StoreModel store;
+  final VoidCallback onStorePressed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          colors: [
-            CustomColors.of(context).storeCardGradientStart,
-            CustomColors.of(context).storeCardGradientEnd,
+    return InkWell(
+      onTap: onStorePressed,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 26),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              CustomColors.of(context).storeCardGradientStart,
+              CustomColors.of(context).storeCardGradientEnd,
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            _InfoSection(store: store),
           ],
         ),
-      ),
-      child: Column(
-        children: [
-          _InfoSection(store: store),
-        ],
       ),
     );
   }
