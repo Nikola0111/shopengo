@@ -22,8 +22,11 @@ class ShoppingListDatasource {
     return query.map((row) => row.readTable(_database.shoppingItem)).get();
   }
 
-  Future<List<ShoppingItemData>> getRandomShoppingItems() async {
-    final data = await (_database.shoppingItem.select()..limit(10)).get();
+  Future<List<ShoppingItemData>> getRandomShoppingItems(List<int> excludedShoppingItemIDs) async {
+    final data = await (_database.shoppingItem.select()
+          ..limit(10)
+          ..where((e) => e.id.isNotIn(excludedShoppingItemIDs)))
+        .get();
     return data;
   }
 
@@ -31,5 +34,11 @@ class ShoppingListDatasource {
     await _database
         .into(_database.shoppingListEntry)
         .insert(ShoppingListEntryCompanion(storeID: Value(storeID), shoppingItemID: Value(shoppingItemID)));
+  }
+
+  Future<void> removeShoppingItemEntry({required int storeID, required int shoppingItemID}) async {
+    await (_database.shoppingListEntry.delete()
+          ..where((e) => e.storeID.equals(storeID) & e.shoppingItemID.equals(shoppingItemID)))
+        .go();
   }
 }

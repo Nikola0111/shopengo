@@ -14,13 +14,13 @@ void main() {
   });
 
   test('testing fetching no items', () async {
-    final items = await datasource.getRandomShoppingItems();
+    final items = await datasource.getRandomShoppingItems([]);
     expect(items.length, 0);
   });
 
   test('testing creating of shopping item', () async {
     await datasource.createShoppingItem('tomato');
-    final items = await datasource.getRandomShoppingItems();
+    final items = await datasource.getRandomShoppingItems([]);
     expect(items.length, 1);
   });
 }

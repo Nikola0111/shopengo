@@ -24,19 +24,27 @@ class ShoppingListBloc extends Bloc<ShoppingListEvent, ShoppingListState> with L
   final ShoppingListRepository _shoppingListRepository;
 
   void _init() {
-    on<ShoppingListLoadDataEvent>((event, emit) async {
+    on<LoadShoppingData>((event, emit) async {
       await _fetchInitialData(emit);
     });
 
-    on<ShoppingListCreateAddGrocery>((event, emit) async {
+    on<CreateAndAddShoppingItem>((event, emit) async {
       await _createAddShoppingItem(emit, shoppingItemName: event.groceryName);
+    });
+
+    on<AddToShoppingList>((event, emit) async {
+      await _addItemToShoppingList(event.id);
+    });
+
+    on<RemoveFromShoppingList>((event, emit) async {
+      await _removeItemFromShoppingList(event.id);
     });
   }
 
   Future<void> _fetchInitialData(Emitter<ShoppingListState> emit) async {
     try {
       final list = await _shoppingListRepository.getShoppingItemsByStoreID(storeID);
-      final items = await _shoppingListRepository.getRandomShoppingItems();
+      final items = await _shoppingListRepository.getRandomShoppingItems(list.shoppingItems);
       final store = await _storeRepository.getStoreByID(storeID);
 
       emit(
@@ -63,7 +71,25 @@ class ShoppingListBloc extends Bloc<ShoppingListEvent, ShoppingListState> with L
       final shoppingItemID = await _shoppingListRepository.createShoppingItem(shoppingItemName);
       await _shoppingListRepository.addShoppingItemToShoppingList(storeID: storeID, shoppingItemID: shoppingItemID);
 
-      add(const ShoppingListLoadDataEvent());
+      add(const LoadShoppingData());
+    } on Exception catch (e) {
+      logE('error fetching initial data: $e');
+    }
+  }
+
+  Future<void> _addItemToShoppingList(int id) async {
+    try {
+      await _shoppingListRepository.addToShoppingList(shoppingItemID: id, storeID: storeID);
+      add(const LoadShoppingData());
+    } on Exception catch (e) {
+      logE('error fetching initial data: $e');
+    }
+  }
+
+  Future<void> _removeItemFromShoppingList(int id) async {
+    try {
+      await _shoppingListRepository.removeFromShoppingList(shoppingItemID: id, storeID: storeID);
+      add(const LoadShoppingData());
     } on Exception catch (e) {
       logE('error fetching initial data: $e');
     }

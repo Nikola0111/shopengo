@@ -22,8 +22,8 @@ class ShoppingListRepositoryImpl extends ShoppingListRepository {
   }
 
   @override
-  Future<List<ShoppingItemModel>> getRandomShoppingItems() async {
-    final shoppingItems = await _datasource.getRandomShoppingItems();
+  Future<List<ShoppingItemModel>> getRandomShoppingItems(List<ShoppingItemModel> excludedShoppingItems) async {
+    final shoppingItems = await _datasource.getRandomShoppingItems(excludedShoppingItems.map((e) => e.id).toList());
     final models = shoppingItems.map((e) => ShoppingItemModel(id: e.id, name: e.name)).toList();
     return models;
   }
@@ -31,5 +31,15 @@ class ShoppingListRepositoryImpl extends ShoppingListRepository {
   @override
   Future<void> addShoppingItemToShoppingList({required int storeID, required int shoppingItemID}) async {
     await _datasource.insertShoppingItemEntry(shoppingItemID: shoppingItemID, storeID: storeID);
+  }
+
+  @override
+  Future<void> addToShoppingList({required int shoppingItemID, required int storeID}) async {
+    await _datasource.insertShoppingItemEntry(storeID: storeID, shoppingItemID: shoppingItemID);
+  }
+
+  @override
+  Future<void> removeFromShoppingList({required int shoppingItemID, required int storeID}) async {
+    await _datasource.removeShoppingItemEntry(storeID: storeID, shoppingItemID: shoppingItemID);
   }
 }

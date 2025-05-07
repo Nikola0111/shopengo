@@ -9,9 +9,10 @@ import 'package:shopengo/feature/shopping_list/domain/model/shopping_item_model.
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class ShoppingItemsSection extends StatefulWidget {
-  const ShoppingItemsSection({required this.shoppingItems, super.key});
+  const ShoppingItemsSection({required this.shoppingItems, required this.onAddToShoppingList, super.key});
 
   final List<ShoppingItemModel> shoppingItems;
+  final void Function(int id) onAddToShoppingList;
 
   @override
   State<ShoppingItemsSection> createState() => _ShoppingItemsSectionState();
@@ -55,10 +56,22 @@ class _ShoppingItemsSectionState extends State<ShoppingItemsSection> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: widget.shoppingItems.length,
                 itemBuilder: (context, index) {
-                  final title = widget.shoppingItems[index];
+                  final item = widget.shoppingItems[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Text(title.name, style: CustomTextStyles.of(context).regular18),
+                    child: Row(
+                      children: [
+                        Text(item.name, style: CustomTextStyles.of(context).regular18),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () => widget.onAddToShoppingList(item.id),
+                          icon: Icon(
+                            Icons.add,
+                            color: CustomColors.of(context).background,
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),

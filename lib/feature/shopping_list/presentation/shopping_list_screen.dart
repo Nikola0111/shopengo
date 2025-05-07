@@ -29,7 +29,7 @@ class ShoppingListScreen extends StatelessWidget {
             container.resolve<StoreRepositoryImpl>(),
             container.resolve<ShoppingListRepositoryImpl>(),
             storeID,
-          )..add(const ShoppingListLoadDataEvent()),
+          )..add(const LoadShoppingData()),
           child: BlocBuilder<ShoppingListBloc, ShoppingListState>(
             builder: (context, state) {
               return Column(
@@ -43,12 +43,16 @@ class ShoppingListScreen extends StatelessWidget {
                   ShoppingListSection(
                     shoppingListModel: state.shoppingList,
                     onCreateAndAddGrocery: (value) {
-                      context.read<ShoppingListBloc>().add(ShoppingListCreateAddGrocery(groceryName: value));
+                      context.read<ShoppingListBloc>().add(CreateAndAddShoppingItem(groceryName: value));
                     },
                     onFilter: (value) {},
+                    onRemoveFromList: (id) => context.read<ShoppingListBloc>().add(RemoveFromShoppingList(id: id)),
                   ),
                   const SizedBox(height: 12),
-                  ShoppingItemsSection(shoppingItems: state.shoppingItems),
+                  ShoppingItemsSection(
+                    shoppingItems: state.shoppingItems,
+                    onAddToShoppingList: (id) => context.read<ShoppingListBloc>().add(AddToShoppingList(id: id)),
+                  ),
                 ],
               );
             },

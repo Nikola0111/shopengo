@@ -13,12 +13,14 @@ class ShoppingListSection extends StatefulWidget {
     required this.shoppingListModel,
     required this.onCreateAndAddGrocery,
     required this.onFilter,
+    required this.onRemoveFromList,
     super.key,
   });
 
   final ShoppingListModel shoppingListModel;
   final void Function(String name) onCreateAndAddGrocery;
   final void Function(String value) onFilter;
+  final void Function(int id) onRemoveFromList;
 
   @override
   State<ShoppingListSection> createState() => _ShoppingListSectionState();
@@ -129,10 +131,22 @@ class _ShoppingListSectionState extends State<ShoppingListSection> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: widget.shoppingListModel.shoppingItems.length,
                 itemBuilder: (context, index) {
-                  final title = widget.shoppingListModel.shoppingItems[index];
+                  final item = widget.shoppingListModel.shoppingItems[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8),
-                    child: Text(title.name, style: CustomTextStyles.of(context).regular18),
+                    child: Row(
+                      children: [
+                        Text(item.name, style: CustomTextStyles.of(context).regular18),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () => widget.onRemoveFromList(item.id),
+                          icon: Icon(
+                            Icons.remove,
+                            color: CustomColors.of(context).background,
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
