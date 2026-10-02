@@ -13,7 +13,7 @@ Your designated shopping  buddy
 
 # Technical
 
-- flutter version: 3.29.3
+- flutter version: 3.47.6
 - localization gen command: dart run easy_localization:generate --source-dir assets/localization && dart run easy_localization:generate -S assets/localization -f keys -o locale_keys.g.dart
 - command for models/states gen: dart run build_runner build --delete-conflicting-outputs
 - command for asset gen: fluttergen -c pubspec.yaml  
