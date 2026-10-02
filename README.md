@@ -9,6 +9,7 @@ Your designated shopping  buddy
 - as a user i want to be presented with finish shopping button where i can enter the total price of all items
 - as a user i want to filter my shopping lists based on if they've been finished or not (sort, search)
 - as a user i want to add a friend to my shopping list
+- i want to have the possibility to update the shopping list remotely (somebody else updates its, i see it)
 - as a user i want to have a chronological history of my shoppings and spendings
 
 # Technical
