@@ -7,7 +7,7 @@ import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class StoreCard extends StatelessWidget {
-  const StoreCard({required this.store, super.key});
+  const new({required this.store, super.key});
   final StoreModel store;
 
   @override
@@ -35,7 +35,7 @@ class StoreCard extends StatelessWidget {
 }
 
 class _InfoSection extends StatelessWidget {
-  const _InfoSection({required this.store});
+  const new({required this.store});
 
   final StoreModel store;
 

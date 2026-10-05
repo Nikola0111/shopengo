@@ -4,7 +4,7 @@ import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc(this._storeRepository) : super(const HomeState.loading(stores: [])) {
+  new(this._storeRepository) : super(const HomeState.loading(stores: [])) {
     _setupEventListeners();
   }
 

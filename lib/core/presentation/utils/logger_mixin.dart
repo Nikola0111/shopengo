@@ -55,7 +55,6 @@ mixin LoggerMixin {
     // don't print if it's prod
     if (kDebugMode) {
       // This is a logger, therefor we want the print there in debug mode
-      // ignore: avoid_print
       print(output);
     }
     log(output);

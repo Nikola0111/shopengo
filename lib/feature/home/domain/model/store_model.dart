@@ -4,7 +4,7 @@ part '../../../../generated/feature/home/domain/model/store_model.freezed.dart';
 
 @freezed
 class StoreModel with _$StoreModel {
-  StoreModel({
+  new({
     required this.id,
     required this.storeName,
     this.currency,
@@ -13,21 +13,15 @@ class StoreModel with _$StoreModel {
     this.previousShoppingDate,
   });
 
-  @override
   final int id;
 
-  @override
   final String storeName;
 
-  @override
   final String? currency;
 
-  @override
   final DateTime? previousShoppingDate;
 
-  @override
   final double? totalAmountSpentAtStore;
 
-  @override
   final int? previousShoppingArticlesBought;
 }

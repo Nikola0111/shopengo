@@ -21,7 +21,7 @@ class HomeCreatingStoreEvent extends HomeEvent {
 }
 
 class HomeSubmitNewStoreEvent extends HomeEvent {
-  HomeSubmitNewStoreEvent({required this.storeName});
+  new({required this.storeName});
   final String storeName;
 
   @override
@@ -29,7 +29,7 @@ class HomeSubmitNewStoreEvent extends HomeEvent {
 }
 
 class HomeQueryStoresEvent extends HomeEvent {
-  HomeQueryStoresEvent({required this.query});
+  new({required this.query});
   final String? query;
 
   @override

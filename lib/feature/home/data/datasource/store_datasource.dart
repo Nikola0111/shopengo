@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:shopengo/core/presentation/utils/app_database.dart';
 
 class StoreDatasource {
-  const StoreDatasource(this._database);
+  const new(this._database);
   final AppDatabase _database;
 
   Future<List<StoreTableData>> getAllStores() => _database.storeTable.all().get();
