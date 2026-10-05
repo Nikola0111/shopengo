@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomColors {
-  const CustomColors.of(BuildContext context) : _context = context;
+  const new of(BuildContext context) : _context = context;
   final BuildContext _context;
 
   Color get primary => Theme.of(_context).extension<CustomColorScheme>()!.primary!;
@@ -17,7 +17,7 @@ class CustomColors {
 
 @immutable
 class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
-  const CustomColorScheme({
+  const new({
     required this.primary,
     required this.background,
     required this.primaryText,
@@ -29,7 +29,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     required this.undoColor,
   });
 
-  const CustomColorScheme.classic({
+  const new classic({
     this.primary = const Color(0xFF6A5AE0),
     this.background = const Color(0xFFFFFFFF),
     this.primaryText = const Color(0xFFFFFFFF),

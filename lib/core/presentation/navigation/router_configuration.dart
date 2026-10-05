@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shopengo/feature/home/presentation/home_screen.dart';
 
 class RouterConfiguration {
-  RouterConfiguration() {
+  new() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
     _goRouter = GoRouter(
       navigatorKey: _rootNavigationKey,

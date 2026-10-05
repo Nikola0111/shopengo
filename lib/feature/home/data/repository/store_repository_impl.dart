@@ -4,7 +4,7 @@ import 'package:shopengo/feature/home/data/repository/store_repository.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 
 class StoreRepositoryImpl implements StoreRepository {
-  StoreRepositoryImpl(this._storeDatasource);
+  new(this._storeDatasource);
 
   final StoreDatasource _storeDatasource;
 

@@ -15,7 +15,7 @@ class ThemeRepository {
     return ThemeData(
       brightness: Brightness.light,
       fontFamily: 'Rubik',
-      appBarTheme: AppBarTheme(color: _colorScheme.background),
+      appBarTheme: AppBarTheme(backgroundColor: _colorScheme.background),
       extensions: <ThemeExtension<dynamic>>[_colorScheme, textStyleScheme],
     );
   }

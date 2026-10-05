@@ -5,7 +5,7 @@ import 'package:shopengo/core/domain/repository/theme_repository.dart';
 import 'package:shopengo/core/presentation/navigation/router_configuration.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {

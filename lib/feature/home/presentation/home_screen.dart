@@ -11,7 +11,7 @@ import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart'
 import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const new({super.key});
   static const path = 'home';
 
   @override

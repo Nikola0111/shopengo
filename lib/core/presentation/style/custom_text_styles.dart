@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopengo/generated/fonts.gen.dart';
 
 class CustomTextStyles {
-  const CustomTextStyles.of(BuildContext context) : _context = context;
+  const new of(BuildContext context) : _context = context;
   final BuildContext _context;
 
   TextStyle get regular14 => Theme.of(_context).extension<CustomTextStyleScheme>()!.regular14!;
@@ -15,7 +15,7 @@ class CustomTextStyles {
 
 @immutable
 class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
-  const CustomTextStyleScheme({
+  const new({
     required this.regular14,
     required this.regular18,
     required this.medium12,
@@ -24,7 +24,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     required this.medium24,
   });
 
-  factory CustomTextStyleScheme.fromPrimaryTextColor({required Color primaryTextColor}) {
+  factory fromPrimaryTextColor({required Color primaryTextColor}) {
     return CustomTextStyleScheme(
       regular14: TextStyle(
         color: primaryTextColor,
@@ -65,7 +65,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     );
   }
 
-  static const _fontFamilyRubik = FontFamily.rubik;
+  static const String _fontFamilyRubik = FontFamily.rubik;
 
   final TextStyle? regular14;
   final TextStyle? regular18;

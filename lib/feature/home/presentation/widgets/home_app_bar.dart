@@ -7,7 +7,7 @@ import 'package:shopengo/generated/assets.gen.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class HomeAppBar extends StatelessWidget {
-  const HomeAppBar({
+  const new({
     required this.totalStores,
     required this.isCreating,
     required this.isSearching,
@@ -82,7 +82,7 @@ class HomeAppBar extends StatelessWidget {
 }
 
 class _InfoSection extends StatelessWidget {
-  const _InfoSection({required this.totalStores});
+  const new({required this.totalStores});
   final int totalStores;
 
   @override

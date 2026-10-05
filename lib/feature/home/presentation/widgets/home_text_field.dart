@@ -3,7 +3,7 @@ import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 
 class HomeTextField extends StatelessWidget {
-  const HomeTextField({
+  const new({
     required this.isVisible,
     required this.onDone,
     required this.controller,
