@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 import 'package:shopengo/core/presentation/widgets/rounded_button.dart';
+import 'package:shopengo/core/presentation/widgets/secondary_button.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
@@ -79,35 +80,13 @@ class StoreCard extends StatelessWidget {
                       onPressed: onCartPressed,
                     ),
                     const SizedBox(width: 10),
-                    _HistoryButton(onPressed: onHistoryPressed),
+                    SecondaryButton(text: LocaleKeys.home_history.tr(), onPressed: onHistoryPressed),
                   ],
                 ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _HistoryButton extends StatelessWidget {
-  const new({required this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 36,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          side: BorderSide(color: CustomColors.of(context).primaryText, width: 1.5),
-          shape: const StadiumBorder(),
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-        ),
-        child: Text(LocaleKeys.home_history, style: CustomTextStyles.of(context).medium16).tr(),
       ),
     );
   }
