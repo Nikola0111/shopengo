@@ -52,10 +52,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 12),
                       HomeTextField(
                         isVisible: state is HomeCreatingStoreState || state is HomeSearchingStoresState,
-                        onDone: () {},
+                        onDone: () {
+                          if (context.read<HomeBloc>().state is HomeCreatingStoreState) {
+                            _onCreateStore(context);
+                          }
+                        },
                         controller: _homeTextFieldController,
                         onChanged: (value) {
-                          context.read<HomeBloc>().add(HomeQueryStoresEvent(query: value));
+                          final bloc = context.read<HomeBloc>();
+                          if (bloc.state is HomeSearchingStoresState) {
+                            bloc.add(HomeQueryStoresEvent(query: value));
+                          }
                         },
                       ),
                       const SizedBox(height: 12),
@@ -66,7 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             final store = state.stores[index];
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 12),
-                              child: StoreCard(store: store),
+                              child: StoreCard(
+                                store: store,
+                                onCartPressed: () {},
+                                onHistoryPressed: () {},
+                              ),
                             );
                           },
                         ),
@@ -90,7 +101,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onCreateStore(BuildContext context) {
-    context.read<HomeBloc>().add(HomeSubmitNewStoreEvent(storeName: _homeTextFieldController.text));
+    final storeName = _homeTextFieldController.text.trim();
+    if (storeName.isEmpty) return;
+
+    context.read<HomeBloc>().add(HomeSubmitNewStoreEvent(storeName: storeName));
     _onFieldCollapse();
   }
 

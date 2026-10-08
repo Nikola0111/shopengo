@@ -35,7 +35,6 @@ class HomeAppBar extends StatelessWidget {
     return Row(
       children: [
         Expanded(child: _InfoSection(totalStores: totalStores)),
-        const Spacer(),
         if (isCreating) ...[
           RoundedButton(
             icon: Icons.close,
