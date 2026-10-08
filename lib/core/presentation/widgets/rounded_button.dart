@@ -6,6 +6,7 @@ class RoundedButton extends StatelessWidget {
     required this.backgroundColor,
     required this.iconColor,
     required this.onPressed,
+    this.size = 48,
     super.key,
   });
 
@@ -13,14 +14,18 @@ class RoundedButton extends StatelessWidget {
   final Color backgroundColor;
   final Color iconColor;
   final VoidCallback onPressed;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 48,
-      height: 48,
+      width: size,
+      height: size,
       child: TextButton(
-        style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(backgroundColor)),
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(backgroundColor),
+          padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+        ),
         onPressed: onPressed,
         child: Icon(icon, color: iconColor, size: 24),
       ),

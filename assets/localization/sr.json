@@ -8,6 +8,10 @@
     "numOfStores": "Radnje ({storesAmount})",
 
     "noMoneySpend": "Nije potrošen novac",
-    "numOfArticles": "Broj artikala: {articlesAmount}"
+    "numOfArticles": "Broj artikala: {articlesAmount}",
+
+    "emptyList": "Lista je prazna",
+    "startFirstShopping": "Započni prvu kupovinu!",
+    "history": "Istorija"
   }
 }

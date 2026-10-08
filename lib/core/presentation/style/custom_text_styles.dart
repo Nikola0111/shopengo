@@ -11,6 +11,7 @@ class CustomTextStyles {
   TextStyle get medium16 => Theme.of(_context).extension<CustomTextStyleScheme>()!.medium16!;
   TextStyle get medium20 => Theme.of(_context).extension<CustomTextStyleScheme>()!.medium20!;
   TextStyle get medium24 => Theme.of(_context).extension<CustomTextStyleScheme>()!.medium24!;
+  TextStyle get bold20 => Theme.of(_context).extension<CustomTextStyleScheme>()!.bold20!;
 }
 
 @immutable
@@ -22,6 +23,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     required this.medium16,
     required this.medium20,
     required this.medium24,
+    required this.bold20,
   });
 
   factory fromPrimaryTextColor({required Color primaryTextColor}) {
@@ -62,6 +64,12 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
         fontWeight: FontWeight.w500,
         fontFamily: _fontFamilyRubik,
       ),
+      bold20: TextStyle(
+        color: primaryTextColor,
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        fontFamily: _fontFamilyRubik,
+      ),
     );
   }
 
@@ -73,6 +81,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
   final TextStyle? medium16;
   final TextStyle? medium20;
   final TextStyle? medium24;
+  final TextStyle? bold20;
 
   @override
   CustomTextStyleScheme copyWith({
@@ -82,6 +91,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     TextStyle? medium16,
     TextStyle? medium20,
     TextStyle? medium24,
+    TextStyle? bold20,
   }) {
     return CustomTextStyleScheme(
       regular14: regular14 ?? this.regular14,
@@ -90,6 +100,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       medium16: medium16 ?? this.medium16,
       medium20: medium20 ?? this.medium20,
       medium24: medium24 ?? this.medium24,
+      bold20: bold20 ?? this.bold20,
     );
   }
 
@@ -105,6 +116,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       medium16: TextStyle.lerp(medium16, other.medium16, t),
       medium20: TextStyle.lerp(medium20, other.medium20, t),
       medium24: TextStyle.lerp(medium24, other.medium24, t),
+      bold20: TextStyle.lerp(bold20, other.bold20, t),
     );
   }
 }

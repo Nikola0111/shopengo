@@ -73,7 +73,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             final store = state.stores[index];
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 12),
-                              child: StoreCard(store: store),
+                              child: StoreCard(
+                                store: store,
+                                onCartPressed: () {},
+                                onHistoryPressed: () {},
+                              ),
                             );
                           },
                         ),

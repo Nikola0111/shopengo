@@ -8,6 +8,10 @@
     "numOfStores": "Stores ({storesAmount})",
 
     "noMoneySpend": "No Money Spent",
-    "numOfArticles": "Number of articles: {articlesAmount}"
+    "numOfArticles": "Number of articles: {articlesAmount}",
+
+    "emptyList": "List is empty",
+    "startFirstShopping": "Start your first shopping!",
+    "history": "History"
   }
 }
