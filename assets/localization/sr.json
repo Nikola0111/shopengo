@@ -13,5 +13,11 @@
     "emptyList": "Lista je prazna",
     "startFirstShopping": "Započni prvu kupovinu!",
     "history": "Istorija"
+  },
+  "store": {
+    "preparation": "Priprema",
+    "prepareListBeforeLeaving": "Pripremi listu pre odlaska",
+    "addItem": "Dodaj stvar…",
+    "startShopping": "Počni kupovinu"
   }
 }

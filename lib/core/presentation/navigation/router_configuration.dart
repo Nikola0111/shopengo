@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/home_screen.dart';
+import 'package:shopengo/feature/store/presentation/store_screen.dart';
 
 class RouterConfiguration {
   new() {
@@ -20,6 +22,17 @@ class RouterConfiguration {
           pageBuilder:
               (context, state) =>
                   _getPage(key: state.pageKey, child: const HomeScreen()),
+          routes: [
+            GoRoute(
+              path: StoreScreen.path,
+              name: StoreScreen.path,
+              pageBuilder:
+                  (context, state) => _getPage(
+                    key: state.pageKey,
+                    child: StoreScreen(store: state.extra! as StoreModel),
+                  ),
+            ),
+          ],
         ),
       ],
     );
