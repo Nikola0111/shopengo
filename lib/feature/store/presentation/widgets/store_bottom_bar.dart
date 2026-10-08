@@ -29,7 +29,7 @@ class StoreBottomBar extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _AddItemField(onAddPressed: onAddPressed),
+          _AddProductField(onAddPressed: onAddPressed),
           const SizedBox(height: 10),
           _StartShoppingButton(onPressed: onStartShoppingPressed),
         ],
@@ -38,7 +38,7 @@ class StoreBottomBar extends StatelessWidget {
   }
 }
 
-class _AddItemField extends StatelessWidget {
+class _AddProductField extends StatelessWidget {
   const new({required this.onAddPressed});
 
   final VoidCallback onAddPressed;
@@ -65,7 +65,7 @@ class _AddItemField extends StatelessWidget {
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
-                hintText: LocaleKeys.store_addItem.tr(),
+                hintText: LocaleKeys.store_addProduct.tr(),
                 hintStyle: textStyle.copyWith(color: colors.hintText),
               ),
             ),

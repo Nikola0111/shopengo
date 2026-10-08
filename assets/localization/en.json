@@ -17,7 +17,7 @@
   "store": {
     "preparation": "Preparation",
     "prepareListBeforeLeaving": "Prepare the list before you go",
-    "addItem": "Add item…",
+    "addProduct": "Add product…",
     "startShopping": "Start shopping"
   }
 }
