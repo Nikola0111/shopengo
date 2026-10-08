@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
+import 'package:shopengo/core/presentation/widgets/circular_button.dart';
+import 'package:shopengo/core/presentation/widgets/secondary_button.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/generated/assets.gen.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
@@ -23,8 +25,11 @@ class StoreAppBar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _BackButton(onPressed: onBackPressed),
-              _HistoryButton(onPressed: onHistoryPressed),
+              CircularButton(
+                icon: Assets.icon.chevronLeft.svg(width: 20, height: 20),
+                onPressed: onBackPressed,
+              ),
+              SecondaryButton(text: LocaleKeys.home_history.tr(), onPressed: onHistoryPressed),
             ],
           ),
           const SizedBox(height: 14),
@@ -32,47 +37,6 @@ class StoreAppBar extends StatelessWidget {
           const SizedBox(height: 14),
           const _StatusSection(),
         ],
-      ),
-    );
-  }
-}
-
-class _BackButton extends StatelessWidget {
-  const new({required this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: CustomColors.of(context).background.withValues(alpha: 0.16),
-      shape: const CircleBorder(),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onPressed,
-        child: SizedBox.square(dimension: 40, child: Center(child: Assets.icon.chevronLeft.svg(width: 20, height: 20))),
-      ),
-    );
-  }
-}
-
-class _HistoryButton extends StatelessWidget {
-  const new({required this.onPressed});
-
-  final VoidCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 34,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 14),
-          side: BorderSide(color: CustomColors.of(context).background.withValues(alpha: 0.85)),
-          foregroundColor: CustomColors.of(context).primaryText,
-        ),
-        child: Text(LocaleKeys.home_history.tr(), style: CustomTextStyles.of(context).regular14),
       ),
     );
   }

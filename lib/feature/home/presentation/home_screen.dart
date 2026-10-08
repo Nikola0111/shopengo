@@ -80,8 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.only(bottom: 12),
                               child: StoreCard(
                                 store: store,
-                                onTap: () => _openStore(context, store),
-                                onCartPressed: () => _openStore(context, store),
+                                onOpenStore: () => _openStore(context, store),
                                 onHistoryPressed: () {},
                               ),
                             );

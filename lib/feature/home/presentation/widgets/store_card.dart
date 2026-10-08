@@ -10,15 +10,13 @@ import 'package:shopengo/generated/locale_keys.g.dart';
 class StoreCard extends StatelessWidget {
   const new({
     required this.store,
-    required this.onTap,
-    required this.onCartPressed,
+    required this.onOpenStore,
     required this.onHistoryPressed,
     super.key,
   });
 
   final StoreModel store;
-  final VoidCallback onTap;
-  final VoidCallback onCartPressed;
+  final VoidCallback onOpenStore;
   final VoidCallback onHistoryPressed;
 
   static const double _decorationCircleSize = 200;
@@ -28,7 +26,7 @@ class StoreCard extends StatelessWidget {
     final borderColor = CustomColors.of(context).primaryText.withValues(alpha: 0.3);
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: onOpenStore,
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
@@ -81,7 +79,7 @@ class StoreCard extends StatelessWidget {
                         backgroundColor: CustomColors.of(context).background,
                         iconColor: CustomColors.of(context).primary,
                         size: 36,
-                        onPressed: onCartPressed,
+                        onPressed: onOpenStore,
                       ),
                       const SizedBox(width: 10),
                       SecondaryButton(text: LocaleKeys.home_history.tr(), onPressed: onHistoryPressed),
