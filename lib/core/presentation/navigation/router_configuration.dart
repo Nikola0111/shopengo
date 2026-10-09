@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shopengo/core/presentation/screens/error_screen.dart';
+import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/home_screen.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/shopping_preparation_screen.dart';
 
 class RouterConfiguration {
   new() {
@@ -20,6 +23,12 @@ class RouterConfiguration {
           pageBuilder:
               (context, state) =>
                   _getPage(key: state.pageKey, child: const HomeScreen()),
+          routes: [
+            _routeWithExtra<StoreModel>(
+              path: ShoppingPreparationScreen.path,
+              builder: (store) => ShoppingPreparationScreen(store: store),
+            ),
+          ],
         ),
       ],
     );
@@ -32,6 +41,29 @@ class RouterConfiguration {
   final _rootNavigationKey = GlobalKey<NavigatorState>(
     debugLabel: 'makeBookingKey',
   );
+
+  /// Route that requires `extra` of type [T]. Extra is lost on deep links and
+  /// restoration, so we redirect to home when it's missing or of a wrong type.
+  GoRoute _routeWithExtra<T>({
+    required String path,
+    required Widget Function(T extra) builder,
+    List<RouteBase> routes = const [],
+  }) {
+    return GoRoute(
+      path: path,
+      name: path,
+      redirect: (context, state) => state.extra is T ? null : '/${HomeScreen.path}',
+      pageBuilder:
+          (context, state) => _getPage(
+            key: state.pageKey,
+            child: switch (state.extra) {
+              final T extra => builder(extra),
+              _ => const ErrorScreen(),
+            },
+          ),
+      routes: routes,
+    );
+  }
 
   Page<dynamic> _getPage({
     required ValueKey<dynamic> key,

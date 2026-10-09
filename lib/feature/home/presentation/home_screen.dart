@@ -1,14 +1,19 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/domain/repository/di.dart' show container;
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository_impl.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_bloc.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
+import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
 import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/shopping_preparation_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const new({super.key});
@@ -75,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               padding: const EdgeInsets.only(bottom: 12),
                               child: StoreCard(
                                 store: store,
-                                onCartPressed: () {},
+                                onOpenStore: () => _openStore(context, store),
                                 onHistoryPressed: () {},
                               ),
                             );
@@ -93,6 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  void _openStore(BuildContext context, StoreModel store) {
+    unawaited(context.pushNamed(ShoppingPreparationScreen.path, extra: store));
   }
 
   void _onCancel(BuildContext context) {
