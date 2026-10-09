@@ -8,7 +8,7 @@ import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/generated/assets.gen.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
-class StoreAppBar extends StatelessWidget {
+class ShoppingPreparationHeader extends StatelessWidget {
   const new({required this.store, required this.onBackPressed, required this.onHistoryPressed, super.key});
 
   final StoreModel store;
@@ -74,14 +74,14 @@ class _StatusSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(999),
             ),
             child: Text(
-              LocaleKeys.store_preparation.tr().toUpperCase(),
+              LocaleKeys.shoppingPreparation_preparation.tr().toUpperCase(),
               style: CustomTextStyles.of(context).semiBold11.copyWith(letterSpacing: 0.8),
             ),
           ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              LocaleKeys.store_prepareListBeforeLeaving.tr(),
+              LocaleKeys.shoppingPreparation_prepareListBeforeLeaving.tr(),
               style: CustomTextStyles.of(context).regular13,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

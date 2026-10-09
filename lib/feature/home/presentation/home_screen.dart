@@ -13,7 +13,7 @@ import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
 import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
-import 'package:shopengo/feature/store/presentation/store_screen.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/shopping_preparation_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const new({super.key});
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openStore(BuildContext context, StoreModel store) {
-    unawaited(context.pushNamed(StoreScreen.path, extra: store));
+    unawaited(context.pushNamed(ShoppingPreparationScreen.path, extra: store));
   }
 
   void _onCancel(BuildContext context) {

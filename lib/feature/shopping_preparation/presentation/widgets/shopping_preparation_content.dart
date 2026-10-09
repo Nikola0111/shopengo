@@ -7,7 +7,7 @@ import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 import 'package:shopengo/generated/assets.gen.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
-class StoreBottomBar extends StatelessWidget {
+class ShoppingPreparationContent extends StatelessWidget {
   const new({required this.onAddPressed, required this.onStartShoppingPressed, super.key});
 
   final VoidCallback onAddPressed;
@@ -65,7 +65,7 @@ class _AddProductField extends StatelessWidget {
               decoration: InputDecoration(
                 isCollapsed: true,
                 border: InputBorder.none,
-                hintText: LocaleKeys.store_addProduct.tr(),
+                hintText: LocaleKeys.shoppingPreparation_addProduct.tr(),
                 hintStyle: textStyle.copyWith(color: colors.hintText),
               ),
             ),
@@ -110,7 +110,7 @@ class _StartShoppingButton extends StatelessWidget {
             const SizedBox(width: 10),
             Flexible(
               child: Text(
-                LocaleKeys.store_startShopping.tr(),
+                LocaleKeys.shoppingPreparation_startShopping.tr(),
                 style: CustomTextStyles.of(context).semiBold16,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
