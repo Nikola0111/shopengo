@@ -14,7 +14,8 @@ class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
     this._storeRepository, {
     required this.storeId,
     bool isShopping = false,
-  }) : super(ShoppingState(isShopping: isShopping)) {
+    double? previousShoppingAmountSpent,
+  }) : super(ShoppingState(isShopping: isShopping, previousShoppingAmountSpent: previousShoppingAmountSpent)) {
     _setupEventListeners();
   }
 
@@ -31,7 +32,12 @@ class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
       final store = await _storeRepository.getStore(storeId);
       emit(
         await _withReloadedCart(
-          state.copyWith(products: products, categories: categories, isShopping: store.isShopping),
+          state.copyWith(
+            products: products,
+            categories: categories,
+            isShopping: store.isShopping,
+            previousShoppingAmountSpent: store.previousShoppingAmountSpent,
+          ),
         ),
       );
     });
@@ -112,7 +118,13 @@ class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
 
     on<ShoppingFinishEvent>((event, emit) async {
       await _storeRepository.finishShopping(storeId: storeId, amountSpent: event.amountSpent);
-      emit(await _withReloadedCart(state.copyWith(isShopping: false)));
+      // Finishing with checked products makes this the previous shopping.
+      final store = await _storeRepository.getStore(storeId);
+      emit(
+        await _withReloadedCart(
+          state.copyWith(isShopping: false, previousShoppingAmountSpent: store.previousShoppingAmountSpent),
+        ),
+      );
     });
   }
 

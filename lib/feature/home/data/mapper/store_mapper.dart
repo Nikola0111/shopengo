@@ -9,7 +9,7 @@ class StoreMapper {
       id: data.id,
       storeName: data.storeName,
       currency: data.currency,
-      totalAmountSpentAtStore: data.previousShoppingAmountSpent,
+      previousShoppingAmountSpent: data.previousShoppingAmountSpent,
       previousShoppingArticlesBought: data.previousShoppingArticlesBought,
       previousShoppingDate: data.previousShoppingDate,
       isShopping: data.isShopping,
