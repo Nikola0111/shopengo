@@ -18,7 +18,11 @@
     "preparation": "Preparation",
     "prepareListBeforeLeaving": "Prepare the list before you go",
     "addProduct": "Add product…",
-    "startShopping": "Start shopping"
+    "startShopping": "Start shopping",
+    "productsInList": {
+      "one": "{} product on the list",
+      "other": "{} products on the list"
+    }
   },
   "addProductSheet": {
     "addTo": "Add to {storeName}",

@@ -18,7 +18,12 @@
     "preparation": "Priprema",
     "prepareListBeforeLeaving": "Pripremi listu pre odlaska",
     "addProduct": "Dodaj proizvod…",
-    "startShopping": "Počni kupovinu"
+    "startShopping": "Počni kupovinu",
+    "productsInList": {
+      "one": "{} proizvod na listi",
+      "few": "{} proizvoda na listi",
+      "other": "{} proizvoda na listi"
+    }
   },
   "addProductSheet": {
     "addTo": "Dodaj u {storeName}",

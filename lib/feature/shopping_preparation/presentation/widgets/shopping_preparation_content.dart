@@ -11,7 +11,9 @@ class ShoppingPreparationContent extends StatelessWidget {
   const new({required this.onAddPressed, required this.onStartShoppingPressed, super.key});
 
   final VoidCallback onAddPressed;
-  final VoidCallback onStartShoppingPressed;
+
+  /// Disables the start shopping button when null.
+  final VoidCallback? onStartShoppingPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -86,34 +88,41 @@ class _AddProductField extends StatelessWidget {
 class _StartShoppingButton extends StatelessWidget {
   const new({required this.onPressed});
 
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
+
+  static const double _disabledOpacity = 0.4;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 54,
-      child: TextButton(
-        onPressed: onPressed,
-        style: TextButton.styleFrom(
-          backgroundColor: CustomColors.of(context).dark,
-          foregroundColor: CustomColors.of(context).primaryText,
-          shape: const StadiumBorder(),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Assets.icon.cart.svg(width: 20, height: 20),
-            const SizedBox(width: 10),
-            Flexible(
-              child: Text(
-                LocaleKeys.shoppingPreparation_startShopping.tr(),
-                style: CustomTextStyles.of(context).semiBold16,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+    return Opacity(
+      opacity: onPressed == null ? _disabledOpacity : 1,
+      child: SizedBox(
+        width: double.infinity,
+        height: 54,
+        child: TextButton(
+          onPressed: onPressed,
+          style: TextButton.styleFrom(
+            backgroundColor: CustomColors.of(context).dark,
+            foregroundColor: CustomColors.of(context).primaryText,
+            disabledBackgroundColor: CustomColors.of(context).dark,
+            disabledForegroundColor: CustomColors.of(context).primaryText,
+            shape: const StadiumBorder(),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Assets.icon.cart.svg(width: 20, height: 20),
+              const SizedBox(width: 10),
+              Flexible(
+                child: Text(
+                  LocaleKeys.shoppingPreparation_startShopping.tr(),
+                  style: CustomTextStyles.of(context).semiBold16,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

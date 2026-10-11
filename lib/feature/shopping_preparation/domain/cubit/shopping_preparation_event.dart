@@ -26,6 +26,15 @@ class ShoppingPreparationAddProductEvent extends ShoppingPreparationEvent {
   List<Object?> get props => [productId];
 }
 
+/// Takes one of the product off the list, removing it once none are left.
+class ShoppingPreparationDecreaseQuantityEvent extends ShoppingPreparationEvent {
+  new({required this.productId});
+  final int productId;
+
+  @override
+  List<Object?> get props => [productId];
+}
+
 /// Adds the product with [productName] to the list, creating it first if no saved product has that name.
 ///
 /// [amountType] and [categoryId] only apply when a new product is created.

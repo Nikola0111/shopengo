@@ -6,6 +6,7 @@ import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
 import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
+import 'package:shopengo/core/presentation/widgets/section_label.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
@@ -139,7 +140,10 @@ class _AddProductSheetState extends State<AddProductSheet> {
                         const SizedBox(height: 18),
                       ],
                       if (products.isNotEmpty) ...[
-                        const _SectionLabel(),
+                        SectionLabel(
+                          title: LocaleKeys.addProductSheet_frequentlyBought.tr(),
+                          dotColor: CustomColors.of(context).primary,
+                        ),
                         const SizedBox(height: 8),
                         GroupedCard(
                           children: [
@@ -201,7 +205,6 @@ class _ProductNameField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        autofocus: true,
         textCapitalization: TextCapitalization.sentences,
         textInputAction: TextInputAction.done,
         style: textStyle.copyWith(color: colors.dark),
@@ -217,29 +220,6 @@ class _ProductNameField extends StatelessWidget {
           hintStyle: textStyle.copyWith(color: colors.hintText),
         ),
       ),
-    );
-  }
-}
-
-class _SectionLabel extends StatelessWidget {
-  const new();
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = CustomColors.of(context);
-    return Row(
-      children: [
-        Container(
-          width: 8,
-          height: 8,
-          decoration: BoxDecoration(color: colors.primary, borderRadius: BorderRadius.circular(4)),
-        ),
-        const SizedBox(width: 8),
-        Text(
-          LocaleKeys.addProductSheet_frequentlyBought.tr().toUpperCase(),
-          style: CustomTextStyles.of(context).semiBold12.copyWith(color: colors.sectionLabel, letterSpacing: 1),
-        ),
-      ],
     );
   }
 }
