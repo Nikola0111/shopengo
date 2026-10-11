@@ -19,5 +19,20 @@
     "prepareListBeforeLeaving": "Prepare the list before you go",
     "addProduct": "Add product…",
     "startShopping": "Start shopping"
+  },
+  "addProductSheet": {
+    "addTo": "Add to {storeName}",
+    "done": "Done",
+    "productNameHint": "Enter product name",
+    "frequentlyBought": "Frequently bought",
+    "inList": "In list · {quantity}",
+    "newProduct": "new product"
+  },
+  "amountType": {
+    "piece": "pcs",
+    "pack": "pack",
+    "gram": "g",
+    "kilogram": "kg",
+    "liter": "l"
   }
 }

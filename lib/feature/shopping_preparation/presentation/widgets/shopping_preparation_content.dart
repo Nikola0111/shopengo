@@ -47,40 +47,37 @@ class _AddProductField extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = CustomColors.of(context);
     final textStyle = CustomTextStyles.of(context).regular16;
-    return Container(
-      height: 54,
-      padding: const EdgeInsets.only(left: 20, right: 7),
-      decoration: BoxDecoration(
-        color: colors.background,
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: colors.border),
-        boxShadow: const [BoxShadow(color: Color(0x1A3C28A0), offset: Offset(0, 6), blurRadius: 10)],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              style: textStyle.copyWith(color: colors.dark),
-              cursorColor: colors.primary,
-              decoration: InputDecoration(
-                isCollapsed: true,
-                border: InputBorder.none,
-                hintText: LocaleKeys.shoppingPreparation_addProduct.tr(),
-                hintStyle: textStyle.copyWith(color: colors.hintText),
+    return GestureDetector(
+      onTap: onAddPressed,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        height: 54,
+        padding: const EdgeInsets.only(left: 20, right: 7),
+        decoration: BoxDecoration(
+          color: colors.background,
+          borderRadius: BorderRadius.circular(999),
+          border: Border.all(color: colors.border),
+          boxShadow: const [BoxShadow(color: Color(0x1A3C28A0), offset: Offset(0, 6), blurRadius: 10)],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                LocaleKeys.shoppingPreparation_addProduct.tr(),
+                style: textStyle.copyWith(color: colors.hintText),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Material(
-            color: colors.primary,
-            shape: const CircleBorder(),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: onAddPressed,
-              child: SizedBox.square(dimension: 40, child: Center(child: Assets.icon.plus.svg(width: 20, height: 20))),
+            const SizedBox(width: 10),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(color: colors.primary, shape: BoxShape.circle),
+              child: Center(child: Assets.icon.plus.svg(width: 20, height: 20)),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
