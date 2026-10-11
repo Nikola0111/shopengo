@@ -121,6 +121,27 @@ void main() {
   );
 
   blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
+    'should create a new product with the chosen unit and category',
+    setUp: () {
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other, baby]);
+      when(productRepository.createProduct(name: 'Pelene', amountType: AmountType.pack, categoryId: baby.id))
+          .thenAnswer((_) async => 3);
+      when(productRepository.getAllProducts()).thenAnswer((_) async => [milk]);
+      when(cartRepository.getCartItems(storeId)).thenAnswer((_) async => []);
+    },
+    build: buildBloc,
+    seed: () => ShoppingPreparationState(products: [milk], categories: [other, baby]),
+    act: (bloc) => bloc.add(
+      ShoppingPreparationSubmitProductEvent(productName: 'Pelene', amountType: AmountType.pack, categoryId: baby.id),
+    ),
+    verify: (_) {
+      verify(productRepository.createProduct(name: 'Pelene', amountType: AmountType.pack, categoryId: baby.id))
+          .called(1);
+      verify(cartRepository.addProduct(storeId: storeId, productId: 3)).called(1);
+    },
+  );
+
+  blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
     'should ignore a blank product name',
     build: buildBloc,
     act: (bloc) => bloc.add(ShoppingPreparationSubmitProductEvent(productName: '   ')),

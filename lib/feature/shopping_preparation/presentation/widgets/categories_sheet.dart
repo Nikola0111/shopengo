@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
+import 'package:shopengo/core/presentation/widgets/dashed_border_painter.dart';
 import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
@@ -89,7 +90,7 @@ class _NewCategoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = CustomColors.of(context);
     return CustomPaint(
-      foregroundPainter: _DashedBorderPainter(color: colors.outline, radius: _radius),
+      foregroundPainter: DashedBorderPainter(color: colors.outline, radius: _radius),
       child: Material(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(_radius),
@@ -121,36 +122,6 @@ class _NewCategoryButton extends StatelessWidget {
       ),
     );
   }
-}
-
-class _DashedBorderPainter extends CustomPainter {
-  const new({required this.color, required this.radius});
-
-  final Color color;
-  final double radius;
-
-  static const double _strokeWidth = 1.5;
-  static const double _dashLength = 5;
-  static const double _gapLength = 4;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final rect = (Offset.zero & size).deflate(_strokeWidth / 2);
-    final path = Path()..addRRect(RRect.fromRectAndRadius(rect, Radius.circular(radius)));
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = _strokeWidth;
-
-    for (final metric in path.computeMetrics()) {
-      for (double start = 0; start < metric.length; start += _dashLength + _gapLength) {
-        canvas.drawPath(metric.extractPath(start, start + _dashLength), paint);
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(_DashedBorderPainter oldDelegate) => color != oldDelegate.color || radius != oldDelegate.radius;
 }
 
 class _CategoryRow extends StatelessWidget {

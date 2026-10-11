@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
 import 'package:shopengo/feature/category/data/repository/category_repository.dart';
 import 'package:shopengo/feature/product/data/repository/product_repository.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
 
@@ -44,7 +43,11 @@ class ShoppingPreparationBloc extends Bloc<ShoppingPreparationEvent, ShoppingPre
           .firstOrNull;
       final productId =
           existingProduct?.id ??
-          await _productRepository.createProduct(name: productName, amountType: AmountType.piece);
+          await _productRepository.createProduct(
+            name: productName,
+            amountType: event.amountType,
+            categoryId: event.categoryId,
+          );
       await _cartRepository.addProduct(storeId: storeId, productId: productId);
 
       if (existingProduct != null) {

@@ -8,6 +8,8 @@ import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
 import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
+import 'package:shopengo/feature/category/domain/model/category_model.dart';
+import 'package:shopengo/feature/category/presentation/add_category_sheet.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
@@ -15,6 +17,7 @@ import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_prep
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
 import 'package:shopengo/feature/shopping_preparation/presentation/widgets/categories_sheet.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/widgets/new_product_card/new_product_card.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class AddProductSheet extends StatefulWidget {
@@ -39,7 +42,14 @@ class AddProductSheet extends StatefulWidget {
 }
 
 class _AddProductSheetState extends State<AddProductSheet> {
+  /// Trimmed query length from which the new product card opens by itself.
+  static const int _expandedQueryLength = 3;
+
   final _controller = TextEditingController();
+  bool _isLongQuery = false;
+  bool _isNewProductExpanded = false;
+  AmountType _amountType = AmountType.piece;
+  int _categoryId = CategoryModel.defaultCategoryId;
 
   @override
   void dispose() {
@@ -47,9 +57,44 @@ class _AddProductSheetState extends State<AddProductSheet> {
     super.dispose();
   }
 
+  void _onQueryChanged(String query) {
+    // Only crossing the length threshold changes the expansion, so a manual toggle sticks while typing.
+    final isLongQuery = query.trim().length >= _expandedQueryLength;
+    if (isLongQuery != _isLongQuery) {
+      setState(() {
+        _isLongQuery = isLongQuery;
+        _isNewProductExpanded = isLongQuery;
+      });
+    }
+    context.read<ShoppingPreparationBloc>().add(ShoppingPreparationQueryProductsEvent(query: query));
+  }
+
   void _onSubmit(String productName) {
-    context.read<ShoppingPreparationBloc>().add(ShoppingPreparationSubmitProductEvent(productName: productName));
+    context.read<ShoppingPreparationBloc>().add(
+      ShoppingPreparationSubmitProductEvent(productName: productName, amountType: _amountType, categoryId: _categoryId),
+    );
     _controller.clear();
+    setState(() {
+      _isLongQuery = false;
+      _isNewProductExpanded = false;
+      _amountType = AmountType.piece;
+      _categoryId = CategoryModel.defaultCategoryId;
+    });
+  }
+
+  Future<void> _onNewCategoryPressed() async {
+    final bloc = context.read<ShoppingPreparationBloc>();
+    final category = await AddCategorySheet.show(context);
+    if (category == null) {
+      return;
+    }
+
+    final existingIds = bloc.state.categories.map((e) => e.id).toSet();
+    bloc.add(ShoppingPreparationCreateCategoryEvent(title: category.title, color: category.color));
+    final state = await bloc.stream.firstWhere((state) => state.categories.any((e) => !existingIds.contains(e.id)));
+    if (mounted) {
+      setState(() => _categoryId = state.categories.firstWhere((e) => !existingIds.contains(e.id)).id);
+    }
   }
 
   @override
@@ -69,12 +114,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-              child: _ProductNameField(
-                controller: _controller,
-                onChanged: (value) =>
-                    context.read<ShoppingPreparationBloc>().add(ShoppingPreparationQueryProductsEvent(query: value)),
-                onSubmitted: _onSubmit,
-              ),
+              child: _ProductNameField(controller: _controller, onChanged: _onQueryChanged, onSubmitted: _onSubmit),
             ),
             Expanded(
               child: BlocBuilder<ShoppingPreparationBloc, ShoppingPreparationState>(
@@ -84,17 +124,19 @@ class _AddProductSheetState extends State<AddProductSheet> {
                     padding: EdgeInsets.fromLTRB(20, 4, 20, 30 + bottomInset),
                     children: [
                       if (state.isNewProductQuery) ...[
-                        GroupedCard(
-                          children: [
-                            _ProductRow(
-                              name: state.query.trim(),
-                              subtitle:
-                                  '${AmountType.piece.shortLabel} · ${LocaleKeys.addProductSheet_newProduct.tr()}',
-                              onAddPressed: () => _onSubmit(state.query),
-                            ),
-                          ],
+                        NewProductCard(
+                          name: state.query.trim(),
+                          isExpanded: _isNewProductExpanded,
+                          onExpandToggled: () => setState(() => _isNewProductExpanded = !_isNewProductExpanded),
+                          amountType: _amountType,
+                          onAmountTypeSelected: (amountType) => setState(() => _amountType = amountType),
+                          categories: state.categories,
+                          categoryId: _categoryId,
+                          onCategorySelected: (categoryId) => setState(() => _categoryId = categoryId),
+                          onNewCategoryPressed: _onNewCategoryPressed,
+                          onSavePressed: () => _onSubmit(state.query),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 18),
                       ],
                       if (products.isNotEmpty) ...[
                         const _SectionLabel(),

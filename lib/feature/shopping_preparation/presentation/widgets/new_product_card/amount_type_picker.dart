@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:shopengo/core/presentation/style/custom_colors.dart';
+import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
+import 'package:shopengo/feature/product/domain/model/amount_type.dart';
+import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
+
+class AmountTypePicker extends StatelessWidget {
+  const new({required this.selectedAmountType, required this.onSelected, super.key});
+
+  final AmountType selectedAmountType;
+  final ValueChanged<AmountType> onSelected;
+
+  static const List<AmountType> _amountTypes = [
+    AmountType.piece,
+    AmountType.kilogram,
+    AmountType.gram,
+    AmountType.liter,
+    AmountType.pack,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = CustomColors.of(context);
+    final textStyle = CustomTextStyles.of(context).medium14;
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(color: colors.surface, borderRadius: BorderRadius.circular(12)),
+      child: Row(
+        spacing: 6,
+        children: [
+          for (final amountType in _amountTypes)
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onSelected(amountType),
+                behavior: HitTestBehavior.opaque,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 150),
+                  height: 34,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: amountType == selectedAmountType
+                        ? colors.background
+                        : colors.background.withValues(alpha: 0),
+                    borderRadius: BorderRadius.circular(9),
+                    boxShadow: [
+                      if (amountType == selectedAmountType)
+                        const BoxShadow(color: Color(0x26281E78), offset: Offset(0, 1), blurRadius: 1.5),
+                    ],
+                  ),
+                  child: Text(
+                    amountType.shortLabel,
+                    style: textStyle.copyWith(
+                      color: amountType == selectedAmountType ? colors.dark : colors.sectionLabel,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
