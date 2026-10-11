@@ -25,20 +25,43 @@ class StoreDatasource {
 
   /// Ends shopping at the store, returning its list to preparation.
   ///
-  /// Checked products leave the cart and are saved as the store's previous shopping, together with [amountSpent].
-  /// Unchecked ones stay on the list. When nothing is checked, the previous shopping is left as it was.
+  /// Checked products leave the cart and are saved to the store's history and as its previous shopping, together
+  /// with [amountSpent]. Unchecked ones stay on the list. When nothing is checked, nothing is saved.
   Future<void> finishShopping({required int storeId, double? amountSpent}) {
     return _database.transaction(() async {
-      final boughtCount = await (_database.delete(_database.cartItemTable)
-            ..where((t) => t.storeId.equals(storeId) & t.isChecked.equals(true)))
-          .go();
+      final now = DateTime.now();
+      final cart = _database.cartItemTable;
+      final products = _database.productTable;
+      final bought = await (_database.select(cart).join([innerJoin(products, products.id.equalsExp(cart.productId))])
+            ..where(cart.storeId.equals(storeId) & cart.isChecked.equals(true))
+            ..orderBy([OrderingTerm.asc(products.name)]))
+          .get();
+
+      if (bought.isNotEmpty) {
+        final shoppingHistoryId = await _database
+            .into(_database.shoppingHistoryTable)
+            .insert(ShoppingHistoryTableCompanion.insert(storeId: storeId, date: now, amountSpent: Value(amountSpent)));
+        await _database.batch(
+          (batch) => batch.insertAll(_database.shoppingHistoryItemTable, [
+            for (final row in bought)
+              ShoppingHistoryItemTableCompanion.insert(
+                shoppingHistoryId: shoppingHistoryId,
+                productName: row.readTable(products).name,
+                amountType: row.readTable(products).amountType,
+                quantity: row.readTable(cart).quantity,
+              ),
+          ]),
+        );
+        await (_database.delete(cart)..where((t) => t.storeId.equals(storeId) & t.isChecked.equals(true))).go();
+      }
+
       await (_database.update(_database.storeTable)..where((t) => t.id.equals(storeId))).write(
-        boughtCount > 0
+        bought.isNotEmpty
             ? StoreTableCompanion(
                 isShopping: const Value(false),
-                previousShoppingDate: Value(DateTime.now()),
+                previousShoppingDate: Value(now),
                 previousShoppingAmountSpent: Value(amountSpent),
-                previousShoppingArticlesBought: Value(boughtCount),
+                previousShoppingArticlesBought: Value(bought.length),
               )
             : const StoreTableCompanion(isShopping: Value(false)),
       );

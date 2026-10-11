@@ -5,6 +5,7 @@ import 'package:shopengo/core/domain/repository/di.dart' show container;
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/feature/cart/data/repository/cart_repository_impl.dart';
 import 'package:shopengo/feature/category/data/repository/category_repository_impl.dart';
+import 'package:shopengo/feature/history/presentation/history_screen.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository_impl.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/product/data/repository/product_repository_impl.dart';
@@ -62,7 +63,7 @@ class ShoppingScreen extends StatelessWidget {
                 productCount: header.productCount,
                 checkedCount: header.checkedCount,
                 onBackPressed: () => context.pop(),
-                onHistoryPressed: () {},
+                onHistoryPressed: () => context.pushNamed(HistoryScreen.path, extra: store),
                 onBackToPreparationPressed: () => context.read<ShoppingBloc>().add(ShoppingBackToPreparationEvent()),
               ),
             ),

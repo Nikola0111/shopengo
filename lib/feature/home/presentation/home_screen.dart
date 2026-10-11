@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/domain/repository/di.dart' show container;
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
+import 'package:shopengo/feature/history/presentation/history_screen.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository_impl.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_bloc.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: StoreCard(
                                 store: store,
                                 onOpenStore: () => _openStore(context, store),
-                                onHistoryPressed: () {},
+                                onHistoryPressed: () => context.pushNamed(HistoryScreen.path, extra: store),
                               ),
                             );
                           },

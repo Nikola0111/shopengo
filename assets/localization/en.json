@@ -43,6 +43,18 @@
     "saveToHistory": "Save to history",
     "finishWithoutSaving": "Finish shopping"
   },
+  "history": {
+    "label": "History · {storeName}",
+    "title": "Shoppings",
+    "shoppingCount": "Shoppings",
+    "totalSpent": "Total spent",
+    "productCount": {
+      "one": "{} product",
+      "other": "{} products"
+    },
+    "empty": "No shoppings yet",
+    "emptyDescription": "When you finish shopping, what you bought and how much you spent is saved here."
+  },
   "addProductSheet": {
     "addTo": "Add to {storeName}",
     "done": "Done",

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/presentation/screens/error_screen.dart';
+import 'package:shopengo/feature/history/presentation/history_screen.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/home_screen.dart';
 import 'package:shopengo/feature/shopping/presentation/shopping_screen.dart';
@@ -27,6 +28,10 @@ class RouterConfiguration {
             _routeWithExtra<StoreModel>(
               path: ShoppingScreen.path,
               builder: (store) => ShoppingScreen(store: store),
+            ),
+            _routeWithExtra<StoreModel>(
+              path: HistoryScreen.path,
+              builder: (store) => HistoryScreen(store: store),
             ),
           ],
         ),

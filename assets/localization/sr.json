@@ -45,6 +45,19 @@
     "saveToHistory": "Sačuvaj u istoriju",
     "finishWithoutSaving": "Završi kupovinu"
   },
+  "history": {
+    "label": "Istorija · {storeName}",
+    "title": "Kupovine",
+    "shoppingCount": "Kupovina",
+    "totalSpent": "Ukupno potrošeno",
+    "productCount": {
+      "one": "{} proizvod",
+      "few": "{} proizvoda",
+      "other": "{} proizvoda"
+    },
+    "empty": "Još nema kupovina",
+    "emptyDescription": "Kad završiš kupovinu, ovde se čuva šta je kupljeno i koliko je potrošeno."
+  },
   "addProductSheet": {
     "addTo": "Dodaj u {storeName}",
     "done": "Gotovo",
