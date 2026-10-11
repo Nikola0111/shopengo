@@ -17,6 +17,12 @@ class CustomTextStyles {
   TextStyle get semiBold11 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold11!;
   TextStyle get semiBold16 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold16!;
   TextStyle get semiBold30 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold30!;
+  TextStyle get regular12 => Theme.of(_context).extension<CustomTextStyleScheme>()!.regular12!;
+  TextStyle get regular17 => Theme.of(_context).extension<CustomTextStyleScheme>()!.regular17!;
+  TextStyle get medium14 => Theme.of(_context).extension<CustomTextStyleScheme>()!.medium14!;
+  TextStyle get medium15 => Theme.of(_context).extension<CustomTextStyleScheme>()!.medium15!;
+  TextStyle get semiBold12 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold12!;
+  TextStyle get semiBold20 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold20!;
 }
 
 @immutable
@@ -34,21 +40,18 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     required this.semiBold11,
     required this.semiBold16,
     required this.semiBold30,
+    required this.regular12,
+    required this.regular17,
+    required this.medium14,
+    required this.medium15,
+    required this.semiBold12,
+    required this.semiBold20,
   });
 
   factory fromPrimaryTextColor({required Color primaryTextColor}) {
     return CustomTextStyleScheme(
-      regular14: TextStyle(
-        color: primaryTextColor,
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
-      regular18: TextStyle(
-        color: primaryTextColor,
-        fontSize: 18,
-        fontWeight: FontWeight.w400,
-        height: 1.2,
-      ),
+      regular14: TextStyle(color: primaryTextColor, fontSize: 14, fontWeight: FontWeight.w400),
+      regular18: TextStyle(color: primaryTextColor, fontSize: 18, fontWeight: FontWeight.w400, height: 1.2),
       medium12: TextStyle(
         color: primaryTextColor,
         fontSize: 12,
@@ -110,6 +113,42 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
         fontWeight: FontWeight.w600,
         fontFamily: _fontFamilyRubik,
       ),
+      regular12: TextStyle(
+        color: primaryTextColor,
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        fontFamily: _fontFamilyRubik,
+      ),
+      regular17: TextStyle(
+        color: primaryTextColor,
+        fontSize: 17,
+        fontWeight: FontWeight.w400,
+        fontFamily: _fontFamilyRubik,
+      ),
+      medium14: TextStyle(
+        color: primaryTextColor,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        fontFamily: _fontFamilyRubik,
+      ),
+      medium15: TextStyle(
+        color: primaryTextColor,
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        fontFamily: _fontFamilyRubik,
+      ),
+      semiBold12: TextStyle(
+        color: primaryTextColor,
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        fontFamily: _fontFamilyRubik,
+      ),
+      semiBold20: TextStyle(
+        color: primaryTextColor,
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        fontFamily: _fontFamilyRubik,
+      ),
     );
   }
 
@@ -127,6 +166,12 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
   final TextStyle? semiBold11;
   final TextStyle? semiBold16;
   final TextStyle? semiBold30;
+  final TextStyle? regular12;
+  final TextStyle? regular17;
+  final TextStyle? medium14;
+  final TextStyle? medium15;
+  final TextStyle? semiBold12;
+  final TextStyle? semiBold20;
 
   @override
   CustomTextStyleScheme copyWith({
@@ -142,6 +187,12 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     TextStyle? semiBold11,
     TextStyle? semiBold16,
     TextStyle? semiBold30,
+    TextStyle? regular12,
+    TextStyle? regular17,
+    TextStyle? medium14,
+    TextStyle? medium15,
+    TextStyle? semiBold12,
+    TextStyle? semiBold20,
   }) {
     return CustomTextStyleScheme(
       regular14: regular14 ?? this.regular14,
@@ -156,6 +207,12 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       semiBold11: semiBold11 ?? this.semiBold11,
       semiBold16: semiBold16 ?? this.semiBold16,
       semiBold30: semiBold30 ?? this.semiBold30,
+      regular12: regular12 ?? this.regular12,
+      regular17: regular17 ?? this.regular17,
+      medium14: medium14 ?? this.medium14,
+      medium15: medium15 ?? this.medium15,
+      semiBold12: semiBold12 ?? this.semiBold12,
+      semiBold20: semiBold20 ?? this.semiBold20,
     );
   }
 
@@ -177,6 +234,12 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       semiBold11: TextStyle.lerp(semiBold11, other.semiBold11, t),
       semiBold16: TextStyle.lerp(semiBold16, other.semiBold16, t),
       semiBold30: TextStyle.lerp(semiBold30, other.semiBold30, t),
+      regular12: TextStyle.lerp(regular12, other.regular12, t),
+      regular17: TextStyle.lerp(regular17, other.regular17, t),
+      medium14: TextStyle.lerp(medium14, other.medium14, t),
+      medium15: TextStyle.lerp(medium15, other.medium15, t),
+      semiBold12: TextStyle.lerp(semiBold12, other.semiBold12, t),
+      semiBold20: TextStyle.lerp(semiBold20, other.semiBold20, t),
     );
   }
 }

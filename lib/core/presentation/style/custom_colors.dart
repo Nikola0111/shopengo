@@ -18,6 +18,14 @@ class CustomColors {
   Color get border => Theme.of(_context).extension<CustomColorScheme>()!.border!;
   Color get hintText => Theme.of(_context).extension<CustomColorScheme>()!.hintText!;
   Color get badgeBackground => Theme.of(_context).extension<CustomColorScheme>()!.badgeBackground!;
+  Color get divider => Theme.of(_context).extension<CustomColorScheme>()!.divider!;
+  Color get accentText => Theme.of(_context).extension<CustomColorScheme>()!.accentText!;
+  Color get mutedText => Theme.of(_context).extension<CustomColorScheme>()!.mutedText!;
+  Color get sectionLabel => Theme.of(_context).extension<CustomColorScheme>()!.sectionLabel!;
+  Color get sheetHandle => Theme.of(_context).extension<CustomColorScheme>()!.sheetHandle!;
+  Color get outline => Theme.of(_context).extension<CustomColorScheme>()!.outline!;
+  Color get highlight => Theme.of(_context).extension<CustomColorScheme>()!.highlight!;
+  Color get scrim => Theme.of(_context).extension<CustomColorScheme>()!.scrim!;
 }
 
 @immutable
@@ -37,6 +45,14 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     required this.border,
     required this.hintText,
     required this.badgeBackground,
+    required this.divider,
+    required this.accentText,
+    required this.mutedText,
+    required this.sectionLabel,
+    required this.sheetHandle,
+    required this.outline,
+    required this.highlight,
+    required this.scrim,
   });
 
   const new classic({
@@ -54,6 +70,14 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     this.border = const Color(0xFFE4E1F2),
     this.hintText = const Color(0xFFA9A4C4),
     this.badgeBackground = const Color(0x6123186E),
+    this.divider = const Color(0xFFECEAF6),
+    this.accentText = const Color(0xFF5646D0),
+    this.mutedText = const Color(0xFF8C87AE),
+    this.sectionLabel = const Color(0xFF7B76A0),
+    this.sheetHandle = const Color(0xFFD8D4EA),
+    this.outline = const Color(0xFFD8D2F6),
+    this.highlight = const Color(0xFFEEEBFD),
+    this.scrim = const Color(0x73140E3C),
   });
 
   final Color? primary;
@@ -70,6 +94,14 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   final Color? border;
   final Color? hintText;
   final Color? badgeBackground;
+  final Color? divider;
+  final Color? accentText;
+  final Color? mutedText;
+  final Color? sectionLabel;
+  final Color? sheetHandle;
+  final Color? outline;
+  final Color? highlight;
+  final Color? scrim;
 
   @override
   ThemeExtension<CustomColorScheme> copyWith({
@@ -87,6 +119,14 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     Color? border,
     Color? hintText,
     Color? badgeBackground,
+    Color? divider,
+    Color? accentText,
+    Color? mutedText,
+    Color? sectionLabel,
+    Color? sheetHandle,
+    Color? outline,
+    Color? highlight,
+    Color? scrim,
   }) {
     return CustomColorScheme(
       primary: primary ?? this.primary,
@@ -103,6 +143,14 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       border: border ?? this.border,
       hintText: hintText ?? this.hintText,
       badgeBackground: badgeBackground ?? this.badgeBackground,
+      divider: divider ?? this.divider,
+      accentText: accentText ?? this.accentText,
+      mutedText: mutedText ?? this.mutedText,
+      sectionLabel: sectionLabel ?? this.sectionLabel,
+      sheetHandle: sheetHandle ?? this.sheetHandle,
+      outline: outline ?? this.outline,
+      highlight: highlight ?? this.highlight,
+      scrim: scrim ?? this.scrim,
     );
   }
 
@@ -126,6 +174,14 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       border: Color.lerp(border, other.border, t),
       hintText: Color.lerp(hintText, other.hintText, t),
       badgeBackground: Color.lerp(badgeBackground, other.badgeBackground, t),
+      divider: Color.lerp(divider, other.divider, t),
+      accentText: Color.lerp(accentText, other.accentText, t),
+      mutedText: Color.lerp(mutedText, other.mutedText, t),
+      sectionLabel: Color.lerp(sectionLabel, other.sectionLabel, t),
+      sheetHandle: Color.lerp(sheetHandle, other.sheetHandle, t),
+      outline: Color.lerp(outline, other.outline, t),
+      highlight: Color.lerp(highlight, other.highlight, t),
+      scrim: Color.lerp(scrim, other.scrim, t),
     );
   }
 }

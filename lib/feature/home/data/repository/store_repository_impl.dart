@@ -1,17 +1,18 @@
-import 'package:shopengo/core/presentation/utils/app_database.dart';
 import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
+import 'package:shopengo/feature/home/data/mapper/store_mapper.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 
 class StoreRepositoryImpl implements StoreRepository {
-  new(this._storeDatasource);
+  new(this._storeDatasource, this._storeMapper);
 
   final StoreDatasource _storeDatasource;
+  final StoreMapper _storeMapper;
 
   @override
   Future<List<StoreModel>> getAllStores() async {
     final storeData = await _storeDatasource.getAllStores();
-    return _mapDataToStores(storeData);
+    return _storeMapper.toDomainList(storeData);
   }
 
   @override
@@ -23,21 +24,6 @@ class StoreRepositoryImpl implements StoreRepository {
   @override
   Future<List<StoreModel>> searchByQuery(String query) async {
     final storeData = await _storeDatasource.searchByQuery(query);
-    return _mapDataToStores(storeData);
-  }
-
-  List<StoreModel> _mapDataToStores(List<StoreTableData> data) {
-    return data
-        .map(
-          (e) => StoreModel(
-            id: e.id,
-            storeName: e.storeName,
-            currency: e.currency,
-            totalAmountSpentAtStore: e.previousShoppingAmountSpent,
-            previousShoppingArticlesBought: e.previousShoppingArticlesBought,
-            previousShoppingDate: e.previousShoppingDate,
-          ),
-        )
-        .toList();
+    return _storeMapper.toDomainList(storeData);
   }
 }

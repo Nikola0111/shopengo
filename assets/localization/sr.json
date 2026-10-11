@@ -19,5 +19,20 @@
     "prepareListBeforeLeaving": "Pripremi listu pre odlaska",
     "addProduct": "Dodaj proizvod…",
     "startShopping": "Počni kupovinu"
+  },
+  "addProductSheet": {
+    "addTo": "Dodaj u {storeName}",
+    "done": "Gotovo",
+    "productNameHint": "Upiši naziv proizvoda",
+    "frequentlyBought": "Često kupuješ",
+    "inList": "U listi · {quantity}",
+    "newProduct": "novi proizvod"
+  },
+  "amountType": {
+    "piece": "kom",
+    "pack": "pak",
+    "gram": "g",
+    "kilogram": "kg",
+    "liter": "l"
   }
 }

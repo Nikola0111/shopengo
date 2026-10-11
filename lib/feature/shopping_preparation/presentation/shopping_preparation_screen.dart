@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shopengo/core/domain/repository/di.dart' show container;
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
+import 'package:shopengo/feature/cart/data/repository/cart_repository_impl.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
+import 'package:shopengo/feature/product/data/repository/product_repository_impl.dart';
+import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_bloc.dart';
+import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/widgets/add_product_sheet.dart';
 import 'package:shopengo/feature/shopping_preparation/presentation/widgets/shopping_preparation_content.dart';
 import 'package:shopengo/feature/shopping_preparation/presentation/widgets/shopping_preparation_header.dart';
 
@@ -16,6 +23,17 @@ class ShoppingPreparationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<ShoppingPreparationBloc>(
+      create: (context) => ShoppingPreparationBloc(
+        container.resolve<ProductRepositoryImpl>(),
+        container.resolve<CartRepositoryImpl>(),
+        storeId: store.id,
+      )..add(ShoppingPreparationLoadProductsEvent()),
+      child: Builder(builder: _buildScreen),
+    );
+  }
+
+  Widget _buildScreen(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.of(context).primary,
       body: SafeArea(
@@ -37,7 +55,10 @@ class ShoppingPreparationScreen extends StatelessWidget {
                       left: 0,
                       right: 0,
                       bottom: 0,
-                      child: ShoppingPreparationContent(onAddPressed: () {}, onStartShoppingPressed: () {}),
+                      child: ShoppingPreparationContent(
+                        onAddPressed: () => AddProductSheet.show(context, store: store),
+                        onStartShoppingPressed: () {},
+                      ),
                     ),
                   ],
                 ),
