@@ -7,7 +7,7 @@ import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 part '../../../generated/core/presentation/utils/app_database.g.dart';
 
 @DriftDatabase(
-  tables: [StoreTable, CategoryTable, ProductTable, CartItemTable, PastShoppingTable, PastShoppingItemTable],
+  tables: [StoreTable, CategoryTable, ProductTable, CartItemTable, ShoppingHistoryTable, ShoppingHistoryItemTable],
 )
 class AppDatabase extends _$AppDatabase {
   new([QueryExecutor? executor]) : super(executor ?? _openConnection());
@@ -49,8 +49,8 @@ class AppDatabase extends _$AppDatabase {
         await m.addColumn(cartItemTable, cartItemTable.isChecked);
       }
       if (from < 6) {
-        await m.createTable(pastShoppingTable);
-        await m.createTable(pastShoppingItemTable);
+        await m.createTable(shoppingHistoryTable);
+        await m.createTable(shoppingHistoryItemTable);
       }
     },
     // SQLite ignores foreign keys unless they're enabled per connection.
@@ -111,22 +111,24 @@ class CartItemTable extends Table {
   Set<Column<Object>> get primaryKey => {storeId, productId};
 }
 
-/// A finished shopping at a store.
-class PastShoppingTable extends Table {
+/// A finished shopping at a store, kept in its shopping history.
+class ShoppingHistoryTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get storeId => integer().references(StoreTable, #id, onDelete: KeyAction.cascade)();
   DateTimeColumn get date => dateTime()();
   RealColumn get amountSpent => real().nullable()();
 }
 
-/// A product bought in a past shopping.
+/// A product bought in a shopping, as kept in the shopping history.
 ///
 /// Its name and amount type are copied from the product, so history stays the same when the product changes or is
 /// deleted.
-class PastShoppingItemTable extends Table {
+class ShoppingHistoryItemTable extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get pastShoppingId => integer().references(PastShoppingTable, #id, onDelete: KeyAction.cascade)();
+  IntColumn get shoppingHistoryId => integer().references(ShoppingHistoryTable, #id, onDelete: KeyAction.cascade)();
   TextColumn get productName => text().withLength(min: 1, max: 64)();
   TextColumn get amountType => textEnum<AmountType>()();
   IntColumn get quantity => integer()();
+  // Not filled in yet.
+  RealColumn get price => real().withDefault(const Constant(0))();
 }

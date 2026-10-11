@@ -6,8 +6,8 @@ import 'package:shopengo/feature/history/data/repository/history_repository.dart
 import 'package:shopengo/feature/history/domain/cubit/history_bloc.dart';
 import 'package:shopengo/feature/history/domain/cubit/history_event.dart';
 import 'package:shopengo/feature/history/domain/cubit/history_state.dart';
-import 'package:shopengo/feature/history/domain/model/past_shopping_item_model.dart';
-import 'package:shopengo/feature/history/domain/model/past_shopping_model.dart';
+import 'package:shopengo/feature/history/domain/model/shopping_history_item_model.dart';
+import 'package:shopengo/feature/history/domain/model/shopping_history_model.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 
 import 'history_bloc_test.mocks.dart';
@@ -17,31 +17,31 @@ void main() {
   late MockHistoryRepository historyRepository;
 
   const storeId = 7;
-  final latest = PastShoppingModel(
+  final latest = ShoppingHistoryModel(
     id: 2,
     date: DateTime(2026, 9, 28),
     amountSpent: 3000,
-    items: [PastShoppingItemModel(productName: 'Mleko', amountType: AmountType.liter, quantity: 2)],
+    items: [ShoppingHistoryItemModel(productName: 'Mleko', amountType: AmountType.liter, quantity: 2)],
   );
-  final earlier = PastShoppingModel(id: 1, date: DateTime(2026, 9, 14), amountSpent: 2450.5);
+  final earlier = ShoppingHistoryModel(id: 1, date: DateTime(2026, 9, 14), amountSpent: 2450.5);
 
   setUp(() {
     historyRepository = MockHistoryRepository();
   });
 
   blocTest<HistoryBloc, HistoryState>(
-    "should load the store's past shoppings",
-    setUp: () => when(historyRepository.getPastShoppings(storeId)).thenAnswer((_) async => [latest, earlier]),
+    "should load the store's shopping history",
+    setUp: () => when(historyRepository.getShoppingHistory(storeId)).thenAnswer((_) async => [latest, earlier]),
     build: () => HistoryBloc(historyRepository, storeId: storeId),
     act: (bloc) => bloc.add(HistoryLoadEvent()),
     expect: () => [
-      HistoryState(pastShoppings: [latest, earlier], isLoading: false),
+      HistoryState(shoppingHistory: [latest, earlier], isLoading: false),
     ],
   );
 
   test('should sum the amounts spent, skipping unknown ones', () {
     final state = HistoryState(
-      pastShoppings: [latest, earlier, PastShoppingModel(id: 3, date: DateTime(2026, 9))],
+      shoppingHistory: [latest, earlier, ShoppingHistoryModel(id: 3, date: DateTime(2026, 9))],
       isLoading: false,
     );
 

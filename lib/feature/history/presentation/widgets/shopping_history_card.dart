@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 import 'package:shopengo/core/presentation/utils/date_formatter.dart';
-import 'package:shopengo/feature/history/domain/model/past_shopping_model.dart';
+import 'package:shopengo/feature/history/domain/model/shopping_history_model.dart';
 import 'package:shopengo/feature/history/presentation/widgets/amount_text.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 /// A finished shopping. Tapping it shows or hides the products bought in it.
-class PastShoppingCard extends StatefulWidget {
+class ShoppingHistoryCard extends StatefulWidget {
   const new({required this.shopping, required this.currency, super.key});
 
-  final PastShoppingModel shopping;
+  final ShoppingHistoryModel shopping;
   final String currency;
 
   @override
-  State<PastShoppingCard> createState() => _PastShoppingCardState();
+  State<ShoppingHistoryCard> createState() => _ShoppingHistoryCardState();
 }
 
-class _PastShoppingCardState extends State<PastShoppingCard> {
+class _ShoppingHistoryCardState extends State<ShoppingHistoryCard> {
   static const Duration _expandDuration = Duration(milliseconds: 200);
 
   bool _isExpanded = false;
@@ -96,7 +96,7 @@ class _PastShoppingCardState extends State<PastShoppingCard> {
             AnimatedSize(
               duration: _expandDuration,
               alignment: Alignment.topCenter,
-              child: _isExpanded ? _PastShoppingItems(shopping: shopping) : const SizedBox(width: double.infinity),
+              child: _isExpanded ? _ShoppingHistoryItems(shopping: shopping) : const SizedBox(width: double.infinity),
             ),
           ],
         ),
@@ -105,10 +105,10 @@ class _PastShoppingCardState extends State<PastShoppingCard> {
   }
 }
 
-class _PastShoppingItems extends StatelessWidget {
+class _ShoppingHistoryItems extends StatelessWidget {
   const new({required this.shopping});
 
-  final PastShoppingModel shopping;
+  final ShoppingHistoryModel shopping;
 
   @override
   Widget build(BuildContext context) {

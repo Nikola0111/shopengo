@@ -9,7 +9,7 @@ import 'package:shopengo/feature/category/data/datasource/category_datasource.da
 import 'package:shopengo/feature/category/data/mapper/category_mapper.dart';
 import 'package:shopengo/feature/category/data/repository/category_repository_impl.dart';
 import 'package:shopengo/feature/history/data/datasource/history_datasource.dart';
-import 'package:shopengo/feature/history/data/mapper/past_shopping_mapper.dart';
+import 'package:shopengo/feature/history/data/mapper/shopping_history_mapper.dart';
 import 'package:shopengo/feature/history/data/repository/history_repository_impl.dart';
 import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
 import 'package:shopengo/feature/home/data/mapper/store_mapper.dart';
@@ -47,9 +47,9 @@ void initDI() {
       (container) =>
           CategoryRepositoryImpl(container.resolve<CategoryDatasource>(), container.resolve<CategoryMapper>()),
     )
-    ..registerSingleton((container) => const PastShoppingMapper())
+    ..registerSingleton((container) => const ShoppingHistoryMapper())
     ..registerSingleton(
       (container) =>
-          HistoryRepositoryImpl(container.resolve<HistoryDatasource>(), container.resolve<PastShoppingMapper>()),
+          HistoryRepositoryImpl(container.resolve<HistoryDatasource>(), container.resolve<ShoppingHistoryMapper>()),
     );
 }

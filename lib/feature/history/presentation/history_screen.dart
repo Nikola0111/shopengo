@@ -10,7 +10,7 @@ import 'package:shopengo/feature/history/domain/cubit/history_bloc.dart';
 import 'package:shopengo/feature/history/domain/cubit/history_event.dart';
 import 'package:shopengo/feature/history/domain/cubit/history_state.dart';
 import 'package:shopengo/feature/history/presentation/widgets/history_header.dart';
-import 'package:shopengo/feature/history/presentation/widgets/past_shopping_card.dart';
+import 'package:shopengo/feature/history/presentation/widgets/shopping_history_card.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
@@ -37,7 +37,7 @@ class HistoryScreen extends StatelessWidget {
               children: [
                 HistoryHeader(
                   store: store,
-                  shoppingCount: state.pastShoppings.length,
+                  shoppingCount: state.shoppingHistory.length,
                   totalSpent: state.totalSpent,
                   onBackPressed: () => context.pop(),
                 ),
@@ -51,14 +51,14 @@ class HistoryScreen extends StatelessWidget {
                     ),
                     child: switch (state) {
                       HistoryState(isLoading: true) => const SizedBox.shrink(),
-                      HistoryState(pastShoppings: []) => const _EmptyHistory(),
+                      HistoryState(shoppingHistory: []) => const _EmptyHistory(),
                       _ => ListView.separated(
                         padding: EdgeInsets.fromLTRB(20, 20, 20, 40 + MediaQuery.paddingOf(context).bottom),
-                        itemCount: state.pastShoppings.length,
+                        itemCount: state.shoppingHistory.length,
                         separatorBuilder: (context, index) => const SizedBox(height: 12),
                         itemBuilder: (context, index) {
-                          final shopping = state.pastShoppings[index];
-                          return PastShoppingCard(
+                          final shopping = state.shoppingHistory[index];
+                          return ShoppingHistoryCard(
                             key: ValueKey(shopping.id),
                             shopping: shopping,
                             currency: store.displayCurrency,

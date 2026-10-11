@@ -1,5 +1,5 @@
-import 'package:shopengo/feature/history/domain/model/past_shopping_model.dart';
+import 'package:shopengo/feature/history/domain/model/shopping_history_model.dart';
 
 abstract class HistoryRepository {
-  Future<List<PastShoppingModel>> getPastShoppings(int storeId);
+  Future<List<ShoppingHistoryModel>> getShoppingHistory(int storeId);
 }

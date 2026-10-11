@@ -42,7 +42,7 @@ void main() {
   }
 
   test('a store without finished shoppings has no history', () async {
-    expect(await datasource.getPastShoppings(maxiId), isEmpty);
+    expect(await datasource.getShoppingHistory(maxiId), isEmpty);
   });
 
   test('finishing saves the checked products with their quantities and the amount spent', () async {
@@ -53,11 +53,12 @@ void main() {
 
     await storeDatasource.finishShopping(storeId: maxiId, amountSpent: 450);
 
-    final (:shopping, :items) = (await datasource.getPastShoppings(maxiId)).single;
+    final (:shopping, :items) = (await datasource.getShoppingHistory(maxiId)).single;
     expect(shopping.amountSpent, 450);
     expect(items.single.productName, 'Mleko');
     expect(items.single.amountType, AmountType.liter);
     expect(items.single.quantity, 2);
+    expect(items.single.price, 0);
   });
 
   test('finishing with nothing checked saves nothing', () async {
@@ -65,7 +66,7 @@ void main() {
 
     await storeDatasource.finishShopping(storeId: maxiId);
 
-    expect(await datasource.getPastShoppings(maxiId), isEmpty);
+    expect(await datasource.getShoppingHistory(maxiId), isEmpty);
   });
 
   test('shoppings are newest first and only of the given store', () async {
@@ -73,7 +74,7 @@ void main() {
     await buy(lidlId, {milkId: 1}, amountSpent: 200);
     await buy(maxiId, {breadId: 1, milkId: 1}, amountSpent: 300);
 
-    final shoppings = await datasource.getPastShoppings(maxiId);
+    final shoppings = await datasource.getShoppingHistory(maxiId);
     expect(shoppings.map((e) => e.shopping.amountSpent), [300, 100]);
     expect(shoppings.first.items.map((e) => e.productName), ['Hleb', 'Mleko']);
     expect(shoppings.last.items.map((e) => e.productName), ['Mleko']);
@@ -84,7 +85,7 @@ void main() {
 
     await (database.delete(database.productTable)..where((t) => t.id.equals(milkId))).go();
 
-    final item = (await datasource.getPastShoppings(maxiId)).single.items.single;
+    final item = (await datasource.getShoppingHistory(maxiId)).single.items.single;
     expect(item.productName, 'Mleko');
     expect(item.quantity, 3);
   });
@@ -94,7 +95,7 @@ void main() {
 
     await (database.delete(database.storeTable)..where((t) => t.id.equals(maxiId))).go();
 
-    expect(await database.select(database.pastShoppingTable).get(), isEmpty);
-    expect(await database.select(database.pastShoppingItemTable).get(), isEmpty);
+    expect(await database.select(database.shoppingHistoryTable).get(), isEmpty);
+    expect(await database.select(database.shoppingHistoryItemTable).get(), isEmpty);
   });
 }

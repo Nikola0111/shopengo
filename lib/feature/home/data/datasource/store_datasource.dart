@@ -38,14 +38,14 @@ class StoreDatasource {
           .get();
 
       if (bought.isNotEmpty) {
-        final pastShoppingId = await _database
-            .into(_database.pastShoppingTable)
-            .insert(PastShoppingTableCompanion.insert(storeId: storeId, date: now, amountSpent: Value(amountSpent)));
+        final shoppingHistoryId = await _database
+            .into(_database.shoppingHistoryTable)
+            .insert(ShoppingHistoryTableCompanion.insert(storeId: storeId, date: now, amountSpent: Value(amountSpent)));
         await _database.batch(
-          (batch) => batch.insertAll(_database.pastShoppingItemTable, [
+          (batch) => batch.insertAll(_database.shoppingHistoryItemTable, [
             for (final row in bought)
-              PastShoppingItemTableCompanion.insert(
-                pastShoppingId: pastShoppingId,
+              ShoppingHistoryItemTableCompanion.insert(
+                shoppingHistoryId: shoppingHistoryId,
                 productName: row.readTable(products).name,
                 amountType: row.readTable(products).amountType,
                 quantity: row.readTable(cart).quantity,

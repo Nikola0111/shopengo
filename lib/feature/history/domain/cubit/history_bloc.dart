@@ -13,8 +13,8 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
   void _setupEventListeners() {
     on<HistoryLoadEvent>((event, emit) async {
-      final pastShoppings = await _historyRepository.getPastShoppings(storeId);
-      emit(state.copyWith(pastShoppings: pastShoppings, isLoading: false));
+      final shoppingHistory = await _historyRepository.getShoppingHistory(storeId);
+      emit(state.copyWith(shoppingHistory: shoppingHistory, isLoading: false));
     });
   }
 }
