@@ -19,7 +19,7 @@ class AddCategorySheet extends StatefulWidget {
 
   /// Returns the entered category, or null if the sheet was dismissed.
   static Future<NewCategory?> show(BuildContext context) {
-    return showAppBottomSheet<NewCategory>(context, builder: (context) => const AddCategorySheet());
+    return AppBottomSheet.show<NewCategory>(context, builder: (context) => const AddCategorySheet());
   }
 
   @override

@@ -22,7 +22,7 @@ class CategoriesSheet extends StatelessWidget {
 
   static Future<void> show(BuildContext context) {
     final bloc = context.read<ShoppingPreparationBloc>();
-    return showAppBottomSheet<void>(
+    return AppBottomSheet.show<void>(
       context,
       builder: (context) => BlocProvider.value(value: bloc, child: const CategoriesSheet()),
     );
@@ -40,7 +40,7 @@ class CategoriesSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => SizedBox(
-        height: constraints.maxHeight - fullHeightSheetTopGap,
+        height: constraints.maxHeight - AppBottomSheet.fullHeightTopGap,
         child: Column(
           children: [
             const SheetDragHandle(),

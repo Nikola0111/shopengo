@@ -17,10 +17,14 @@ class GroupedCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: dividerColor),
       ),
-      child: Column(
-        children: [
-          for (final (index, child) in children.indexed) ...[if (index > 0) const SizedBox(height: 1), child],
-        ],
+      // Sits inside the sheet's scrolling list, so it sizes to its rows and doesn't scroll on its own.
+      child: ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: EdgeInsets.zero,
+        itemCount: children.length,
+        itemBuilder: (context, index) => children[index],
+        separatorBuilder: (context, index) => const SizedBox(height: 1),
       ),
     );
   }

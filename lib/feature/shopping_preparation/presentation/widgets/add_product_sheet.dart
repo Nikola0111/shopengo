@@ -24,7 +24,7 @@ class AddProductSheet extends StatefulWidget {
 
   static Future<void> show(BuildContext context, {required StoreModel store}) async {
     final bloc = context.read<ShoppingPreparationBloc>();
-    await showAppBottomSheet<void>(
+    await AppBottomSheet.show<void>(
       context,
       builder: (context) => BlocProvider.value(
         value: bloc,
@@ -58,7 +58,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
     // `useSafeArea` already keeps the sheet below the status bar, so size it from the space it's given.
     return LayoutBuilder(
       builder: (context, constraints) => SizedBox(
-        height: constraints.maxHeight - fullHeightSheetTopGap,
+        height: constraints.maxHeight - AppBottomSheet.fullHeightTopGap,
         child: Column(
           children: [
             const SheetDragHandle(),
