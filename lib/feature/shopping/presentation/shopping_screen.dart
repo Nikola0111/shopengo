@@ -39,6 +39,7 @@ class ShoppingScreen extends StatelessWidget {
         container.resolve<StoreRepositoryImpl>(),
         storeId: store.id,
         isShopping: store.isShopping,
+        previousShoppingAmountSpent: store.previousShoppingAmountSpent,
       )..add(ShoppingLoadProductsEvent()),
       child: Builder(builder: _buildScreen),
     );
@@ -51,17 +52,23 @@ class ShoppingScreen extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            BlocSelector<ShoppingBloc, ShoppingState, ({bool isShopping, int productCount, int checkedCount})>(
+            BlocSelector<
+              ShoppingBloc,
+              ShoppingState,
+              ({bool isShopping, int productCount, int checkedCount, double? previousShoppingAmountSpent})
+            >(
               selector: (state) => (
                 isShopping: state.isShopping,
                 productCount: state.cartQuantities.length,
                 checkedCount: state.checkedProductIds.length,
+                previousShoppingAmountSpent: state.previousShoppingAmountSpent,
               ),
               builder: (context, header) => ShoppingHeader(
                 store: store,
                 isShopping: header.isShopping,
                 productCount: header.productCount,
                 checkedCount: header.checkedCount,
+                previousShoppingAmountSpent: header.previousShoppingAmountSpent,
                 onBackPressed: () => context.pop(),
                 onHistoryPressed: () => context.pushNamed(HistoryScreen.path, extra: store),
                 onBackToPreparationPressed: () => context.read<ShoppingBloc>().add(ShoppingBackToPreparationEvent()),

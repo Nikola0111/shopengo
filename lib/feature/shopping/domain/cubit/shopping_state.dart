@@ -14,6 +14,7 @@ class ShoppingState with _$ShoppingState {
     this.cartQuantities = const {},
     this.checkedProductIds = const {},
     this.isShopping = false,
+    this.previousShoppingAmountSpent,
   });
 
   final List<ProductModel> products;
@@ -30,6 +31,9 @@ class ShoppingState with _$ShoppingState {
 
   /// Whether the list is being shopped, as opposed to prepared.
   final bool isShopping;
+
+  /// Spent at this store the last time, or null if nothing was bought yet.
+  final double? previousShoppingAmountSpent;
 
   List<ProductModel> get filteredProducts {
     final normalizedQuery = query.trim().toUpperCase();

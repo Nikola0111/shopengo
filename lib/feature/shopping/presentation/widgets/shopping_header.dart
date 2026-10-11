@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
+import 'package:shopengo/core/presentation/widgets/amount_text.dart';
 import 'package:shopengo/core/presentation/widgets/circular_button.dart';
 import 'package:shopengo/core/presentation/widgets/secondary_button.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
@@ -14,6 +15,7 @@ class ShoppingHeader extends StatelessWidget {
     required this.isShopping,
     required this.productCount,
     required this.checkedCount,
+    required this.previousShoppingAmountSpent,
     required this.onBackPressed,
     required this.onHistoryPressed,
     required this.onBackToPreparationPressed,
@@ -30,6 +32,9 @@ class ShoppingHeader extends StatelessWidget {
 
   /// Number of products on the list that are already in the basket.
   final int checkedCount;
+
+  /// Spent at this store the last time, or null if nothing was bought yet.
+  final double? previousShoppingAmountSpent;
   final VoidCallback onBackPressed;
   final VoidCallback onHistoryPressed;
   final VoidCallback onBackToPreparationPressed;
@@ -57,7 +62,7 @@ class ShoppingHeader extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 14),
-          _StoreName(store: store),
+          _StoreName(store: store, previousShoppingAmountSpent: previousShoppingAmountSpent),
           const SizedBox(height: 14),
           AnimatedSize(
             duration: _phaseSwitchDuration,
@@ -79,18 +84,40 @@ class ShoppingHeader extends StatelessWidget {
   }
 }
 
+/// The store's name, with what was spent there the last time on the right.
 class _StoreName extends StatelessWidget {
-  const new({required this.store});
+  const new({required this.store, required this.previousShoppingAmountSpent});
 
   final StoreModel store;
+  final double? previousShoppingAmountSpent;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      store.storeName,
-      style: CustomTextStyles.of(context).semiBold30,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
+    final textStyles = CustomTextStyles.of(context);
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Text(store.storeName, style: textStyles.semiBold30, maxLines: 1, overflow: TextOverflow.ellipsis),
+        ),
+        const SizedBox(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Opacity(
+              opacity: 0.85,
+              child: Text(LocaleKeys.history_lastTime.tr(), style: textStyles.regular12),
+            ),
+            const SizedBox(height: 4),
+            AmountText(
+              amount: previousShoppingAmountSpent,
+              currency: store.displayCurrency,
+              amountStyle: textStyles.semiBold20,
+              currencyStyle: textStyles.medium12.copyWith(fontSize: 11, letterSpacing: 0),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

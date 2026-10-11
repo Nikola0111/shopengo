@@ -20,14 +20,10 @@ class AmountText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final amount = this.amount;
-    if (amount == null) {
-      return Text('–', style: amountStyle);
-    }
-
     return Text.rich(
       TextSpan(
         children: [
-          TextSpan(text: '${AmountFormatter.format(amount)} ', style: amountStyle),
+          TextSpan(text: '${amount == null ? '—' : AmountFormatter.format(amount)} ', style: amountStyle),
           TextSpan(text: currency, style: currencyStyle),
         ],
       ),

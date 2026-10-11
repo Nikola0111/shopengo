@@ -8,7 +8,7 @@ class StoreModel with _$StoreModel {
     required this.id,
     required this.storeName,
     this.currency,
-    this.totalAmountSpentAtStore,
+    this.previousShoppingAmountSpent,
     this.previousShoppingArticlesBought,
     this.previousShoppingDate,
     this.isShopping = false,
@@ -25,7 +25,7 @@ class StoreModel with _$StoreModel {
 
   final DateTime? previousShoppingDate;
 
-  final double? totalAmountSpentAtStore;
+  final double? previousShoppingAmountSpent;
 
   final int? previousShoppingArticlesBought;
 

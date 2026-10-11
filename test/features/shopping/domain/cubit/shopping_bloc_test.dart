@@ -51,12 +51,13 @@ void main() {
   });
 
   blocTest<ShoppingBloc, ShoppingState>(
-    "should load saved products, categories, this store's cart and whether it's being shopped",
+    "should load saved products, categories, this store's cart, whether it's being shopped and the previous amount",
     setUp: () {
       when(productRepository.getAllProducts()).thenAnswer((_) async => [milk, bread]);
       when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other]);
-      when(storeRepository.getStore(storeId))
-          .thenAnswer((_) async => StoreModel(id: storeId, storeName: 'Maxi', isShopping: true));
+      when(storeRepository.getStore(storeId)).thenAnswer(
+        (_) async => StoreModel(id: storeId, storeName: 'Maxi', isShopping: true, previousShoppingAmountSpent: 3000),
+      );
       when(cartRepository.getCartItems(storeId)).thenAnswer(
         (_) async => [
           CartItemModel(storeId: storeId, productId: 1, quantity: 3),
@@ -73,6 +74,7 @@ void main() {
         cartQuantities: const {1: 3, 2: 1},
         checkedProductIds: const {2},
         isShopping: true,
+        previousShoppingAmountSpent: 3000,
       ),
     ],
   );
@@ -277,17 +279,24 @@ void main() {
   );
 
   blocTest<ShoppingBloc, ShoppingState>(
-    'should finish shopping, leaving unchecked products on the list',
+    'should finish shopping, leaving unchecked products on the list and making it the previous shopping',
     setUp: () {
       when(storeRepository.finishShopping(storeId: storeId, amountSpent: 3000)).thenAnswer((_) async {});
+      when(storeRepository.getStore(storeId))
+          .thenAnswer((_) async => StoreModel(id: storeId, storeName: 'Maxi', previousShoppingAmountSpent: 3000));
       when(cartRepository.getCartItems(storeId))
           .thenAnswer((_) async => [CartItemModel(storeId: storeId, productId: 2, quantity: 1)]);
     },
     build: buildBloc,
-    seed: () => const ShoppingState(cartQuantities: {1: 2, 2: 1}, checkedProductIds: {1}, isShopping: true),
+    seed: () => const ShoppingState(
+      cartQuantities: {1: 2, 2: 1},
+      checkedProductIds: {1},
+      isShopping: true,
+      previousShoppingAmountSpent: 1200,
+    ),
     act: (bloc) => bloc.add(ShoppingFinishEvent(amountSpent: 3000)),
     expect: () => [
-      const ShoppingState(cartQuantities: {2: 1}),
+      const ShoppingState(cartQuantities: {2: 1}, previousShoppingAmountSpent: 3000),
     ],
     verify: (_) => verify(storeRepository.finishShopping(storeId: storeId, amountSpent: 3000)).called(1),
   );

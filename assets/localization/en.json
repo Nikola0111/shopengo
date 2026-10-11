@@ -10,8 +10,8 @@
     "noMoneySpend": "No Money Spent",
     "numOfArticles": "Number of articles: {articlesAmount}",
 
-    "emptyList": "List is empty",
-    "startFirstShopping": "Start your first shopping!",
+    "productsBought": "Products: {count}",
+    "noShoppings": "No shoppings yet",
     "history": "History"
   },
   "shoppingPreparation": {
@@ -44,6 +44,7 @@
     "finishWithoutSaving": "Finish shopping"
   },
   "history": {
+    "lastTime": "Last time",
     "label": "History · {storeName}",
     "title": "Shoppings",
     "shoppingCount": "Shoppings",
