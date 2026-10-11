@@ -23,13 +23,18 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<int> createProduct({required String name, required AmountType amountType}) {
-    return _productDatasource.createProduct(name: name, amountType: amountType);
+  Future<int> createProduct({required String name, required AmountType amountType, int? categoryId}) {
+    return _productDatasource.createProduct(name: name, amountType: amountType, categoryId: categoryId);
   }
 
   @override
   Future<bool> updateProduct(ProductModel product) {
-    return _productDatasource.updateProduct(id: product.id, name: product.name, amountType: product.amountType);
+    return _productDatasource.updateProduct(
+      id: product.id,
+      name: product.name,
+      amountType: product.amountType,
+      categoryId: product.categoryId,
+    );
   }
 
   @override

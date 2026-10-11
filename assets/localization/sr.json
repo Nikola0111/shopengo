@@ -26,7 +26,31 @@
     "productNameHint": "Upiši naziv proizvoda",
     "frequentlyBought": "Često kupuješ",
     "inList": "U listi · {quantity}",
-    "newProduct": "novi proizvod"
+    "newProduct": "novi proizvod",
+    "manageCategories": "Upravljaj kategorijama"
+  },
+  "categoriesSheet": {
+    "title": "Kategorije",
+    "back": "Nazad",
+    "newCategory": "Nova kategorija",
+    "productCount": {
+      "one": "{} proizvod",
+      "few": "{} proizvoda",
+      "other": "{} proizvoda"
+    },
+    "defaultCategoryNote": "„Ostalo“ je podrazumevana kategorija i ne može se menjati."
+  },
+  "addCategorySheet": {
+    "title": "Nova kategorija",
+    "back": "Nazad",
+    "titleHint": "npr. Za bebu, Ljubimci, Zamrznuto",
+    "color": "Boja",
+    "preview": "Pregled",
+    "previewPlaceholder": "Naziv kategorije",
+    "save": "Sačuvaj kategoriju"
+  },
+  "category": {
+    "defaultTitle": "Ostalo"
   },
   "amountType": {
     "piece": "kom",

@@ -1,13 +1,16 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/product/domain/model/product_model.dart';
 
 part '../../../../generated/feature/shopping_preparation/domain/cubit/shopping_preparation_state.freezed.dart';
 
 @freezed
 class ShoppingPreparationState with _$ShoppingPreparationState {
-  const new({this.products = const [], this.query = '', this.cartQuantities = const {}});
+  const new({this.products = const [], this.categories = const [], this.query = '', this.cartQuantities = const {}});
 
   final List<ProductModel> products;
+
+  final List<CategoryModel> categories;
 
   final String query;
 

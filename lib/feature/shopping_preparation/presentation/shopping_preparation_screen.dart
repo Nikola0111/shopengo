@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/domain/repository/di.dart' show container;
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/feature/cart/data/repository/cart_repository_impl.dart';
+import 'package:shopengo/feature/category/data/repository/category_repository_impl.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/product/data/repository/product_repository_impl.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_bloc.dart';
@@ -27,6 +28,7 @@ class ShoppingPreparationScreen extends StatelessWidget {
       create: (context) => ShoppingPreparationBloc(
         container.resolve<ProductRepositoryImpl>(),
         container.resolve<CartRepositoryImpl>(),
+        container.resolve<CategoryRepositoryImpl>(),
         storeId: store.id,
       )..add(ShoppingPreparationLoadProductsEvent()),
       child: Builder(builder: _buildScreen),

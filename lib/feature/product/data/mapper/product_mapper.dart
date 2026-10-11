@@ -5,7 +5,7 @@ class ProductMapper {
   const new();
 
   ProductModel toDomain(ProductTableData data) {
-    return ProductModel(id: data.id, name: data.name, amountType: data.amountType);
+    return ProductModel(id: data.id, name: data.name, amountType: data.amountType, categoryId: data.categoryId);
   }
 
   List<ProductModel> toDomainList(List<ProductTableData> data) => data.map(toDomain).toList();

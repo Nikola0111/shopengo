@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
 
 abstract class ShoppingPreparationEvent extends Equatable {
@@ -30,4 +32,13 @@ class ShoppingPreparationSubmitProductEvent extends ShoppingPreparationEvent {
 
   @override
   List<Object?> get props => [productName];
+}
+
+class ShoppingPreparationCreateCategoryEvent extends ShoppingPreparationEvent {
+  new({required this.title, required this.color});
+  final String title;
+  final Color color;
+
+  @override
+  List<Object?> get props => [title, color];
 }
