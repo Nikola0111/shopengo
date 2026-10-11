@@ -44,30 +44,27 @@ class HistoryHeader extends StatelessWidget {
           const SizedBox(height: 4),
           Text(LocaleKeys.history_title.tr(), style: textStyles.semiBold30),
           const SizedBox(height: 14),
-          IntrinsicHeight(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: _StatTile(
-                    label: LocaleKeys.history_shoppingCount.tr(),
-                    value: Text('$shoppingCount', style: textStyles.semiBold20),
+          Row(
+            children: [
+              Expanded(
+                child: _StatTile(
+                  label: LocaleKeys.history_shoppingCount.tr(),
+                  value: Text('$shoppingCount', style: textStyles.semiBold20),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: _StatTile(
+                  label: LocaleKeys.history_totalSpent.tr(),
+                  value: AmountText(
+                    amount: totalSpent,
+                    currency: store.displayCurrency,
+                    amountStyle: textStyles.semiBold20,
+                    currencyStyle: textStyles.medium12.copyWith(fontSize: 11, letterSpacing: 0),
                   ),
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: _StatTile(
-                    label: LocaleKeys.history_totalSpent.tr(),
-                    value: AmountText(
-                      amount: totalSpent,
-                      currency: store.displayCurrency,
-                      amountStyle: textStyles.semiBold20,
-                      currencyStyle: textStyles.medium12.copyWith(fontSize: 11, letterSpacing: 0),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

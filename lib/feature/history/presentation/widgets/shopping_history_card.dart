@@ -76,18 +76,11 @@ class _ShoppingHistoryCardState extends State<ShoppingHistoryCard> {
                         color: colors.mutedText,
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                     AnimatedRotation(
                       turns: _isExpanded ? 0.5 : 0,
                       duration: _expandDuration,
-                      child: SizedBox(
-                        width: 14,
-                        child: Text(
-                          '▾',
-                          textAlign: TextAlign.center,
-                          style: textStyles.regular14.copyWith(color: colors.hintText),
-                        ),
-                      ),
+                      child: Icon(Icons.expand_more_rounded, size: 20, color: colors.hintText),
                     ),
                   ],
                 ),
