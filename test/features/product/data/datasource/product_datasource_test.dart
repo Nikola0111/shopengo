@@ -1,6 +1,7 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shopengo/core/presentation/utils/app_database.dart';
+import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/product/data/datasource/product_datasource.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 
@@ -27,12 +28,18 @@ void main() {
 
       expect(product?.name, 'Milk');
       expect(product?.amountType, AmountType.liter);
+      expect(product?.categoryId, CategoryModel.defaultCategoryId);
     });
 
     test('updating a product', () async {
       final id = await datasource.createProduct(name: 'Milk', amountType: AmountType.liter);
 
-      final updated = await datasource.updateProduct(id: id, name: 'Flour', amountType: AmountType.kilogram);
+      final updated = await datasource.updateProduct(
+        id: id,
+        name: 'Flour',
+        amountType: AmountType.kilogram,
+        categoryId: CategoryModel.defaultCategoryId,
+      );
       final product = await datasource.getProductById(id);
 
       expect(updated, isTrue);
@@ -41,7 +48,12 @@ void main() {
     });
 
     test('updating a missing product returns false', () async {
-      final updated = await datasource.updateProduct(id: 42, name: 'Flour', amountType: AmountType.gram);
+      final updated = await datasource.updateProduct(
+        id: 42,
+        name: 'Flour',
+        amountType: AmountType.gram,
+        categoryId: CategoryModel.defaultCategoryId,
+      );
       expect(updated, isFalse);
     });
 

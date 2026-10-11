@@ -4,12 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
+import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
+import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
+import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
+import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_bloc.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/widgets/categories_sheet.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class AddProductSheet extends StatefulWidget {
@@ -17,20 +22,10 @@ class AddProductSheet extends StatefulWidget {
 
   final StoreModel store;
 
-  static const double _radius = 28;
-  static const double _topGap = 16;
-
   static Future<void> show(BuildContext context, {required StoreModel store}) async {
     final bloc = context.read<ShoppingPreparationBloc>();
-    final colors = CustomColors.of(context);
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      backgroundColor: colors.surface,
-      barrierColor: colors.scrim,
-      clipBehavior: Clip.antiAlias,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(_radius))),
+    await AppBottomSheet.show<void>(
+      context,
       builder: (context) => BlocProvider.value(
         value: bloc,
         child: AddProductSheet(store: store),
@@ -63,11 +58,15 @@ class _AddProductSheetState extends State<AddProductSheet> {
     // `useSafeArea` already keeps the sheet below the status bar, so size it from the space it's given.
     return LayoutBuilder(
       builder: (context, constraints) => SizedBox(
-        height: constraints.maxHeight - AddProductSheet._topGap,
+        height: constraints.maxHeight - AppBottomSheet.fullHeightTopGap,
         child: Column(
           children: [
-            const _DragHandle(),
-            _Header(storeName: widget.store.storeName, onDonePressed: () => context.pop()),
+            const SheetDragHandle(),
+            SheetHeader(
+              title: LocaleKeys.addProductSheet_addTo.tr(namedArgs: {'storeName': widget.store.storeName}),
+              buttonText: LocaleKeys.addProductSheet_done.tr(),
+              onButtonPressed: () => context.pop(),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
               child: _ProductNameField(
@@ -85,7 +84,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
                     padding: EdgeInsets.fromLTRB(20, 4, 20, 30 + bottomInset),
                     children: [
                       if (state.isNewProductQuery) ...[
-                        _ProductGroup(
+                        GroupedCard(
                           children: [
                             _ProductRow(
                               name: state.query.trim(),
@@ -100,7 +99,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
                       if (products.isNotEmpty) ...[
                         const _SectionLabel(),
                         const SizedBox(height: 8),
-                        _ProductGroup(
+                        GroupedCard(
                           children: [
                             for (final product in products)
                               _ProductRow(
@@ -113,7 +112,19 @@ class _AddProductSheetState extends State<AddProductSheet> {
                               ),
                           ],
                         ),
+                        const SizedBox(height: 16),
                       ],
+                      Center(
+                        child: TextButton(
+                          onPressed: () => CategoriesSheet.show(context),
+                          style: TextButton.styleFrom(foregroundColor: CustomColors.of(context).accentText),
+                          child: Text(
+                            LocaleKeys.addProductSheet_manageCategories.tr(),
+                            style: CustomTextStyles.of(context).semiBold16
+                                .copyWith(color: CustomColors.of(context).accentText),
+                          ),
+                        ),
+                      ),
                     ],
                   );
                 },
@@ -121,68 +132,6 @@ class _AddProductSheetState extends State<AddProductSheet> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _DragHandle extends StatelessWidget {
-  const new();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 4),
-      child: Container(
-        width: 40,
-        height: 5,
-        decoration: BoxDecoration(color: CustomColors.of(context).sheetHandle, borderRadius: BorderRadius.circular(3)),
-      ),
-    );
-  }
-}
-
-class _Header extends StatelessWidget {
-  const new({required this.storeName, required this.onDonePressed});
-
-  final String storeName;
-  final VoidCallback onDonePressed;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = CustomColors.of(context);
-    final textStyles = CustomTextStyles.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 6, 20, 14),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              LocaleKeys.addProductSheet_addTo.tr(namedArgs: {'storeName': storeName}),
-              style: textStyles.semiBold20.copyWith(color: colors.dark),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Material(
-            color: colors.divider,
-            shape: const StadiumBorder(),
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: onDonePressed,
-              child: Container(
-                height: 34,
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                alignment: Alignment.center,
-                child: Text(
-                  LocaleKeys.addProductSheet_done.tr(),
-                  style: textStyles.medium14.copyWith(color: colors.accentText),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -249,31 +198,6 @@ class _SectionLabel extends StatelessWidget {
           style: CustomTextStyles.of(context).semiBold12.copyWith(color: colors.sectionLabel, letterSpacing: 1),
         ),
       ],
-    );
-  }
-}
-
-/// White rows on a rounded card, separated by 1px dividers.
-class _ProductGroup extends StatelessWidget {
-  const new({required this.children});
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    final dividerColor = CustomColors.of(context).divider;
-    return Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: dividerColor,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: dividerColor),
-      ),
-      child: Column(
-        children: [
-          for (final (index, child) in children.indexed) ...[if (index > 0) const SizedBox(height: 1), child],
-        ],
-      ),
     );
   }
 }

@@ -26,7 +26,30 @@
     "productNameHint": "Enter product name",
     "frequentlyBought": "Frequently bought",
     "inList": "In list · {quantity}",
-    "newProduct": "new product"
+    "newProduct": "new product",
+    "manageCategories": "Manage categories"
+  },
+  "categoriesSheet": {
+    "title": "Categories",
+    "back": "Back",
+    "newCategory": "New category",
+    "productCount": {
+      "one": "{} product",
+      "other": "{} products"
+    },
+    "defaultCategoryNote": "“Other” is the default category and can't be changed."
+  },
+  "addCategorySheet": {
+    "title": "New category",
+    "back": "Back",
+    "titleHint": "e.g. Baby, Pets, Frozen",
+    "color": "Color",
+    "preview": "Preview",
+    "previewPlaceholder": "Category name",
+    "save": "Save category"
+  },
+  "category": {
+    "defaultTitle": "Other"
   },
   "amountType": {
     "piece": "pcs",

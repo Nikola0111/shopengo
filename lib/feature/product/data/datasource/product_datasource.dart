@@ -11,16 +11,24 @@ class ProductDatasource {
   Future<ProductTableData?> getProductById(int id) =>
       (_database.select(_database.productTable)..where((t) => t.id.equals(id))).getSingleOrNull();
 
-  Future<int> createProduct({required String name, required AmountType amountType}) {
+  /// Without a [categoryId] the product goes to the default category.
+  Future<int> createProduct({required String name, required AmountType amountType, int? categoryId}) {
     return _database
         .into(_database.productTable)
-        .insert(ProductTableCompanion.insert(name: name, amountType: amountType));
+        .insert(
+          ProductTableCompanion.insert(name: name, amountType: amountType, categoryId: Value.absentIfNull(categoryId)),
+        );
   }
 
-  Future<bool> updateProduct({required int id, required String name, required AmountType amountType}) async {
-    final updatedRows = await (_database.update(
-      _database.productTable,
-    )..where((t) => t.id.equals(id))).write(ProductTableCompanion(name: Value(name), amountType: Value(amountType)));
+  Future<bool> updateProduct({
+    required int id,
+    required String name,
+    required AmountType amountType,
+    required int categoryId,
+  }) async {
+    final updatedRows = await (_database.update(_database.productTable)..where((t) => t.id.equals(id))).write(
+      ProductTableCompanion(name: Value(name), amountType: Value(amountType), categoryId: Value(categoryId)),
+    );
 
     return updatedRows > 0;
   }

@@ -1,9 +1,13 @@
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
 import 'package:shopengo/feature/cart/domain/model/cart_item_model.dart';
+import 'package:shopengo/feature/category/data/repository/category_repository.dart';
+import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/product/data/repository/product_repository.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/product/domain/model/product_model.dart';
@@ -13,35 +17,46 @@ import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_prep
 
 import 'shopping_preparation_bloc_test.mocks.dart';
 
-@GenerateMocks([ProductRepository, CartRepository])
+@GenerateMocks([ProductRepository, CartRepository, CategoryRepository])
 void main() {
   late MockProductRepository productRepository;
   late MockCartRepository cartRepository;
+  late MockCategoryRepository categoryRepository;
 
   const storeId = 7;
   final milk = ProductModel(id: 1, name: 'Mleko', amountType: AmountType.liter);
   final bread = ProductModel(id: 2, name: 'Hleb', amountType: AmountType.piece);
+  final other = CategoryModel(
+    id: CategoryModel.defaultCategoryId,
+    title: CategoryModel.defaultCategoryTitle,
+    color: const Color(CategoryModel.defaultCategoryColor),
+    productCount: 2,
+  );
+  final baby = CategoryModel(id: 2, title: 'Za bebu', color: const Color(0xFF52B086));
 
-  ShoppingPreparationBloc buildBloc() => ShoppingPreparationBloc(productRepository, cartRepository, storeId: storeId);
+  ShoppingPreparationBloc buildBloc() =>
+      ShoppingPreparationBloc(productRepository, cartRepository, categoryRepository, storeId: storeId);
 
   setUp(() {
     productRepository = MockProductRepository();
     cartRepository = MockCartRepository();
+    categoryRepository = MockCategoryRepository();
     when(cartRepository.addProduct(storeId: anyNamed('storeId'), productId: anyNamed('productId')))
         .thenAnswer((_) async {});
   });
 
   blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
-    "should load saved products and this store's cart",
+    "should load saved products, categories and this store's cart",
     setUp: () {
       when(productRepository.getAllProducts()).thenAnswer((_) async => [milk, bread]);
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other]);
       when(cartRepository.getCartItems(storeId))
           .thenAnswer((_) async => [CartItemModel(storeId: storeId, productId: 1, quantity: 3)]);
     },
     build: buildBloc,
     act: (bloc) => bloc.add(ShoppingPreparationLoadProductsEvent()),
     expect: () => [
-      ShoppingPreparationState(products: [milk, bread], cartQuantities: const {1: 3}),
+      ShoppingPreparationState(products: [milk, bread], categories: [other], cartQuantities: const {1: 3}),
     ],
   );
 
@@ -88,8 +103,9 @@ void main() {
   );
 
   blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
-    'should create a new product as piece and add it to the cart',
+    'should create a new product as piece, add it to the cart and refresh category counts',
     setUp: () {
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other]);
       when(productRepository.createProduct(name: 'Hleb', amountType: AmountType.piece)).thenAnswer((_) async => 2);
       when(productRepository.getAllProducts()).thenAnswer((_) async => [milk, bread]);
       when(cartRepository.getCartItems(storeId))
@@ -99,7 +115,7 @@ void main() {
     seed: () => ShoppingPreparationState(products: [milk], query: 'Hleb '),
     act: (bloc) => bloc.add(ShoppingPreparationSubmitProductEvent(productName: 'Hleb ')),
     expect: () => [
-      ShoppingPreparationState(products: [milk, bread], cartQuantities: const {2: 1}),
+      ShoppingPreparationState(products: [milk, bread], categories: [other], cartQuantities: const {2: 1}),
     ],
     verify: (_) => verify(cartRepository.addProduct(storeId: storeId, productId: 2)).called(1),
   );
@@ -108,6 +124,28 @@ void main() {
     'should ignore a blank product name',
     build: buildBloc,
     act: (bloc) => bloc.add(ShoppingPreparationSubmitProductEvent(productName: '   ')),
+    expect: () => <ShoppingPreparationState>[],
+  );
+
+  blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
+    'should create a category and reload categories',
+    setUp: () {
+      when(categoryRepository.createCategory(title: 'Za bebu', color: const Color(0xFF52B086)))
+          .thenAnswer((_) async => 2);
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other, baby]);
+    },
+    build: buildBloc,
+    seed: () => ShoppingPreparationState(categories: [other]),
+    act: (bloc) => bloc.add(ShoppingPreparationCreateCategoryEvent(title: ' Za bebu ', color: const Color(0xFF52B086))),
+    expect: () => [
+      ShoppingPreparationState(categories: [other, baby]),
+    ],
+  );
+
+  blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
+    'should ignore a blank category title',
+    build: buildBloc,
+    act: (bloc) => bloc.add(ShoppingPreparationCreateCategoryEvent(title: '  ', color: const Color(0xFF52B086))),
     expect: () => <ShoppingPreparationState>[],
   );
 }
