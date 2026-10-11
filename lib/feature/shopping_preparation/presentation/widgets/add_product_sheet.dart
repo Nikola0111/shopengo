@@ -17,7 +17,7 @@ import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_prep
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
 import 'package:shopengo/feature/shopping_preparation/presentation/widgets/categories_sheet.dart';
-import 'package:shopengo/feature/shopping_preparation/presentation/widgets/new_product_card.dart';
+import 'package:shopengo/feature/shopping_preparation/presentation/widgets/new_product_card/new_product_card.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class AddProductSheet extends StatefulWidget {

@@ -1,0 +1,39 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:shopengo/core/presentation/style/custom_colors.dart';
+import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
+import 'package:shopengo/core/presentation/widgets/dashed_border_painter.dart';
+import 'package:shopengo/generated/locale_keys.g.dart';
+
+class NewCategoryChip extends StatelessWidget {
+  const new({required this.onPressed, super.key});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = CustomColors.of(context);
+    final textStyles = CustomTextStyles.of(context);
+    return GestureDetector(
+      onTap: onPressed,
+      child: CustomPaint(
+        foregroundPainter: DashedBorderPainter(color: colors.outline, radius: 16, strokeWidth: 1),
+        child: Container(
+          height: 32,
+          padding: const EdgeInsets.symmetric(horizontal: 12.5),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 5,
+            children: [
+              Text('+', style: textStyles.medium16.copyWith(color: colors.accentText, height: 1)),
+              Text(
+                LocaleKeys.addProductSheet_newCategory.tr(),
+                style: textStyles.medium14.copyWith(color: colors.accentText, fontSize: 13),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
