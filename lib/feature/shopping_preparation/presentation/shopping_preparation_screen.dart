@@ -71,11 +71,10 @@ class ShoppingPreparationScreen extends StatelessWidget {
                           itemCount: shoppingList.length,
                           separatorBuilder: (context, index) => const SizedBox(height: _sectionSpacing),
                           itemBuilder: (context, index) {
-                            final (category, products) = shoppingList[index];
+                            final (:category, :items) = shoppingList[index];
                             return ShoppingListSection(
                               category: category,
-                              products: products,
-                              quantities: state.cartQuantities,
+                              items: items,
                               onIncreasePressed: (product) => context.read<ShoppingPreparationBloc>().add(
                                 ShoppingPreparationAddProductEvent(productId: product.id),
                               ),

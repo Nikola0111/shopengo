@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
+import 'package:shopengo/feature/shopping_preparation/domain/model/shopping_list_item_model.dart';
 
 class ShoppingListItem extends StatelessWidget {
-  const new({
-    required this.product,
-    required this.quantity,
-    required this.onIncreasePressed,
-    required this.onDecreasePressed,
-    super.key,
-  });
+  const new({required this.item, required this.onIncreasePressed, required this.onDecreasePressed, super.key});
 
-  final ProductModel product;
-  final int quantity;
+  final ShoppingListItemModel item;
   final VoidCallback onIncreasePressed;
   final VoidCallback onDecreasePressed;
 
@@ -29,7 +22,7 @@ class ShoppingListItem extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                product.name,
+                item.product.name,
                 style: CustomTextStyles.of(context).medium16.copyWith(color: colors.dark),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -37,7 +30,7 @@ class ShoppingListItem extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             _QuantityStepper(
-              label: '$quantity ${product.amountType.shortLabel}',
+              label: '${item.quantity} ${item.product.amountType.shortLabel}',
               onIncreasePressed: onIncreasePressed,
               onDecreasePressed: onDecreasePressed,
             ),

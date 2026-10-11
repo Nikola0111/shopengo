@@ -14,6 +14,7 @@ import 'package:shopengo/feature/product/domain/model/product_model.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_bloc.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
 import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
+import 'package:shopengo/feature/shopping_preparation/domain/model/shopping_list_item_model.dart';
 
 import 'shopping_preparation_bloc_test.mocks.dart';
 
@@ -92,10 +93,10 @@ void main() {
       categories: [baby, other],
       cartQuantities: const {1: 2, 3: 1},
     );
-    expect(state.shoppingList.map((e) => e.$1), [baby, other]);
-    expect(state.shoppingList.map((e) => e.$2), [
-      [diapers],
-      [milk],
+    expect(state.shoppingList.map((e) => e.category), [baby, other]);
+    expect(state.shoppingList.map((e) => e.items), [
+      [ShoppingListItemModel(product: diapers, quantity: 1)],
+      [ShoppingListItemModel(product: milk, quantity: 2)],
     ]);
   });
 

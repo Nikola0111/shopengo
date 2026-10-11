@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/product/domain/model/product_model.dart';
+import 'package:shopengo/feature/shopping_preparation/domain/model/shopping_list_item_model.dart';
 
 part '../../../../generated/feature/shopping_preparation/domain/cubit/shopping_preparation_state.freezed.dart';
 
@@ -29,11 +30,17 @@ class ShoppingPreparationState with _$ShoppingPreparationState {
   }
 
   /// Products in this store's cart, grouped by category in category order. Empty categories are left out.
-  List<(CategoryModel, List<ProductModel>)> get shoppingList {
-    final cartProducts = products.where((e) => cartQuantities.containsKey(e.id)).toList();
+  List<({CategoryModel category, List<ShoppingListItemModel> items})> get shoppingList {
+    final items = [
+      for (final product in products)
+        if (cartQuantities[product.id] case final quantity?)
+          ShoppingListItemModel(product: product, quantity: quantity),
+    ];
     return categories
-        .map((category) => (category, cartProducts.where((e) => e.categoryId == category.id).toList()))
-        .where((e) => e.$2.isNotEmpty)
+        .map(
+          (category) => (category: category, items: items.where((e) => e.product.categoryId == category.id).toList()),
+        )
+        .where((section) => section.items.isNotEmpty)
         .toList();
   }
 }
