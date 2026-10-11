@@ -27,4 +27,13 @@ class ShoppingPreparationState with _$ShoppingPreparationState {
     final normalizedQuery = query.trim().toUpperCase();
     return normalizedQuery.isNotEmpty && products.every((e) => e.name.toUpperCase() != normalizedQuery);
   }
+
+  /// Products in this store's cart, grouped by category in category order. Empty categories are left out.
+  List<(CategoryModel, List<ProductModel>)> get shoppingList {
+    final cartProducts = products.where((e) => cartQuantities.containsKey(e.id)).toList();
+    return categories
+        .map((category) => (category, cartProducts.where((e) => e.categoryId == category.id).toList()))
+        .where((e) => e.$2.isNotEmpty)
+        .toList();
+  }
 }

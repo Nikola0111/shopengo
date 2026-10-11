@@ -26,6 +26,7 @@ class CustomColors {
   Color get outline => Theme.of(_context).extension<CustomColorScheme>()!.outline!;
   Color get highlight => Theme.of(_context).extension<CustomColorScheme>()!.highlight!;
   Color get scrim => Theme.of(_context).extension<CustomColorScheme>()!.scrim!;
+  Color get fill => Theme.of(_context).extension<CustomColorScheme>()!.fill!;
 }
 
 @immutable
@@ -53,6 +54,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     required this.outline,
     required this.highlight,
     required this.scrim,
+    required this.fill,
   });
 
   const new classic({
@@ -78,6 +80,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     this.outline = const Color(0xFFD8D2F6),
     this.highlight = const Color(0xFFEEEBFD),
     this.scrim = const Color(0x73140E3C),
+    this.fill = const Color(0xFFF3F1FB),
   });
 
   final Color? primary;
@@ -102,6 +105,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   final Color? outline;
   final Color? highlight;
   final Color? scrim;
+  final Color? fill;
 
   @override
   ThemeExtension<CustomColorScheme> copyWith({
@@ -127,6 +131,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     Color? outline,
     Color? highlight,
     Color? scrim,
+    Color? fill,
   }) {
     return CustomColorScheme(
       primary: primary ?? this.primary,
@@ -151,6 +156,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       outline: outline ?? this.outline,
       highlight: highlight ?? this.highlight,
       scrim: scrim ?? this.scrim,
+      fill: fill ?? this.fill,
     );
   }
 
@@ -182,6 +188,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       outline: Color.lerp(outline, other.outline, t),
       highlight: Color.lerp(highlight, other.highlight, t),
       scrim: Color.lerp(scrim, other.scrim, t),
+      fill: Color.lerp(fill, other.fill, t),
     );
   }
 }

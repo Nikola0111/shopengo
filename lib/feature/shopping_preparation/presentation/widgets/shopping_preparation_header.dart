@@ -9,9 +9,18 @@ import 'package:shopengo/generated/assets.gen.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class ShoppingPreparationHeader extends StatelessWidget {
-  const new({required this.store, required this.onBackPressed, required this.onHistoryPressed, super.key});
+  const new({
+    required this.store,
+    required this.productCount,
+    required this.onBackPressed,
+    required this.onHistoryPressed,
+    super.key,
+  });
 
   final StoreModel store;
+
+  /// Number of different products on this store's list.
+  final int productCount;
   final VoidCallback onBackPressed;
   final VoidCallback onHistoryPressed;
 
@@ -25,17 +34,14 @@ class ShoppingPreparationHeader extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircularButton(
-                icon: Assets.icon.chevronLeft.svg(width: 20, height: 20),
-                onPressed: onBackPressed,
-              ),
+              CircularButton(icon: Assets.icon.chevronLeft.svg(width: 20, height: 20), onPressed: onBackPressed),
               SecondaryButton(text: LocaleKeys.home_history.tr(), onPressed: onHistoryPressed),
             ],
           ),
           const SizedBox(height: 14),
           _StoreName(store: store),
           const SizedBox(height: 14),
-          const _StatusSection(),
+          _StatusSection(productCount: productCount),
         ],
       ),
     );
@@ -59,7 +65,9 @@ class _StoreName extends StatelessWidget {
 }
 
 class _StatusSection extends StatelessWidget {
-  const new();
+  const new({required this.productCount});
+
+  final int productCount;
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +89,9 @@ class _StatusSection extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              LocaleKeys.shoppingPreparation_prepareListBeforeLeaving.tr(),
+              productCount > 0
+                  ? LocaleKeys.shoppingPreparation_productsInList.plural(productCount)
+                  : LocaleKeys.shoppingPreparation_prepareListBeforeLeaving.tr(),
               style: CustomTextStyles.of(context).regular13,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

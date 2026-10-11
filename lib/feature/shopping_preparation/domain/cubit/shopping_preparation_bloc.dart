@@ -32,6 +32,11 @@ class ShoppingPreparationBloc extends Bloc<ShoppingPreparationEvent, ShoppingPre
       emit(state.copyWith(cartQuantities: await _getCartQuantities()));
     });
 
+    on<ShoppingPreparationDecreaseQuantityEvent>((event, emit) async {
+      await _cartRepository.decreaseQuantity(storeId: storeId, productId: event.productId);
+      emit(state.copyWith(cartQuantities: await _getCartQuantities()));
+    });
+
     on<ShoppingPreparationSubmitProductEvent>((event, emit) async {
       final productName = event.productName.trim();
       if (productName.isEmpty) {

@@ -21,6 +21,11 @@ class CartRepositoryImpl implements CartRepository {
   }
 
   @override
+  Future<void> decreaseQuantity({required int storeId, required int productId}) {
+    return _cartDatasource.decreaseQuantity(storeId: storeId, productId: productId);
+  }
+
+  @override
   Future<bool> updateQuantity({required int storeId, required int productId, required int quantity}) {
     return _cartDatasource.updateQuantity(storeId: storeId, productId: productId, quantity: quantity);
   }

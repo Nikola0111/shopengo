@@ -85,6 +85,40 @@ void main() {
     verify: (_) => verify(cartRepository.addProduct(storeId: storeId, productId: 1)).called(1),
   );
 
+  test("should group this store's cart products by category, in category order", () {
+    final diapers = ProductModel(id: 3, name: 'Pelene', amountType: AmountType.pack, categoryId: baby.id);
+    final state = ShoppingPreparationState(
+      products: [milk, bread, diapers],
+      categories: [baby, other],
+      cartQuantities: const {1: 2, 3: 1},
+    );
+    expect(state.shoppingList.map((e) => e.$1), [baby, other]);
+    expect(state.shoppingList.map((e) => e.$2), [
+      [diapers],
+      [milk],
+    ]);
+  });
+
+  test('should have an empty shopping list when the cart is empty', () {
+    final state = ShoppingPreparationState(products: [milk, bread], categories: [other]);
+    expect(state.shoppingList, isEmpty);
+  });
+
+  blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
+    "should take a product off this store's cart and reload it",
+    setUp: () {
+      when(cartRepository.decreaseQuantity(storeId: storeId, productId: 1)).thenAnswer((_) async {});
+      when(cartRepository.getCartItems(storeId)).thenAnswer((_) async => []);
+    },
+    build: buildBloc,
+    seed: () => ShoppingPreparationState(products: [milk], cartQuantities: const {1: 1}),
+    act: (bloc) => bloc.add(ShoppingPreparationDecreaseQuantityEvent(productId: 1)),
+    expect: () => [
+      ShoppingPreparationState(products: [milk]),
+    ],
+    verify: (_) => verify(cartRepository.decreaseQuantity(storeId: storeId, productId: 1)).called(1),
+  );
+
   blocTest<ShoppingPreparationBloc, ShoppingPreparationState>(
     'should add an existing product to the cart when its name is submitted',
     setUp: () =>

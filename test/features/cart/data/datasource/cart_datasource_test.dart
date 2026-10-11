@@ -54,6 +54,32 @@ void main() {
     expect(await datasource.getCartItems(maxiId), isEmpty);
   });
 
+  test('decreasing takes one off and removes the item after the last one', () async {
+    await datasource.addProduct(storeId: maxiId, productId: milkId);
+    await datasource.addProduct(storeId: maxiId, productId: milkId);
+    await datasource.addProduct(storeId: ideaId, productId: milkId);
+
+    await datasource.decreaseQuantity(storeId: maxiId, productId: milkId);
+    expect((await datasource.getCartItems(maxiId)).single.quantity, 1);
+
+    await datasource.decreaseQuantity(storeId: maxiId, productId: milkId);
+    expect(await datasource.getCartItems(maxiId), isEmpty);
+    expect((await datasource.getCartItems(ideaId)).single.quantity, 1);
+  });
+
+  test('quick successive decreases each take one off', () async {
+    for (var i = 0; i < 3; i++) {
+      await datasource.addProduct(storeId: maxiId, productId: milkId);
+    }
+
+    await Future.wait([
+      datasource.decreaseQuantity(storeId: maxiId, productId: milkId),
+      datasource.decreaseQuantity(storeId: maxiId, productId: milkId),
+    ]);
+
+    expect((await datasource.getCartItems(maxiId)).single.quantity, 1);
+  });
+
   test('deleting a product removes it from every cart', () async {
     await datasource.addProduct(storeId: maxiId, productId: milkId);
     await datasource.addProduct(storeId: ideaId, productId: milkId);

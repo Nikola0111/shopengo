@@ -18,6 +18,21 @@ class CartDatasource {
         );
   }
 
+  /// Takes one of the product off the store's cart, deleting the item when it was the last one.
+  ///
+  /// Runs in a transaction so that quick successive calls each take one off.
+  Future<void> decreaseQuantity({required int storeId, required int productId}) {
+    return _database.transaction(() async {
+      await (_database.delete(_database.cartItemTable)..where(
+            (t) => t.storeId.equals(storeId) & t.productId.equals(productId) & t.quantity.isSmallerOrEqualValue(1),
+          ))
+          .go();
+      await (_database.update(_database.cartItemTable)
+            ..where((t) => t.storeId.equals(storeId) & t.productId.equals(productId) & t.quantity.isBiggerThanValue(1)))
+          .write(CartItemTableCompanion.custom(quantity: _database.cartItemTable.quantity - const Constant(1)));
+    });
+  }
+
   Future<bool> updateQuantity({required int storeId, required int productId, required int quantity}) async {
     final updatedRows =
         await (_database.update(_database.cartItemTable)

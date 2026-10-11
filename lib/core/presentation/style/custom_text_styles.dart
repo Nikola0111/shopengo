@@ -15,6 +15,7 @@ class CustomTextStyles {
   TextStyle get regular13 => Theme.of(_context).extension<CustomTextStyleScheme>()!.regular13!;
   TextStyle get regular16 => Theme.of(_context).extension<CustomTextStyleScheme>()!.regular16!;
   TextStyle get semiBold11 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold11!;
+  TextStyle get semiBold14 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold14!;
   TextStyle get semiBold15 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold15!;
   TextStyle get semiBold16 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold16!;
   TextStyle get semiBold30 => Theme.of(_context).extension<CustomTextStyleScheme>()!.semiBold30!;
@@ -39,6 +40,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     required this.regular13,
     required this.regular16,
     required this.semiBold11,
+    required this.semiBold14,
     required this.semiBold15,
     required this.semiBold16,
     required this.semiBold30,
@@ -100,6 +102,12 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       semiBold11: TextStyle(
         color: primaryTextColor,
         fontSize: 11,
+        fontWeight: FontWeight.w600,
+        fontFamily: _fontFamilyRubik,
+      ),
+      semiBold14: TextStyle(
+        color: primaryTextColor,
+        fontSize: 14,
         fontWeight: FontWeight.w600,
         fontFamily: _fontFamilyRubik,
       ),
@@ -172,6 +180,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
   final TextStyle? regular13;
   final TextStyle? regular16;
   final TextStyle? semiBold11;
+  final TextStyle? semiBold14;
   final TextStyle? semiBold15;
   final TextStyle? semiBold16;
   final TextStyle? semiBold30;
@@ -194,6 +203,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
     TextStyle? regular13,
     TextStyle? regular16,
     TextStyle? semiBold11,
+    TextStyle? semiBold14,
     TextStyle? semiBold15,
     TextStyle? semiBold16,
     TextStyle? semiBold30,
@@ -215,6 +225,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       regular13: regular13 ?? this.regular13,
       regular16: regular16 ?? this.regular16,
       semiBold11: semiBold11 ?? this.semiBold11,
+      semiBold14: semiBold14 ?? this.semiBold14,
       semiBold15: semiBold15 ?? this.semiBold15,
       semiBold16: semiBold16 ?? this.semiBold16,
       semiBold30: semiBold30 ?? this.semiBold30,
@@ -243,6 +254,7 @@ class CustomTextStyleScheme extends ThemeExtension<CustomTextStyleScheme> {
       regular13: TextStyle.lerp(regular13, other.regular13, t),
       regular16: TextStyle.lerp(regular16, other.regular16, t),
       semiBold11: TextStyle.lerp(semiBold11, other.semiBold11, t),
+      semiBold14: TextStyle.lerp(semiBold14, other.semiBold14, t),
       semiBold15: TextStyle.lerp(semiBold15, other.semiBold15, t),
       semiBold16: TextStyle.lerp(semiBold16, other.semiBold16, t),
       semiBold30: TextStyle.lerp(semiBold30, other.semiBold30, t),
