@@ -6,7 +6,9 @@ import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 
 part '../../../generated/core/presentation/utils/app_database.g.dart';
 
-@DriftDatabase(tables: [StoreTable, CategoryTable, ProductTable, CartItemTable])
+@DriftDatabase(
+  tables: [StoreTable, CategoryTable, ProductTable, CartItemTable, PastShoppingTable, PastShoppingItemTable],
+)
 class AppDatabase extends _$AppDatabase {
   new([QueryExecutor? executor]) : super(executor ?? _openConnection());
 
@@ -21,7 +23,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 5;
+  int get schemaVersion => 6;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -45,6 +47,10 @@ class AppDatabase extends _$AppDatabase {
       if (from < 5) {
         await m.addColumn(storeTable, storeTable.isShopping);
         await m.addColumn(cartItemTable, cartItemTable.isChecked);
+      }
+      if (from < 6) {
+        await m.createTable(pastShoppingTable);
+        await m.createTable(pastShoppingItemTable);
       }
     },
     // SQLite ignores foreign keys unless they're enabled per connection.
@@ -103,4 +109,24 @@ class CartItemTable extends Table {
 
   @override
   Set<Column<Object>> get primaryKey => {storeId, productId};
+}
+
+/// A finished shopping at a store.
+class PastShoppingTable extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get storeId => integer().references(StoreTable, #id, onDelete: KeyAction.cascade)();
+  DateTimeColumn get date => dateTime()();
+  RealColumn get amountSpent => real().nullable()();
+}
+
+/// A product bought in a past shopping.
+///
+/// Its name and amount type are copied from the product, so history stays the same when the product changes or is
+/// deleted.
+class PastShoppingItemTable extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get pastShoppingId => integer().references(PastShoppingTable, #id, onDelete: KeyAction.cascade)();
+  TextColumn get productName => text().withLength(min: 1, max: 64)();
+  TextColumn get amountType => textEnum<AmountType>()();
+  IntColumn get quantity => integer()();
 }

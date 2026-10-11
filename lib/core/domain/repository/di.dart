@@ -8,6 +8,9 @@ import 'package:shopengo/feature/cart/data/repository/cart_repository_impl.dart'
 import 'package:shopengo/feature/category/data/datasource/category_datasource.dart';
 import 'package:shopengo/feature/category/data/mapper/category_mapper.dart';
 import 'package:shopengo/feature/category/data/repository/category_repository_impl.dart';
+import 'package:shopengo/feature/history/data/datasource/history_datasource.dart';
+import 'package:shopengo/feature/history/data/mapper/past_shopping_mapper.dart';
+import 'package:shopengo/feature/history/data/repository/history_repository_impl.dart';
 import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
 import 'package:shopengo/feature/home/data/mapper/store_mapper.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository_impl.dart';
@@ -24,6 +27,7 @@ void initDI() {
     ..registerSingleton((container) => ProductDatasource(container.resolve<AppDatabase>()))
     ..registerSingleton((container) => CartDatasource(container.resolve<AppDatabase>()))
     ..registerSingleton((container) => CategoryDatasource(container.resolve<AppDatabase>()))
+    ..registerSingleton((container) => HistoryDatasource(container.resolve<AppDatabase>()))
     ..registerSingleton((container) => ThemeRepository())
     ..registerSingleton((container) => RouterConfiguration())
     ..registerSingleton((container) => const StoreMapper())
@@ -42,5 +46,10 @@ void initDI() {
     ..registerSingleton(
       (container) =>
           CategoryRepositoryImpl(container.resolve<CategoryDatasource>(), container.resolve<CategoryMapper>()),
+    )
+    ..registerSingleton((container) => const PastShoppingMapper())
+    ..registerSingleton(
+      (container) =>
+          HistoryRepositoryImpl(container.resolve<HistoryDatasource>(), container.resolve<PastShoppingMapper>()),
     );
 }
