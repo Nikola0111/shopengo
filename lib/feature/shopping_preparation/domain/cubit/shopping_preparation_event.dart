@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
+import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 
 abstract class ShoppingPreparationEvent extends Equatable {
   @override
@@ -26,12 +27,16 @@ class ShoppingPreparationAddProductEvent extends ShoppingPreparationEvent {
 }
 
 /// Adds the product with [productName] to the list, creating it first if no saved product has that name.
+///
+/// [amountType] and [categoryId] only apply when a new product is created.
 class ShoppingPreparationSubmitProductEvent extends ShoppingPreparationEvent {
-  new({required this.productName});
+  new({required this.productName, this.amountType = AmountType.piece, this.categoryId});
   final String productName;
+  final AmountType amountType;
+  final int? categoryId;
 
   @override
-  List<Object?> get props => [productName];
+  List<Object?> get props => [productName, amountType, categoryId];
 }
 
 class ShoppingPreparationCreateCategoryEvent extends ShoppingPreparationEvent {

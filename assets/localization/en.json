@@ -26,7 +26,12 @@
     "productNameHint": "Enter product name",
     "frequentlyBought": "Frequently bought",
     "inList": "In list · {quantity}",
-    "newProduct": "new product",
+    "newProductTitle": "New product “{name}”",
+    "newProductSubtitle": "Entered once, saved for all stores",
+    "unit": "Unit",
+    "category": "Category",
+    "newCategory": "New",
+    "saveAndAdd": "Save and add to list",
     "manageCategories": "Manage categories"
   },
   "categoriesSheet": {

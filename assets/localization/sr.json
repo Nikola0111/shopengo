@@ -26,7 +26,12 @@
     "productNameHint": "Upiši naziv proizvoda",
     "frequentlyBought": "Često kupuješ",
     "inList": "U listi · {quantity}",
-    "newProduct": "novi proizvod",
+    "newProductTitle": "Novi proizvod „{name}“",
+    "newProductSubtitle": "Unosi se jednom, čuva se za sve prodavnice",
+    "unit": "Jedinica",
+    "category": "Kategorija",
+    "newCategory": "Nova",
+    "saveAndAdd": "Sačuvaj i dodaj u listu",
     "manageCategories": "Upravljaj kategorijama"
   },
   "categoriesSheet": {
