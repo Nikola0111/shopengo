@@ -16,6 +16,22 @@ class StoreRepositoryImpl implements StoreRepository {
   }
 
   @override
+  Future<StoreModel> getStore(int storeId) async {
+    final storeData = await _storeDatasource.getStore(storeId);
+    return _storeMapper.toDomain(storeData);
+  }
+
+  @override
+  Future<void> setShopping({required int storeId, required bool isShopping}) {
+    return _storeDatasource.setShopping(storeId: storeId, isShopping: isShopping);
+  }
+
+  @override
+  Future<void> finishShopping({required int storeId, double? amountSpent}) {
+    return _storeDatasource.finishShopping(storeId: storeId, amountSpent: amountSpent);
+  }
+
+  @override
   Future<int> createStore(String storeName) async {
     final id = await _storeDatasource.createStore(storeName);
     return id;

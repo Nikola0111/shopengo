@@ -11,7 +11,11 @@ class StoreModel with _$StoreModel {
     this.totalAmountSpentAtStore,
     this.previousShoppingArticlesBought,
     this.previousShoppingDate,
+    this.isShopping = false,
   });
+
+  /// Shown for amounts while stores don't have a currency set.
+  static const defaultCurrency = 'RSD';
 
   final int id;
 
@@ -24,4 +28,9 @@ class StoreModel with _$StoreModel {
   final double? totalAmountSpentAtStore;
 
   final int? previousShoppingArticlesBought;
+
+  /// Whether the store's list is being shopped, as opposed to prepared.
+  final bool isShopping;
+
+  String get displayCurrency => currency ?? defaultCurrency;
 }

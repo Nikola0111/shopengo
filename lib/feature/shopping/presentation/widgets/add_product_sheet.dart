@@ -14,11 +14,11 @@ import 'package:shopengo/feature/category/presentation/add_category_sheet.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_bloc.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
-import 'package:shopengo/feature/shopping_preparation/presentation/widgets/categories_sheet.dart';
-import 'package:shopengo/feature/shopping_preparation/presentation/widgets/new_product_card/new_product_card.dart';
+import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
+import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/categories_sheet.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_product_card.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class AddProductSheet extends StatefulWidget {
@@ -27,7 +27,7 @@ class AddProductSheet extends StatefulWidget {
   final StoreModel store;
 
   static Future<void> show(BuildContext context, {required StoreModel store}) async {
-    final bloc = context.read<ShoppingPreparationBloc>();
+    final bloc = context.read<ShoppingBloc>();
     await AppBottomSheet.show<void>(
       context,
       builder: (context) => BlocProvider.value(
@@ -35,7 +35,7 @@ class AddProductSheet extends StatefulWidget {
         child: AddProductSheet(store: store),
       ),
     );
-    bloc.add(ShoppingPreparationQueryProductsEvent(query: ''));
+    bloc.add(ShoppingQueryProductsEvent(query: ''));
   }
 
   @override
@@ -67,12 +67,12 @@ class _AddProductSheetState extends State<AddProductSheet> {
         _isNewProductExpanded = isLongQuery;
       });
     }
-    context.read<ShoppingPreparationBloc>().add(ShoppingPreparationQueryProductsEvent(query: query));
+    context.read<ShoppingBloc>().add(ShoppingQueryProductsEvent(query: query));
   }
 
   void _onSubmit(String productName) {
-    context.read<ShoppingPreparationBloc>().add(
-      ShoppingPreparationSubmitProductEvent(productName: productName, amountType: _amountType, categoryId: _categoryId),
+    context.read<ShoppingBloc>().add(
+      ShoppingSubmitProductEvent(productName: productName, amountType: _amountType, categoryId: _categoryId),
     );
     _controller.clear();
     setState(() {
@@ -84,14 +84,14 @@ class _AddProductSheetState extends State<AddProductSheet> {
   }
 
   Future<void> _onNewCategoryPressed() async {
-    final bloc = context.read<ShoppingPreparationBloc>();
+    final bloc = context.read<ShoppingBloc>();
     final category = await AddCategorySheet.show(context);
     if (category == null) {
       return;
     }
 
     final existingIds = bloc.state.categories.map((e) => e.id).toSet();
-    bloc.add(ShoppingPreparationCreateCategoryEvent(title: category.title, color: category.color));
+    bloc.add(ShoppingCreateCategoryEvent(title: category.title, color: category.color));
     final state = await bloc.stream.firstWhere((state) => state.categories.any((e) => !existingIds.contains(e.id)));
     if (mounted) {
       setState(() => _categoryId = state.categories.firstWhere((e) => !existingIds.contains(e.id)).id);
@@ -118,7 +118,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
               child: _ProductNameField(controller: _controller, onChanged: _onQueryChanged, onSubmitted: _onSubmit),
             ),
             Expanded(
-              child: BlocBuilder<ShoppingPreparationBloc, ShoppingPreparationState>(
+              child: BlocBuilder<ShoppingBloc, ShoppingState>(
                 builder: (context, state) {
                   final products = state.filteredProducts;
                   return ListView(
@@ -152,8 +152,8 @@ class _AddProductSheetState extends State<AddProductSheet> {
                                 name: product.name,
                                 subtitle: product.amountType.shortLabel,
                                 quantityInList: state.cartQuantities[product.id],
-                                onAddPressed: () => context.read<ShoppingPreparationBloc>().add(
-                                  ShoppingPreparationAddProductEvent(productId: product.id),
+                                onAddPressed: () => context.read<ShoppingBloc>().add(
+                                  ShoppingAddProductEvent(productId: product.id),
                                 ),
                               ),
                           ],

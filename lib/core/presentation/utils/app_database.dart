@@ -21,7 +21,7 @@ class AppDatabase extends _$AppDatabase {
   }
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -41,6 +41,10 @@ class AppDatabase extends _$AppDatabase {
         await _seedDefaultCategory();
         // Existing products land in the default category through the column's default value.
         await m.addColumn(productTable, productTable.categoryId);
+      }
+      if (from < 5) {
+        await m.addColumn(storeTable, storeTable.isShopping);
+        await m.addColumn(cartItemTable, cartItemTable.isChecked);
       }
     },
     // SQLite ignores foreign keys unless they're enabled per connection.
@@ -66,6 +70,8 @@ class StoreTable extends Table {
   DateTimeColumn get previousShoppingDate => dateTime().nullable()();
   RealColumn get previousShoppingAmountSpent => real().nullable()();
   IntColumn get previousShoppingArticlesBought => integer().nullable()();
+  // Whether the store's list is being shopped, as opposed to prepared.
+  BoolColumn get isShopping => boolean().withDefault(const Constant(false))();
 }
 
 class CategoryTable extends Table {
@@ -92,6 +98,8 @@ class CartItemTable extends Table {
   // Drift's check constraints reference the column's own getter.
   // ignore: recursive_getters
   IntColumn get quantity => integer().check(quantity.isBiggerThanValue(0))();
+  // Whether the product was put in the basket while shopping.
+  BoolColumn get isChecked => boolean().withDefault(const Constant(false))();
 
   @override
   Set<Column<Object>> get primaryKey => {storeId, productId};

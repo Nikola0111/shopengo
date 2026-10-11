@@ -25,6 +25,26 @@
       "other": "{} proizvoda na listi"
     }
   },
+  "shoppingInProgress": {
+    "shopping": "U kupovini",
+    "backToPreparation": "Nazad na pripremu",
+    "checkedOfTotal": "{checked} od {total} u korpi",
+    "finishShopping": "Završi kupovinu"
+  },
+  "finishShoppingSheet": {
+    "title": "Završi kupovinu",
+    "done": "Gotovo",
+    "nothingChecked": "Ništa nije označeno, pa se ništa ne čuva u istoriju. Lista ostaje ista.",
+    "checkedSaved": {
+      "one": "{} proizvod se čuva u istoriju.",
+      "few": "{} proizvoda se čuvaju u istoriju.",
+      "other": "{} proizvoda se čuva u istoriju."
+    },
+    "uncheckedStay": "Neoznačeni ostaju na listi.",
+    "amountHint": "Iznos sa računa",
+    "saveToHistory": "Sačuvaj u istoriju",
+    "finishWithoutSaving": "Završi kupovinu"
+  },
   "addProductSheet": {
     "addTo": "Dodaj u {storeName}",
     "done": "Gotovo",

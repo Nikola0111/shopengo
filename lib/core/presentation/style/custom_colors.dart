@@ -27,6 +27,10 @@ class CustomColors {
   Color get highlight => Theme.of(_context).extension<CustomColorScheme>()!.highlight!;
   Color get scrim => Theme.of(_context).extension<CustomColorScheme>()!.scrim!;
   Color get fill => Theme.of(_context).extension<CustomColorScheme>()!.fill!;
+  Color get progress => Theme.of(_context).extension<CustomColorScheme>()!.progress!;
+  Color get bodyText => Theme.of(_context).extension<CustomColorScheme>()!.bodyText!;
+  Color get quantityText => Theme.of(_context).extension<CustomColorScheme>()!.quantityText!;
+  Color get checkboxBorder => Theme.of(_context).extension<CustomColorScheme>()!.checkboxBorder!;
 }
 
 @immutable
@@ -55,6 +59,10 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     required this.highlight,
     required this.scrim,
     required this.fill,
+    required this.progress,
+    required this.bodyText,
+    required this.quantityText,
+    required this.checkboxBorder,
   });
 
   const new classic({
@@ -81,6 +89,10 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     this.highlight = const Color(0xFFEEEBFD),
     this.scrim = const Color(0x73140E3C),
     this.fill = const Color(0xFFF3F1FB),
+    this.progress = const Color(0xFF7CF0B4),
+    this.bodyText = const Color(0xFF6E6A8C),
+    this.quantityText = const Color(0xFF4A4664),
+    this.checkboxBorder = const Color(0xFFC9C3E8),
   });
 
   final Color? primary;
@@ -106,6 +118,10 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   final Color? highlight;
   final Color? scrim;
   final Color? fill;
+  final Color? progress;
+  final Color? bodyText;
+  final Color? quantityText;
+  final Color? checkboxBorder;
 
   @override
   ThemeExtension<CustomColorScheme> copyWith({
@@ -132,6 +148,10 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     Color? highlight,
     Color? scrim,
     Color? fill,
+    Color? progress,
+    Color? bodyText,
+    Color? quantityText,
+    Color? checkboxBorder,
   }) {
     return CustomColorScheme(
       primary: primary ?? this.primary,
@@ -157,6 +177,10 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       highlight: highlight ?? this.highlight,
       scrim: scrim ?? this.scrim,
       fill: fill ?? this.fill,
+      progress: progress ?? this.progress,
+      bodyText: bodyText ?? this.bodyText,
+      quantityText: quantityText ?? this.quantityText,
+      checkboxBorder: checkboxBorder ?? this.checkboxBorder,
     );
   }
 
@@ -189,6 +213,10 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       highlight: Color.lerp(highlight, other.highlight, t),
       scrim: Color.lerp(scrim, other.scrim, t),
       fill: Color.lerp(fill, other.fill, t),
+      progress: Color.lerp(progress, other.progress, t),
+      bodyText: Color.lerp(bodyText, other.bodyText, t),
+      quantityText: Color.lerp(quantityText, other.quantityText, t),
+      checkboxBorder: Color.lerp(checkboxBorder, other.checkboxBorder, t),
     );
   }
 }

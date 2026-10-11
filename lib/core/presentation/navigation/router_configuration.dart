@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shopengo/core/presentation/screens/error_screen.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/home_screen.dart';
-import 'package:shopengo/feature/shopping_preparation/presentation/shopping_preparation_screen.dart';
+import 'package:shopengo/feature/shopping/presentation/shopping_screen.dart';
 
 class RouterConfiguration {
   new() {
@@ -25,8 +25,8 @@ class RouterConfiguration {
                   _getPage(key: state.pageKey, child: const HomeScreen()),
           routes: [
             _routeWithExtra<StoreModel>(
-              path: ShoppingPreparationScreen.path,
-              builder: (store) => ShoppingPreparationScreen(store: store),
+              path: ShoppingScreen.path,
+              builder: (store) => ShoppingScreen(store: store),
             ),
           ],
         ),
