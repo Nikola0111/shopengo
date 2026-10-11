@@ -1,13 +1,20 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/product/domain/model/product_model.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/model/shopping_list_item_model.dart';
+import 'package:shopengo/feature/shopping/domain/model/shopping_list_item_model.dart';
 
-part '../../../../generated/feature/shopping_preparation/domain/cubit/shopping_preparation_state.freezed.dart';
+part '../../../../generated/feature/shopping/domain/cubit/shopping_state.freezed.dart';
 
 @freezed
-class ShoppingPreparationState with _$ShoppingPreparationState {
-  const new({this.products = const [], this.categories = const [], this.query = '', this.cartQuantities = const {}});
+class ShoppingState with _$ShoppingState {
+  const new({
+    this.products = const [],
+    this.categories = const [],
+    this.query = '',
+    this.cartQuantities = const {},
+    this.checkedProductIds = const {},
+    this.isShopping = false,
+  });
 
   final List<ProductModel> products;
 
@@ -17,6 +24,12 @@ class ShoppingPreparationState with _$ShoppingPreparationState {
 
   /// Quantity of each product in this store's cart, keyed by product id.
   final Map<int, int> cartQuantities;
+
+  /// Products in this store's cart that are already in the basket.
+  final Set<int> checkedProductIds;
+
+  /// Whether the list is being shopped, as opposed to prepared.
+  final bool isShopping;
 
   List<ProductModel> get filteredProducts {
     final normalizedQuery = query.trim().toUpperCase();
@@ -34,7 +47,11 @@ class ShoppingPreparationState with _$ShoppingPreparationState {
     final items = [
       for (final product in products)
         if (cartQuantities[product.id] case final quantity?)
-          ShoppingListItemModel(product: product, quantity: quantity),
+          ShoppingListItemModel(
+            product: product,
+            quantity: quantity,
+            isChecked: checkedProductIds.contains(product.id),
+          ),
     ];
     return categories
         .map(

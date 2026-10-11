@@ -13,7 +13,7 @@ import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
 import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
-import 'package:shopengo/feature/shopping_preparation/presentation/shopping_preparation_screen.dart';
+import 'package:shopengo/feature/shopping/presentation/shopping_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const new({super.key});
@@ -100,8 +100,11 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _openStore(BuildContext context, StoreModel store) {
-    unawaited(context.pushNamed(ShoppingPreparationScreen.path, extra: store));
+  Future<void> _openStore(BuildContext context, StoreModel store) async {
+    final bloc = context.read<HomeBloc>();
+    await context.pushNamed(ShoppingScreen.path, extra: store);
+    // Shopping may have started or finished, changing the store's phase and previous shopping.
+    bloc.add(LoadStoresEvent());
   }
 
   void _onCancel(BuildContext context) {

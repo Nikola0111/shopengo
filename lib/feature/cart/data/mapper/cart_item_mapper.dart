@@ -5,7 +5,12 @@ class CartItemMapper {
   const new();
 
   CartItemModel toDomain(CartItemTableData data) {
-    return CartItemModel(storeId: data.storeId, productId: data.productId, quantity: data.quantity);
+    return CartItemModel(
+      storeId: data.storeId,
+      productId: data.productId,
+      quantity: data.quantity,
+      isChecked: data.isChecked,
+    );
   }
 
   List<CartItemModel> toDomainList(List<CartItemTableData> data) => data.map(toDomain).toList();

@@ -24,6 +24,25 @@
       "other": "{} products on the list"
     }
   },
+  "shoppingInProgress": {
+    "shopping": "Shopping",
+    "backToPreparation": "Back to preparation",
+    "checkedOfTotal": "{checked} of {total} in the cart",
+    "finishShopping": "Finish shopping"
+  },
+  "finishShoppingSheet": {
+    "title": "Finish shopping",
+    "done": "Done",
+    "nothingChecked": "Nothing is checked, so nothing is saved to history. The list stays the same.",
+    "checkedSaved": {
+      "one": "{} product is saved to history.",
+      "other": "{} products are saved to history."
+    },
+    "uncheckedStay": "Unchecked ones stay on the list.",
+    "amountHint": "Amount on the receipt",
+    "saveToHistory": "Save to history",
+    "finishWithoutSaving": "Finish shopping"
+  },
   "addProductSheet": {
     "addTo": "Add to {storeName}",
     "done": "Done",

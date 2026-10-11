@@ -33,6 +33,15 @@ class CartDatasource {
     });
   }
 
+  /// Puts the product in the basket, or takes it back out.
+  ///
+  /// Flips the stored value, so that quick successive calls each take effect.
+  Future<void> toggleChecked({required int storeId, required int productId}) {
+    return (_database.update(_database.cartItemTable)
+          ..where((t) => t.storeId.equals(storeId) & t.productId.equals(productId)))
+        .write(CartItemTableCompanion.custom(isChecked: _database.cartItemTable.isChecked.not()));
+  }
+
   Future<bool> updateQuantity({required int storeId, required int productId, required int quantity}) async {
     final updatedRows =
         await (_database.update(_database.cartItemTable)

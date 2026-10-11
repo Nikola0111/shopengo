@@ -12,6 +12,7 @@ class StoreMapper {
       totalAmountSpentAtStore: data.previousShoppingAmountSpent,
       previousShoppingArticlesBought: data.previousShoppingArticlesBought,
       previousShoppingDate: data.previousShoppingDate,
+      isShopping: data.isShopping,
     );
   }
 

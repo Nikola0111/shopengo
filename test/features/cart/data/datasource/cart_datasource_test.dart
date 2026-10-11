@@ -93,4 +93,26 @@ void main() {
   test('a cart item must point to an existing store and product', () async {
     expect(() => datasource.addProduct(storeId: 999, productId: milkId), throwsA(isA<SqliteException>()));
   });
+
+  test('toggling checks a product off and back on', () async {
+    await datasource.addProduct(storeId: maxiId, productId: milkId);
+    expect((await datasource.getCartItems(maxiId)).single.isChecked, isFalse);
+
+    await datasource.toggleChecked(storeId: maxiId, productId: milkId);
+    expect((await datasource.getCartItems(maxiId)).single.isChecked, isTrue);
+
+    await datasource.toggleChecked(storeId: maxiId, productId: milkId);
+    expect((await datasource.getCartItems(maxiId)).single.isChecked, isFalse);
+  });
+
+  test('quick successive toggles each take effect', () async {
+    await datasource.addProduct(storeId: maxiId, productId: milkId);
+
+    await Future.wait([
+      datasource.toggleChecked(storeId: maxiId, productId: milkId),
+      datasource.toggleChecked(storeId: maxiId, productId: milkId),
+    ]);
+
+    expect((await datasource.getCartItems(maxiId)).single.isChecked, isFalse);
+  });
 }

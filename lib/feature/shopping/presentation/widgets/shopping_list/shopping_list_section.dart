@@ -4,23 +4,27 @@ import 'package:shopengo/core/presentation/widgets/section_label.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/category/presentation/category_model_extension.dart';
 import 'package:shopengo/feature/product/domain/model/product_model.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/model/shopping_list_item_model.dart';
-import 'package:shopengo/feature/shopping_preparation/presentation/widgets/shopping_list/shopping_list_item.dart';
+import 'package:shopengo/feature/shopping/domain/model/shopping_list_item_model.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/shopping_list/shopping_list_item.dart';
 
 /// A category's products on the shopping list.
 class ShoppingListSection extends StatelessWidget {
   const new({
     required this.category,
     required this.items,
+    required this.isShopping,
     required this.onIncreasePressed,
     required this.onDecreasePressed,
+    required this.onCheckPressed,
     super.key,
   });
 
   final CategoryModel category;
   final List<ShoppingListItemModel> items;
+  final bool isShopping;
   final ValueChanged<ProductModel> onIncreasePressed;
   final ValueChanged<ProductModel> onDecreasePressed;
+  final ValueChanged<ProductModel> onCheckPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +38,10 @@ class ShoppingListSection extends StatelessWidget {
             for (final item in items)
               ShoppingListItem(
                 item: item,
+                isShopping: isShopping,
                 onIncreasePressed: () => onIncreasePressed(item.product),
                 onDecreasePressed: () => onDecreasePressed(item.product),
+                onCheckPressed: () => onCheckPressed(item.product),
               ),
           ],
         ),

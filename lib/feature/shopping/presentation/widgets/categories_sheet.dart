@@ -12,9 +12,9 @@ import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/category/presentation/add_category_sheet.dart';
 import 'package:shopengo/feature/category/presentation/category_model_extension.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_bloc.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_event.dart';
-import 'package:shopengo/feature/shopping_preparation/domain/cubit/shopping_preparation_state.dart';
+import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
+import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:shopengo/generated/assets.gen.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
@@ -22,7 +22,7 @@ class CategoriesSheet extends StatelessWidget {
   const new({super.key});
 
   static Future<void> show(BuildContext context) {
-    final bloc = context.read<ShoppingPreparationBloc>();
+    final bloc = context.read<ShoppingBloc>();
     return AppBottomSheet.show<void>(
       context,
       builder: (context) => BlocProvider.value(value: bloc, child: const CategoriesSheet()),
@@ -30,10 +30,10 @@ class CategoriesSheet extends StatelessWidget {
   }
 
   Future<void> _onNewCategoryPressed(BuildContext context) async {
-    final bloc = context.read<ShoppingPreparationBloc>();
+    final bloc = context.read<ShoppingBloc>();
     final category = await AddCategorySheet.show(context);
     if (category != null) {
-      bloc.add(ShoppingPreparationCreateCategoryEvent(title: category.title, color: category.color));
+      bloc.add(ShoppingCreateCategoryEvent(title: category.title, color: category.color));
     }
   }
 
@@ -51,7 +51,7 @@ class CategoriesSheet extends StatelessWidget {
               onButtonPressed: () => context.pop(),
             ),
             Expanded(
-              child: BlocBuilder<ShoppingPreparationBloc, ShoppingPreparationState>(
+              child: BlocBuilder<ShoppingBloc, ShoppingState>(
                 buildWhen: (previous, current) => previous.categories != current.categories,
                 builder: (context, state) => ListView(
                   padding: EdgeInsets.fromLTRB(20, 4, 20, 30 + MediaQuery.paddingOf(context).bottom),
