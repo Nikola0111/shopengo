@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
 import 'package:shopengo/feature/category/data/repository/category_repository.dart';
+import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/home/data/repository/store_repository.dart';
 import 'package:shopengo/feature/product/data/repository/product_repository.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
@@ -127,6 +128,32 @@ class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
 
       await _categoryRepository.createCategory(title: title, color: event.color);
       emit(state.copyWith(categories: await _categoryRepository.getAllCategories()));
+    });
+
+    on<ShoppingUpdateCategoryEvent>((event, emit) async {
+      final title = event.title.trim();
+      // The default category can't be changed.
+      if (title.isEmpty || event.categoryId == CategoryModel.defaultCategoryId) {
+        return;
+      }
+
+      await _categoryRepository.updateCategory(id: event.categoryId, title: title, color: event.color);
+      emit(state.copyWith(categories: await _categoryRepository.getAllCategories()));
+    });
+
+    on<ShoppingDeleteCategoryEvent>((event, emit) async {
+      if (event.categoryId == CategoryModel.defaultCategoryId) {
+        return;
+      }
+
+      await _categoryRepository.deleteCategory(event.categoryId);
+      // Its products moved to the default category.
+      emit(
+        state.copyWith(
+          products: await _productRepository.getAllProducts(),
+          categories: await _categoryRepository.getAllCategories(),
+        ),
+      );
     });
 
     on<ShoppingStartShoppingEvent>((event, emit) async {

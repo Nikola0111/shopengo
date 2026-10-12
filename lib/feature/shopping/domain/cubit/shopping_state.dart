@@ -46,6 +46,10 @@ class ShoppingState with _$ShoppingState {
     return normalizedQuery.isNotEmpty && products.every((e) => e.name.toUpperCase() != normalizedQuery);
   }
 
+  /// [categoryId] while that category exists, otherwise the default category its products moved to.
+  int existingCategoryId(int categoryId) =>
+      categories.any((e) => e.id == categoryId) ? categoryId : CategoryModel.defaultCategoryId;
+
   /// Whether [name] is non-blank and no product other than the one with [productId] has it, ignoring case.
   bool isAvailableProductName(String name, {required int productId}) {
     final normalizedName = name.trim().toUpperCase();

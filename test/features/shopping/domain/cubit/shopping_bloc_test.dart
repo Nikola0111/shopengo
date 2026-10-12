@@ -268,6 +268,57 @@ void main() {
   );
 
   blocTest<ShoppingBloc, ShoppingState>(
+    'should save an edited category with a trimmed title',
+    setUp: () {
+      when(categoryRepository.updateCategory(id: baby.id, title: 'Beba', color: const Color(0xFF4EA4DF)))
+          .thenAnswer((_) async => true);
+      when(categoryRepository.getAllCategories())
+          .thenAnswer((_) async => [baby.copyWith(title: 'Beba', color: const Color(0xFF4EA4DF)), other]);
+    },
+    build: buildBloc,
+    seed: () => ShoppingState(categories: [baby, other]),
+    act: (bloc) => bloc.add(
+      ShoppingUpdateCategoryEvent(categoryId: baby.id, title: ' Beba ', color: const Color(0xFF4EA4DF)),
+    ),
+    expect: () => [
+      ShoppingState(categories: [baby.copyWith(title: 'Beba', color: const Color(0xFF4EA4DF)), other]),
+    ],
+  );
+
+  blocTest<ShoppingBloc, ShoppingState>(
+    'should not change the default category',
+    build: buildBloc,
+    seed: () => ShoppingState(categories: [other]),
+    act: (bloc) => bloc
+      ..add(ShoppingUpdateCategoryEvent(categoryId: other.id, title: 'Razno', color: const Color(0xFF4EA4DF)))
+      ..add(ShoppingDeleteCategoryEvent(categoryId: other.id)),
+    expect: () => <ShoppingState>[],
+    verify: (_) => verifyNever(categoryRepository.deleteCategory(any)),
+  );
+
+  blocTest<ShoppingBloc, ShoppingState>(
+    'should delete a category and reload products, which move to the default category',
+    setUp: () {
+      when(categoryRepository.deleteCategory(baby.id)).thenAnswer((_) async => true);
+      when(productRepository.getAllProducts()).thenAnswer((_) async => [milk]);
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other]);
+    },
+    build: buildBloc,
+    seed: () => ShoppingState(products: [milk.copyWith(categoryId: baby.id)], categories: [baby, other]),
+    act: (bloc) => bloc.add(ShoppingDeleteCategoryEvent(categoryId: baby.id)),
+    expect: () => [
+      ShoppingState(products: [milk], categories: [other]),
+    ],
+    verify: (_) => verify(categoryRepository.deleteCategory(baby.id)).called(1),
+  );
+
+  test('should fall back to the default category once a selected one is deleted', () {
+    final state = ShoppingState(categories: [baby, other]);
+    expect(state.existingCategoryId(baby.id), baby.id);
+    expect(state.existingCategoryId(99), CategoryModel.defaultCategoryId);
+  });
+
+  blocTest<ShoppingBloc, ShoppingState>(
     'should ignore a blank category title',
     build: buildBloc,
     act: (bloc) => bloc.add(ShoppingCreateCategoryEvent(title: '  ', color: const Color(0xFF52B086))),

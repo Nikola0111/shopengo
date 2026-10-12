@@ -19,7 +19,7 @@ import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/categories_sheet.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/edit_product_sheet.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/create_category.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_product_card.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/product_name_field.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
@@ -74,8 +74,13 @@ class _AddProductSheetState extends State<AddProductSheet> {
   }
 
   void _onSubmit(String productName) {
-    context.read<ShoppingBloc>().add(
-      ShoppingSubmitProductEvent(productName: productName, amountType: _amountType, categoryId: _categoryId),
+    final bloc = context.read<ShoppingBloc>();
+    bloc.add(
+      ShoppingSubmitProductEvent(
+        productName: productName,
+        amountType: _amountType,
+        categoryId: bloc.state.existingCategoryId(_categoryId),
+      ),
     );
     _controller.clear();
     setState(() {
@@ -87,7 +92,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
   }
 
   Future<void> _onNewCategoryPressed() async {
-    final categoryId = await createCategory(context);
+    final categoryId = await NewCategoryChip.createCategory(context);
     if (categoryId != null && mounted) {
       setState(() => _categoryId = categoryId);
     }
@@ -133,7 +138,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
                           amountType: _amountType,
                           onAmountTypeSelected: (amountType) => setState(() => _amountType = amountType),
                           categories: state.categories,
-                          categoryId: _categoryId,
+                          categoryId: state.existingCategoryId(_categoryId),
                           onCategorySelected: (categoryId) => setState(() => _categoryId = categoryId),
                           onNewCategoryPressed: _onNewCategoryPressed,
                           onSavePressed: () => _onSubmit(state.query),

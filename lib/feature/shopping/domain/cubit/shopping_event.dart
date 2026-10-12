@@ -76,6 +76,25 @@ class ShoppingCreateCategoryEvent extends ShoppingEvent {
   List<Object?> get props => [title, color];
 }
 
+class ShoppingUpdateCategoryEvent extends ShoppingEvent {
+  new({required this.categoryId, required this.title, required this.color});
+  final int categoryId;
+  final String title;
+  final Color color;
+
+  @override
+  List<Object?> get props => [categoryId, title, color];
+}
+
+/// Deletes the category, moving its products to the default one.
+class ShoppingDeleteCategoryEvent extends ShoppingEvent {
+  new({required this.categoryId});
+  final int categoryId;
+
+  @override
+  List<Object?> get props => [categoryId];
+}
+
 class ShoppingStartShoppingEvent extends ShoppingEvent;
 
 class ShoppingBackToPreparationEvent extends ShoppingEvent;

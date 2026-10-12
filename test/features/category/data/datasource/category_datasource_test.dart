@@ -68,9 +68,19 @@ void main() {
       categoryId: babyId,
     );
 
-    await (database.delete(database.categoryTable)..where((t) => t.id.equals(babyId))).go();
+    await datasource.deleteCategory(babyId);
     final product = await productDatasource.getProductById(productId);
 
     expect(product?.categoryId, CategoryModel.defaultCategoryId);
+  });
+
+  test('updating a category', () async {
+    final id = await datasource.createCategory(title: 'Za bebu', color: 0xFF52B086);
+
+    await datasource.updateCategory(id: id, title: 'Beba', color: 0xFF4EA4DF);
+    final (category, _) = (await datasource.getAllCategories()).first;
+
+    expect(category.title, 'Beba');
+    expect(category.color, 0xFF4EA4DF);
   });
 }

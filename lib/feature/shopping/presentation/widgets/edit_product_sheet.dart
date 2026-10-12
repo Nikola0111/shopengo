@@ -13,7 +13,7 @@ import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/categories_sheet.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/create_category.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/product_details_fields.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/product_name_field.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
@@ -56,7 +56,11 @@ class _EditProductSheetState extends State<EditProductSheet> {
     }
     bloc.add(
       ShoppingUpdateProductEvent(
-        product: widget.product.copyWith(name: _controller.text, amountType: _amountType, categoryId: _categoryId),
+        product: widget.product.copyWith(
+          name: _controller.text,
+          amountType: _amountType,
+          categoryId: bloc.state.existingCategoryId(_categoryId),
+        ),
       ),
     );
     context.pop();
@@ -68,7 +72,7 @@ class _EditProductSheetState extends State<EditProductSheet> {
   }
 
   Future<void> _onNewCategoryPressed() async {
-    final categoryId = await createCategory(context);
+    final categoryId = await NewCategoryChip.createCategory(context);
     if (categoryId != null && mounted) {
       setState(() => _categoryId = categoryId);
     }
@@ -107,7 +111,7 @@ class _EditProductSheetState extends State<EditProductSheet> {
                       amountType: _amountType,
                       onAmountTypeSelected: (amountType) => setState(() => _amountType = amountType),
                       categories: state.categories,
-                      categoryId: _categoryId,
+                      categoryId: state.existingCategoryId(_categoryId),
                       onCategorySelected: (categoryId) => setState(() => _categoryId = categoryId),
                       onNewCategoryPressed: _onNewCategoryPressed,
                       onEditCategoriesPressed: () => CategoriesSheet.show(context),
