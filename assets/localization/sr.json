@@ -12,11 +12,22 @@
 
     "productsBought": "Broj proizvoda: {count}",
     "noShoppings": "Nema kupovina",
-    "history": "Istorija"
+    "history": "Istorija",
+    "emptyTitle": "Još nemaš nijednu prodavnicu",
+    "emptyDescription": "Dodaj prodavnicu u kojoj kupuješ i napravi prvu listu za kupovinu.",
+    "addStore": "Dodaj prodavnicu"
+  },
+  "newStoreSheet": {
+    "title": "Nova prodavnica",
+    "done": "Gotovo",
+    "nameHint": "npr. Maxi, Idea, pijaca…",
+    "add": "Dodaj prodavnicu"
   },
   "shoppingPreparation": {
     "preparation": "Priprema",
     "prepareListBeforeLeaving": "Pripremi listu pre odlaska",
+    "emptyCart": "Korpa je prazna",
+    "emptyCartDescription": "Dodirni sačuvani proizvod iznad ili upiši novi dole.",
     "addProduct": "Dodaj proizvod…",
     "startShopping": "Počni kupovinu",
     "productsInList": {

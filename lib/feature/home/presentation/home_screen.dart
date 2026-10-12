@@ -11,8 +11,10 @@ import 'package:shopengo/feature/home/domain/cubit/home_bloc.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
 import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
+import 'package:shopengo/feature/home/presentation/widgets/empty_stores.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
 import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
+import 'package:shopengo/feature/home/presentation/widgets/new_store_sheet.dart';
 import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
 import 'package:shopengo/feature/shopping/presentation/shopping_screen.dart';
 
@@ -41,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           builder: (context, state) {
             if (state is HomeStoresReadyState || state is HomeCreatingStoreState || state is HomeSearchingStoresState) {
+              final hasNoStores = state is HomeStoresReadyState && state.stores.isEmpty;
               return SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -50,44 +53,50 @@ class _HomeScreenState extends State<HomeScreen> {
                         totalStores: state.stores.length,
                         isCreating: state is HomeCreatingStoreState,
                         isSearching: state is HomeSearchingStoresState,
-                        onAddPressed: () => context.read<HomeBloc>().add(HomeCreatingStoreEvent()),
+                        onAddPressed: () => hasNoStores
+                            ? _showNewStoreSheet(context)
+                            : context.read<HomeBloc>().add(HomeCreatingStoreEvent()),
                         onSearchPressed: () => context.read<HomeBloc>().add(HomeQueryStoresEvent(query: null)),
                         onCancel: () => _onCancel(context),
                         onCreateStore: () => _onCreateStore(context),
                       ),
-                      const SizedBox(height: 12),
-                      HomeTextField(
-                        isVisible: state is HomeCreatingStoreState || state is HomeSearchingStoresState,
-                        onDone: () {
-                          if (context.read<HomeBloc>().state is HomeCreatingStoreState) {
-                            _onCreateStore(context);
-                          }
-                        },
-                        controller: _homeTextFieldController,
-                        onChanged: (value) {
-                          final bloc = context.read<HomeBloc>();
-                          if (bloc.state is HomeSearchingStoresState) {
-                            bloc.add(HomeQueryStoresEvent(query: value));
-                          }
-                        },
-                      ),
-                      const SizedBox(height: 12),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: state.stores.length,
-                          itemBuilder: (context, index) {
-                            final store = state.stores[index];
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: StoreCard(
-                                store: store,
-                                onOpenStore: () => _openStore(context, store),
-                                onHistoryPressed: () => context.pushNamed(HistoryScreen.path, extra: store),
-                              ),
-                            );
+                      if (hasNoStores)
+                        Expanded(child: EmptyStores(onAddStorePressed: () => _showNewStoreSheet(context)))
+                      else ...[
+                        const SizedBox(height: 12),
+                        HomeTextField(
+                          isVisible: state is HomeCreatingStoreState || state is HomeSearchingStoresState,
+                          onDone: () {
+                            if (context.read<HomeBloc>().state is HomeCreatingStoreState) {
+                              _onCreateStore(context);
+                            }
+                          },
+                          controller: _homeTextFieldController,
+                          onChanged: (value) {
+                            final bloc = context.read<HomeBloc>();
+                            if (bloc.state is HomeSearchingStoresState) {
+                              bloc.add(HomeQueryStoresEvent(query: value));
+                            }
                           },
                         ),
-                      ),
+                        const SizedBox(height: 12),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: state.stores.length,
+                            itemBuilder: (context, index) {
+                              final store = state.stores[index];
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: StoreCard(
+                                  store: store,
+                                  onOpenStore: () => _openStore(context, store),
+                                  onHistoryPressed: () => context.pushNamed(HistoryScreen.path, extra: store),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -106,6 +115,14 @@ class _HomeScreenState extends State<HomeScreen> {
     await context.pushNamed(ShoppingScreen.path, extra: store);
     // Shopping may have started or finished, changing the store's phase and previous shopping.
     bloc.add(LoadStoresEvent());
+  }
+
+  Future<void> _showNewStoreSheet(BuildContext context) async {
+    final bloc = context.read<HomeBloc>();
+    final storeName = await NewStoreSheet.show(context);
+    if (storeName != null) {
+      bloc.add(HomeSubmitNewStoreEvent(storeName: storeName));
+    }
   }
 
   void _onCancel(BuildContext context) {
