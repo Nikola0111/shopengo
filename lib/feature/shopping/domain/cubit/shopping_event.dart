@@ -1,8 +1,8 @@
 import 'dart:ui';
 
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
+import 'package:basketwise/feature/product/domain/model/product_model.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
 
 abstract class ShoppingEvent extends Equatable {
   @override

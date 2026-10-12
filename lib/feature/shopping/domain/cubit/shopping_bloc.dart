@@ -1,11 +1,11 @@
+import 'package:basketwise/feature/cart/data/repository/cart_repository.dart';
+import 'package:basketwise/feature/category/data/repository/category_repository.dart';
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
+import 'package:basketwise/feature/home/data/repository/store_repository.dart';
+import 'package:basketwise/feature/product/data/repository/product_repository.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
-import 'package:shopengo/feature/category/data/repository/category_repository.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
-import 'package:shopengo/feature/product/data/repository/product_repository.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
 
 class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
   new(

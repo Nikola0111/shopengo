@@ -1,4 +1,4 @@
-# shopengo
+# BasketWise
 
 Your designated shopping  buddy
 

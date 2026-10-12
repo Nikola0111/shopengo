@@ -1,9 +1,9 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:basketwise/generated/assets.gen.dart';
+import 'package:basketwise/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/generated/assets.gen.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
 
 /// Shown in place of the shopping list while the store's cart is empty.
 class EmptyShoppingList extends StatelessWidget {

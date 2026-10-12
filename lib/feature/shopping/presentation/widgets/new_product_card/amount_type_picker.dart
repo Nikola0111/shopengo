@@ -1,8 +1,8 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
+import 'package:basketwise/feature/product/presentation/amount_type_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
 
 class AmountTypePicker extends StatelessWidget {
   const new({required this.selectedAmountType, required this.onSelected, this.backgroundColor, super.key});

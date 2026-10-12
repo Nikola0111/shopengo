@@ -1,4 +1,4 @@
-import 'package:shopengo/feature/cart/domain/model/cart_item_model.dart';
+import 'package:basketwise/feature/cart/domain/model/cart_item_model.dart';
 
 abstract class CartRepository {
   Future<List<CartItemModel>> getCartItems(int storeId);

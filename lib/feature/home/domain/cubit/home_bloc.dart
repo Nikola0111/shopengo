@@ -1,7 +1,7 @@
+import 'package:basketwise/feature/home/data/repository/store_repository.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_event.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   new(this._storeRepository) : super(const HomeState.loading(stores: [])) {

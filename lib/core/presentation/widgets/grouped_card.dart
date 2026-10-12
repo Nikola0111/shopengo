@@ -1,5 +1,5 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
 
 /// Rows on a rounded card, separated by 1px dividers.
 class GroupedCard extends StatelessWidget {

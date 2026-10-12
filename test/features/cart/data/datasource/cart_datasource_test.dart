@@ -1,10 +1,10 @@
+import 'package:basketwise/core/presentation/utils/app_database.dart';
+import 'package:basketwise/feature/cart/data/datasource/cart_datasource.dart';
+import 'package:basketwise/feature/home/data/datasource/store_datasource.dart';
+import 'package:basketwise/feature/product/data/datasource/product_datasource.dart';
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/cart/data/datasource/cart_datasource.dart';
-import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
-import 'package:shopengo/feature/product/data/datasource/product_datasource.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 
 void main() {
   late AppDatabase database;

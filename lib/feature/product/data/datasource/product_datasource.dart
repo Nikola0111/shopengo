@@ -1,6 +1,6 @@
+import 'package:basketwise/core/presentation/utils/app_database.dart';
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
 import 'package:drift/drift.dart';
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 
 class ProductDatasource {
   const new(this._database);

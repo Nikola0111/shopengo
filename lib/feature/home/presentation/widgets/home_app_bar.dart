@@ -1,10 +1,10 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:basketwise/core/presentation/widgets/rounded_button.dart';
+import 'package:basketwise/generated/assets.gen.dart';
+import 'package:basketwise/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/core/presentation/widgets/rounded_button.dart';
-import 'package:shopengo/generated/assets.gen.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
 
 class HomeAppBar extends StatelessWidget {
   const new({

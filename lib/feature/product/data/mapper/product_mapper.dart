@@ -1,5 +1,5 @@
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
+import 'package:basketwise/core/presentation/utils/app_database.dart';
+import 'package:basketwise/feature/product/domain/model/product_model.dart';
 
 class ProductMapper {
   const new();

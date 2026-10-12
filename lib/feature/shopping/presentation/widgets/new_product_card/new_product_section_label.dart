@@ -1,6 +1,6 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 
 class NewProductSectionLabel extends StatelessWidget {
   const new({required this.text, super.key});

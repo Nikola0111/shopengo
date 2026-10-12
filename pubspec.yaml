@@ -1,4 +1,4 @@
-name: shopengo
+name: basketwise
 description: "Your designated shopping buddy"
 publish_to: 'none'
 version: 1.0.0+1
@@ -20,6 +20,7 @@ dependencies:
   kiwi: ^5.0.1
   path_provider: ^2.1.6
 
+  vector_graphics: any
 dev_dependencies:
   bloc_test: ^10.0.0
   build_runner: ^2.16.1

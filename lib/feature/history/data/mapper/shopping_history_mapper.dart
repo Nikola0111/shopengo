@@ -1,6 +1,6 @@
-import 'package:shopengo/feature/history/data/datasource/history_datasource.dart';
-import 'package:shopengo/feature/history/domain/model/shopping_history_item_model.dart';
-import 'package:shopengo/feature/history/domain/model/shopping_history_model.dart';
+import 'package:basketwise/feature/history/data/datasource/history_datasource.dart';
+import 'package:basketwise/feature/history/domain/model/shopping_history_item_model.dart';
+import 'package:basketwise/feature/history/domain/model/shopping_history_model.dart';
 
 class ShoppingHistoryMapper {
   const new();

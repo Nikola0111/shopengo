@@ -1,22 +1,22 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:basketwise/core/presentation/widgets/app_bottom_sheet.dart';
+import 'package:basketwise/core/presentation/widgets/dashed_border_painter.dart';
+import 'package:basketwise/core/presentation/widgets/grouped_card.dart';
+import 'package:basketwise/core/presentation/widgets/sheet_drag_handle.dart';
+import 'package:basketwise/core/presentation/widgets/sheet_header.dart';
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
+import 'package:basketwise/feature/category/presentation/category_model_extension.dart';
+import 'package:basketwise/feature/category/presentation/category_sheet.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_bloc.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_state.dart';
+import 'package:basketwise/generated/assets.gen.dart';
+import 'package:basketwise/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
-import 'package:shopengo/core/presentation/widgets/dashed_border_painter.dart';
-import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
-import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
-import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/category/presentation/category_model_extension.dart';
-import 'package:shopengo/feature/category/presentation/category_sheet.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
-import 'package:shopengo/generated/assets.gen.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
 
 class CategoriesSheet extends StatelessWidget {
   const new({super.key});

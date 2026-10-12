@@ -1,5 +1,5 @@
+import 'package:basketwise/core/presentation/utils/amount_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/utils/amount_formatter.dart';
 
 /// An amount followed by its currency in a smaller style, e.g. 3.000 RSD.
 class AmountText extends StatelessWidget {

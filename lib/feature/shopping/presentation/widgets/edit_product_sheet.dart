@@ -1,22 +1,22 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:basketwise/core/presentation/widgets/app_bottom_sheet.dart';
+import 'package:basketwise/core/presentation/widgets/sheet_drag_handle.dart';
+import 'package:basketwise/core/presentation/widgets/sheet_header.dart';
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
+import 'package:basketwise/feature/product/domain/model/product_model.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_bloc.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_state.dart';
+import 'package:basketwise/feature/shopping/presentation/widgets/categories_sheet.dart';
+import 'package:basketwise/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
+import 'package:basketwise/feature/shopping/presentation/widgets/new_product_card/product_details_fields.dart';
+import 'package:basketwise/feature/shopping/presentation/widgets/product_name_field.dart';
+import 'package:basketwise/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
-import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
-import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/categories_sheet.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/product_details_fields.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/product_name_field.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
 
 class EditProductSheet extends StatefulWidget {
   const new({required this.product, super.key});
