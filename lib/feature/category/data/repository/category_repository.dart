@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
 
 abstract class CategoryRepository {
   Future<List<CategoryModel>> getAllCategories();

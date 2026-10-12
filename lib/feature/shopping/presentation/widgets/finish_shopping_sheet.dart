@@ -1,14 +1,14 @@
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:basketwise/core/presentation/widgets/app_bottom_sheet.dart';
+import 'package:basketwise/core/presentation/widgets/dark_button.dart';
+import 'package:basketwise/core/presentation/widgets/sheet_drag_handle.dart';
+import 'package:basketwise/core/presentation/widgets/sheet_header.dart';
+import 'package:basketwise/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
-import 'package:shopengo/core/presentation/widgets/dark_button.dart';
-import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
-import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
 
 /// How shopping was finished. `amountSpent` is null when nothing was checked.
 typedef FinishedShopping = ({double? amountSpent});

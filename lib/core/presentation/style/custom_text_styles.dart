@@ -1,5 +1,5 @@
+import 'package:basketwise/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:shopengo/generated/fonts.gen.dart';
 
 class CustomTextStyles {
   const new of(BuildContext context) : _context = context;

@@ -1,4 +1,4 @@
-package com.example.shopengo
+package com.basketwise.app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
+import 'package:basketwise/core/presentation/utils/app_database.dart';
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
 
 class CategoryMapper {
   const new();

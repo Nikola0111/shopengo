@@ -1,12 +1,12 @@
+import 'package:basketwise/feature/home/data/repository/store_repository.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_bloc.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_event.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_state.dart';
+import 'package:basketwise/feature/home/domain/model/store_model.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_bloc.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
-import 'package:shopengo/feature/home/domain/model/store_model.dart';
 
 import 'home_bloc_test.mocks.dart';
 

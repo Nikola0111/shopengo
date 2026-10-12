@@ -1,5 +1,5 @@
+import 'package:basketwise/feature/home/domain/model/store_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shopengo/feature/home/domain/model/store_model.dart';
 
 part '../../../../generated/feature/home/domain/cubit/home_state.freezed.dart';
 

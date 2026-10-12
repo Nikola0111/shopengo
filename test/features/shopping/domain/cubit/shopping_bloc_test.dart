@@ -1,22 +1,22 @@
 import 'dart:ui';
 
+import 'package:basketwise/feature/cart/data/repository/cart_repository.dart';
+import 'package:basketwise/feature/cart/domain/model/cart_item_model.dart';
+import 'package:basketwise/feature/category/data/repository/category_repository.dart';
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
+import 'package:basketwise/feature/home/data/repository/store_repository.dart';
+import 'package:basketwise/feature/home/domain/model/store_model.dart';
+import 'package:basketwise/feature/product/data/repository/product_repository.dart';
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
+import 'package:basketwise/feature/product/domain/model/product_model.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_bloc.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:basketwise/feature/shopping/domain/cubit/shopping_state.dart';
+import 'package:basketwise/feature/shopping/domain/model/shopping_list_item_model.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
-import 'package:shopengo/feature/cart/domain/model/cart_item_model.dart';
-import 'package:shopengo/feature/category/data/repository/category_repository.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
-import 'package:shopengo/feature/home/domain/model/store_model.dart';
-import 'package:shopengo/feature/product/data/repository/product_repository.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
-import 'package:shopengo/feature/shopping/domain/model/shopping_list_item_model.dart';
 
 import 'shopping_bloc_test.mocks.dart';
 

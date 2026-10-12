@@ -1,7 +1,7 @@
-import 'package:shopengo/feature/cart/data/datasource/cart_datasource.dart';
-import 'package:shopengo/feature/cart/data/mapper/cart_item_mapper.dart';
-import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
-import 'package:shopengo/feature/cart/domain/model/cart_item_model.dart';
+import 'package:basketwise/feature/cart/data/datasource/cart_datasource.dart';
+import 'package:basketwise/feature/cart/data/mapper/cart_item_mapper.dart';
+import 'package:basketwise/feature/cart/data/repository/cart_repository.dart';
+import 'package:basketwise/feature/cart/domain/model/cart_item_model.dart';
 
 class CartRepositoryImpl implements CartRepository {
   new(this._cartDatasource, this._cartItemMapper);

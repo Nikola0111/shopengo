@@ -1,7 +1,7 @@
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
+import 'package:basketwise/feature/product/domain/model/product_model.dart';
+import 'package:basketwise/feature/shopping/domain/model/shopping_list_item_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
-import 'package:shopengo/feature/shopping/domain/model/shopping_list_item_model.dart';
 
 part '../../../../generated/feature/shopping/domain/cubit/shopping_state.freezed.dart';
 

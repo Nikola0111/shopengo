@@ -1,6 +1,6 @@
+import 'package:basketwise/core/presentation/utils/app_database.dart';
+import 'package:basketwise/feature/category/domain/model/category_model.dart';
 import 'package:drift/drift.dart';
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
 
 class CategoryDatasource {
   const new(this._database);

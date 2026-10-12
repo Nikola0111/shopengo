@@ -1,9 +1,9 @@
+import 'package:basketwise/core/presentation/utils/app_database.dart';
+import 'package:basketwise/feature/home/data/datasource/store_datasource.dart';
+import 'package:basketwise/feature/home/data/repository/store_repository.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
 
 @GenerateMocks([AppDatabase, StoreRepository])
 void main() {

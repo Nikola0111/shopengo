@@ -1,6 +1,6 @@
+import 'package:basketwise/feature/product/domain/model/amount_type.dart';
+import 'package:basketwise/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
 
 extension AmountTypeExtension on AmountType {
   String get shortLabel => switch (this) {

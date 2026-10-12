@@ -1,22 +1,22 @@
 import 'dart:async';
 
+import 'package:basketwise/core/domain/repository/di.dart' show container;
+import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:basketwise/feature/history/presentation/history_screen.dart';
+import 'package:basketwise/feature/home/data/repository/store_repository_impl.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_bloc.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_event.dart';
+import 'package:basketwise/feature/home/domain/cubit/home_state.dart';
+import 'package:basketwise/feature/home/domain/model/store_model.dart';
+import 'package:basketwise/feature/home/presentation/widgets/empty_stores.dart';
+import 'package:basketwise/feature/home/presentation/widgets/home_app_bar.dart';
+import 'package:basketwise/feature/home/presentation/widgets/home_text_field.dart';
+import 'package:basketwise/feature/home/presentation/widgets/new_store_sheet.dart';
+import 'package:basketwise/feature/home/presentation/widgets/store_card.dart';
+import 'package:basketwise/feature/shopping/presentation/shopping_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shopengo/core/domain/repository/di.dart' show container;
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/feature/history/presentation/history_screen.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository_impl.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_bloc.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_event.dart';
-import 'package:shopengo/feature/home/domain/cubit/home_state.dart';
-import 'package:shopengo/feature/home/domain/model/store_model.dart';
-import 'package:shopengo/feature/home/presentation/widgets/empty_stores.dart';
-import 'package:shopengo/feature/home/presentation/widgets/home_app_bar.dart';
-import 'package:shopengo/feature/home/presentation/widgets/home_text_field.dart';
-import 'package:shopengo/feature/home/presentation/widgets/new_store_sheet.dart';
-import 'package:shopengo/feature/home/presentation/widgets/store_card.dart';
-import 'package:shopengo/feature/shopping/presentation/shopping_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const new({super.key});
