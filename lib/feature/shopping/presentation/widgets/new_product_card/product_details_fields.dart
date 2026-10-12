@@ -20,6 +20,7 @@ class ProductDetailsFields extends StatelessWidget {
     required this.onCategorySelected,
     required this.onNewCategoryPressed,
     this.onEditCategoriesPressed,
+    this.unitPickerColor,
     super.key,
   });
 
@@ -33,6 +34,8 @@ class ProductDetailsFields extends StatelessWidget {
   /// Shows an edit link next to the category label when set.
   final VoidCallback? onEditCategoriesPressed;
 
+  final Color? unitPickerColor;
+
   @override
   Widget build(BuildContext context) {
     final onEditCategoriesPressed = this.onEditCategoriesPressed;
@@ -41,7 +44,11 @@ class ProductDetailsFields extends StatelessWidget {
       children: [
         NewProductSectionLabel(text: LocaleKeys.addProductSheet_unit.tr()),
         const SizedBox(height: 8),
-        AmountTypePicker(selectedAmountType: amountType, onSelected: onAmountTypeSelected),
+        AmountTypePicker(
+          selectedAmountType: amountType,
+          onSelected: onAmountTypeSelected,
+          backgroundColor: unitPickerColor,
+        ),
         const SizedBox(height: 14),
         Row(
           children: [

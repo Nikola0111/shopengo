@@ -115,6 +115,8 @@ class _EditProductSheetState extends State<EditProductSheet> {
                       onCategorySelected: (categoryId) => setState(() => _categoryId = categoryId),
                       onNewCategoryPressed: _onNewCategoryPressed,
                       onEditCategoriesPressed: () => CategoriesSheet.show(context),
+                      // The default picker color is the same as the sheet's.
+                      unitPickerColor: CustomColors.of(context).divider,
                     ),
                     const SizedBox(height: 24),
                     _SaveButton(
