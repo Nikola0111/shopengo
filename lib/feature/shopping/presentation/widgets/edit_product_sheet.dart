@@ -179,7 +179,10 @@ class _DeleteButton extends StatelessWidget {
           foregroundColor: colors.danger,
           shape: StadiumBorder(side: BorderSide(color: colors.danger.withValues(alpha: 0.3))),
         ),
-        child: Text(LocaleKeys.editProductSheet_delete.tr(), style: CustomTextStyles.of(context).semiBold16),
+        child: Text(
+          LocaleKeys.editProductSheet_delete.tr(),
+          style: CustomTextStyles.of(context).semiBold16.copyWith(color: colors.danger),
+        ),
       ),
     );
   }
