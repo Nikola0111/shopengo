@@ -10,8 +10,8 @@ import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/category/presentation/add_category_sheet.dart';
 import 'package:shopengo/feature/category/presentation/category_model_extension.dart';
+import 'package:shopengo/feature/category/presentation/category_sheet.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
@@ -31,9 +31,21 @@ class CategoriesSheet extends StatelessWidget {
 
   Future<void> _onNewCategoryPressed(BuildContext context) async {
     final bloc = context.read<ShoppingBloc>();
-    final category = await AddCategorySheet.show(context);
+    final category = await CategorySheet.showNew(context);
     if (category != null) {
       bloc.add(ShoppingCreateCategoryEvent(title: category.title, color: category.color));
+    }
+  }
+
+  Future<void> _onEditCategoryPressed(BuildContext context, CategoryModel category) async {
+    final bloc = context.read<ShoppingBloc>();
+    final details = await CategorySheet.showEdit(
+      context,
+      category: category,
+      onDeletePressed: () => bloc.add(ShoppingDeleteCategoryEvent(categoryId: category.id)),
+    );
+    if (details != null) {
+      bloc.add(ShoppingUpdateCategoryEvent(categoryId: category.id, title: details.title, color: details.color));
     }
   }
 
@@ -58,7 +70,16 @@ class CategoriesSheet extends StatelessWidget {
                   children: [
                     _NewCategoryButton(onPressed: () => _onNewCategoryPressed(context)),
                     const SizedBox(height: 14),
-                    GroupedCard(children: [for (final category in state.categories) _CategoryRow(category: category)]),
+                    GroupedCard(
+                      children: [
+                        for (final category in state.categories)
+                          _CategoryRow(
+                            category: category,
+                            // The default category can't be changed.
+                            onEditPressed: category.isDefault ? null : () => _onEditCategoryPressed(context, category),
+                          ),
+                      ],
+                    ),
                     const SizedBox(height: 14),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -125,45 +146,55 @@ class _NewCategoryButton extends StatelessWidget {
 }
 
 class _CategoryRow extends StatelessWidget {
-  const new({required this.category});
+  const new({required this.category, required this.onEditPressed});
 
   final CategoryModel category;
+  final VoidCallback? onEditPressed;
 
   @override
   Widget build(BuildContext context) {
     final colors = CustomColors.of(context);
     final textStyles = CustomTextStyles.of(context);
-    return ColoredBox(
+    return Material(
       color: colors.background,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        child: Row(
-          children: [
-            Container(
-              width: 12,
-              height: 12,
-              decoration: BoxDecoration(color: category.color, shape: BoxShape.circle),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    category.displayTitle,
-                    style: textStyles.medium15.copyWith(color: colors.dark),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 1),
-                  Text(
-                    LocaleKeys.categoriesSheet_productCount.plural(category.productCount),
-                    style: textStyles.regular12.copyWith(color: colors.mutedText),
-                  ),
-                ],
+      child: InkWell(
+        onTap: onEditPressed,
+        splashColor: colors.highlight,
+        highlightColor: colors.surface,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          child: Row(
+            children: [
+              Container(
+                width: 12,
+                height: 12,
+                decoration: BoxDecoration(color: category.color, shape: BoxShape.circle),
               ),
-            ),
-          ],
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      category.displayTitle,
+                      style: textStyles.medium15.copyWith(color: colors.dark),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 1),
+                    Text(
+                      LocaleKeys.categoriesSheet_productCount.plural(category.productCount),
+                      style: textStyles.regular12.copyWith(color: colors.mutedText),
+                    ),
+                  ],
+                ),
+              ),
+              if (onEditPressed != null) ...[
+                const SizedBox(width: 12),
+                Icon(Icons.edit_outlined, size: 20, color: colors.mutedText),
+              ],
+            ],
+          ),
         ),
       ),
     );

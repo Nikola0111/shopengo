@@ -10,7 +10,7 @@ import 'package:shopengo/core/presentation/widgets/section_label.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/category/presentation/add_category_sheet.dart';
+import 'package:shopengo/feature/category/presentation/category_model_extension.dart';
 import 'package:shopengo/feature/home/domain/model/store_model.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
@@ -18,7 +18,10 @@ import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/categories_sheet.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/edit_product_sheet.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_product_card.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/product_name_field.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
 class AddProductSheet extends StatefulWidget {
@@ -71,8 +74,13 @@ class _AddProductSheetState extends State<AddProductSheet> {
   }
 
   void _onSubmit(String productName) {
-    context.read<ShoppingBloc>().add(
-      ShoppingSubmitProductEvent(productName: productName, amountType: _amountType, categoryId: _categoryId),
+    final bloc = context.read<ShoppingBloc>();
+    bloc.add(
+      ShoppingSubmitProductEvent(
+        productName: productName,
+        amountType: _amountType,
+        categoryId: bloc.state.existingCategoryId(_categoryId),
+      ),
     );
     _controller.clear();
     setState(() {
@@ -84,17 +92,9 @@ class _AddProductSheetState extends State<AddProductSheet> {
   }
 
   Future<void> _onNewCategoryPressed() async {
-    final bloc = context.read<ShoppingBloc>();
-    final category = await AddCategorySheet.show(context);
-    if (category == null) {
-      return;
-    }
-
-    final existingIds = bloc.state.categories.map((e) => e.id).toSet();
-    bloc.add(ShoppingCreateCategoryEvent(title: category.title, color: category.color));
-    final state = await bloc.stream.firstWhere((state) => state.categories.any((e) => !existingIds.contains(e.id)));
-    if (mounted) {
-      setState(() => _categoryId = state.categories.firstWhere((e) => !existingIds.contains(e.id)).id);
+    final categoryId = await NewCategoryChip.createCategory(context);
+    if (categoryId != null && mounted) {
+      setState(() => _categoryId = categoryId);
     }
   }
 
@@ -115,7 +115,13 @@ class _AddProductSheetState extends State<AddProductSheet> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-              child: _ProductNameField(controller: _controller, onChanged: _onQueryChanged, onSubmitted: _onSubmit),
+              child: ProductNameField(
+                controller: _controller,
+                onChanged: _onQueryChanged,
+                onSubmitted: _onSubmit,
+                // Keeps the keyboard open so several products can be added in a row.
+                onEditingComplete: () {},
+              ),
             ),
             Expanded(
               child: BlocBuilder<ShoppingBloc, ShoppingState>(
@@ -132,7 +138,7 @@ class _AddProductSheetState extends State<AddProductSheet> {
                           amountType: _amountType,
                           onAmountTypeSelected: (amountType) => setState(() => _amountType = amountType),
                           categories: state.categories,
-                          categoryId: _categoryId,
+                          categoryId: state.existingCategoryId(_categoryId),
                           onCategorySelected: (categoryId) => setState(() => _categoryId = categoryId),
                           onNewCategoryPressed: _onNewCategoryPressed,
                           onSavePressed: () => _onSubmit(state.query),
@@ -150,8 +156,12 @@ class _AddProductSheetState extends State<AddProductSheet> {
                             for (final product in products)
                               _ProductRow(
                                 name: product.name,
-                                subtitle: product.amountType.shortLabel,
+                                subtitle: [
+                                  product.amountType.shortLabel,
+                                  ?state.categories.where((e) => e.id == product.categoryId).firstOrNull?.displayTitle,
+                                ].join(' · '),
                                 quantityInList: state.cartQuantities[product.id],
+                                onEditPressed: () => EditProductSheet.show(context, product: product),
                                 onAddPressed: () => context.read<ShoppingBloc>().add(
                                   ShoppingAddProductEvent(productId: product.id),
                                 ),
@@ -183,53 +193,19 @@ class _AddProductSheetState extends State<AddProductSheet> {
   }
 }
 
-class _ProductNameField extends StatelessWidget {
-  const new({required this.controller, required this.onChanged, required this.onSubmitted});
-
-  final TextEditingController controller;
-  final ValueChanged<String> onChanged;
-  final ValueChanged<String> onSubmitted;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = CustomColors.of(context);
-    final textStyle = CustomTextStyles.of(context).regular17;
-    return Container(
-      height: 52,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        color: colors.background,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colors.primary, width: 2),
-      ),
-      child: TextField(
-        controller: controller,
-        textCapitalization: TextCapitalization.sentences,
-        textInputAction: TextInputAction.done,
-        style: textStyle.copyWith(color: colors.dark),
-        cursorColor: colors.primary,
-        onChanged: onChanged,
-        onSubmitted: onSubmitted,
-        // Keeps the keyboard open so several products can be added in a row.
-        onEditingComplete: () {},
-        decoration: InputDecoration(
-          isCollapsed: true,
-          border: InputBorder.none,
-          hintText: LocaleKeys.addProductSheet_productNameHint.tr(),
-          hintStyle: textStyle.copyWith(color: colors.hintText),
-        ),
-      ),
-    );
-  }
-}
-
 class _ProductRow extends StatelessWidget {
-  const new({required this.name, required this.subtitle, required this.onAddPressed, this.quantityInList});
+  const new({
+    required this.name,
+    required this.subtitle,
+    required this.onEditPressed,
+    required this.onAddPressed,
+    this.quantityInList,
+  });
 
   final String name;
   final String subtitle;
   final int? quantityInList;
+  final VoidCallback onEditPressed;
   final VoidCallback onAddPressed;
 
   @override
@@ -263,8 +239,16 @@ class _ProductRow extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(width: 4),
+            IconButton(
+              onPressed: onEditPressed,
+              icon: const Icon(Icons.edit_outlined),
+              iconSize: 20,
+              color: colors.mutedText,
+              visualDensity: VisualDensity.compact,
+            ),
             if (quantity != null) ...[
-              const SizedBox(width: 12),
+              const SizedBox(width: 4),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                 decoration: BoxDecoration(color: colors.highlight, borderRadius: BorderRadius.circular(999)),

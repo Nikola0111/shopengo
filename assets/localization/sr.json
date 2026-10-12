@@ -73,6 +73,18 @@
     "saveAndAdd": "Sačuvaj i dodaj u listu",
     "manageCategories": "Upravljaj kategorijama"
   },
+  "editProductSheet": {
+    "title": "Izmeni proizvod",
+    "back": "Nazad",
+    "editCategories": "Izmeni",
+    "save": "Sačuvaj izmene",
+    "delete": "Obriši proizvod"
+  },
+  "editCategorySheet": {
+    "title": "Izmeni kategoriju",
+    "save": "Sačuvaj izmene",
+    "delete": "Obriši kategoriju"
+  },
   "categoriesSheet": {
     "title": "Kategorije",
     "back": "Nazad",

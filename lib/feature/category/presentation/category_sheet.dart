@@ -7,28 +7,49 @@ import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
 import 'package:shopengo/core/presentation/widgets/app_bottom_sheet.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_drag_handle.dart';
 import 'package:shopengo/core/presentation/widgets/sheet_header.dart';
+import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/category/presentation/category_palette.dart';
 import 'package:shopengo/generated/locale_keys.g.dart';
 
-typedef NewCategory = ({String title, Color color});
+typedef CategoryDetails = ({String title, Color color});
 
-class AddCategorySheet extends StatefulWidget {
-  const new({super.key});
+/// Creates a category, or edits [category] when it's given.
+class CategorySheet extends StatefulWidget {
+  const new({this.category, this.onDeletePressed, super.key});
+
+  final CategoryModel? category;
+
+  /// Shows a delete button when editing.
+  final VoidCallback? onDeletePressed;
 
   static const int _maxTitleLength = 32;
 
   /// Returns the entered category, or null if the sheet was dismissed.
-  static Future<NewCategory?> show(BuildContext context) {
-    return AppBottomSheet.show<NewCategory>(context, builder: (context) => const AddCategorySheet());
+  static Future<CategoryDetails?> showNew(BuildContext context) {
+    return AppBottomSheet.show<CategoryDetails>(context, builder: (context) => const CategorySheet());
+  }
+
+  /// Returns the edited title and color, or null if the sheet was dismissed or the category was deleted.
+  static Future<CategoryDetails?> showEdit(
+    BuildContext context, {
+    required CategoryModel category,
+    required VoidCallback onDeletePressed,
+  }) {
+    return AppBottomSheet.show<CategoryDetails>(
+      context,
+      builder: (context) => CategorySheet(category: category, onDeletePressed: onDeletePressed),
+    );
   }
 
   @override
-  State<AddCategorySheet> createState() => _AddCategorySheetState();
+  State<CategorySheet> createState() => _CategorySheetState();
 }
 
-class _AddCategorySheetState extends State<AddCategorySheet> {
-  final _controller = TextEditingController();
-  Color _color = CategoryPalette.colors.first;
+class _CategorySheetState extends State<CategorySheet> {
+  late final _controller = TextEditingController(text: widget.category?.title);
+  late Color _color = widget.category?.color ?? CategoryPalette.colors.first;
+
+  bool get _isEditing => widget.category != null;
 
   String get _title => _controller.text.trim();
 
@@ -42,7 +63,12 @@ class _AddCategorySheetState extends State<AddCategorySheet> {
     if (_title.isEmpty) {
       return;
     }
-    context.pop<NewCategory>((title: _title, color: _color));
+    context.pop<CategoryDetails>((title: _title, color: _color));
+  }
+
+  void _onDelete() {
+    widget.onDeletePressed?.call();
+    context.pop();
   }
 
   @override
@@ -55,7 +81,7 @@ class _AddCategorySheetState extends State<AddCategorySheet> {
         children: [
           const SheetDragHandle(),
           SheetHeader(
-            title: LocaleKeys.addCategorySheet_title.tr(),
+            title: _isEditing ? LocaleKeys.editCategorySheet_title.tr() : LocaleKeys.addCategorySheet_title.tr(),
             buttonText: LocaleKeys.addCategorySheet_back.tr(),
             onButtonPressed: () => context.pop(),
           ),
@@ -68,6 +94,7 @@ class _AddCategorySheetState extends State<AddCategorySheet> {
                 children: [
                   _TitleField(
                     controller: _controller,
+                    autofocus: !_isEditing,
                     onChanged: (_) => setState(() {}),
                     onSubmitted: (_) => _onSave(),
                   ),
@@ -80,7 +107,14 @@ class _AddCategorySheetState extends State<AddCategorySheet> {
                   const SizedBox(height: 10),
                   _CategoryChip(title: _title, color: _color),
                   const SizedBox(height: 28),
-                  _SaveButton(onPressed: _title.isEmpty ? null : _onSave),
+                  _SaveButton(
+                    text: _isEditing ? LocaleKeys.editCategorySheet_save.tr() : LocaleKeys.addCategorySheet_save.tr(),
+                    onPressed: _title.isEmpty ? null : _onSave,
+                  ),
+                  if (widget.onDeletePressed != null) ...[
+                    const SizedBox(height: 10),
+                    _DeleteButton(onPressed: _onDelete),
+                  ],
                 ],
               ),
             ),
@@ -92,9 +126,10 @@ class _AddCategorySheetState extends State<AddCategorySheet> {
 }
 
 class _TitleField extends StatelessWidget {
-  const new({required this.controller, required this.onChanged, required this.onSubmitted});
+  const new({required this.controller, required this.autofocus, required this.onChanged, required this.onSubmitted});
 
   final TextEditingController controller;
+  final bool autofocus;
   final ValueChanged<String> onChanged;
   final ValueChanged<String> onSubmitted;
 
@@ -113,10 +148,10 @@ class _TitleField extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        autofocus: true,
+        autofocus: autofocus,
         textCapitalization: TextCapitalization.sentences,
         textInputAction: TextInputAction.done,
-        inputFormatters: [LengthLimitingTextInputFormatter(AddCategorySheet._maxTitleLength)],
+        inputFormatters: [LengthLimitingTextInputFormatter(CategorySheet._maxTitleLength)],
         style: textStyle.copyWith(color: colors.dark),
         cursorColor: colors.primary,
         onChanged: onChanged,
@@ -243,8 +278,9 @@ class _CategoryChip extends StatelessWidget {
 }
 
 class _SaveButton extends StatelessWidget {
-  const new({required this.onPressed});
+  const new({required this.text, required this.onPressed});
 
+  final String text;
   final VoidCallback? onPressed;
 
   @override
@@ -262,7 +298,34 @@ class _SaveButton extends StatelessWidget {
           disabledForegroundColor: colors.primaryText,
           shape: const StadiumBorder(),
         ),
-        child: Text(LocaleKeys.addCategorySheet_save.tr(), style: CustomTextStyles.of(context).semiBold16),
+        child: Text(text, style: CustomTextStyles.of(context).semiBold16),
+      ),
+    );
+  }
+}
+
+class _DeleteButton extends StatelessWidget {
+  const new({required this.onPressed});
+
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = CustomColors.of(context);
+    return SizedBox(
+      width: double.infinity,
+      height: 54,
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          backgroundColor: colors.background,
+          foregroundColor: colors.danger,
+          shape: StadiumBorder(side: BorderSide(color: colors.danger.withValues(alpha: 0.3))),
+        ),
+        child: Text(
+          LocaleKeys.editCategorySheet_delete.tr(),
+          style: CustomTextStyles.of(context).semiBold16.copyWith(color: colors.danger),
+        ),
       ),
     );
   }

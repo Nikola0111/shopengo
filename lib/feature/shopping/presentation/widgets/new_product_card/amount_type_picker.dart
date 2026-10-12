@@ -5,10 +5,13 @@ import 'package:shopengo/feature/product/domain/model/amount_type.dart';
 import 'package:shopengo/feature/product/presentation/amount_type_extension.dart';
 
 class AmountTypePicker extends StatelessWidget {
-  const new({required this.selectedAmountType, required this.onSelected, super.key});
+  const new({required this.selectedAmountType, required this.onSelected, this.backgroundColor, super.key});
 
   final AmountType selectedAmountType;
   final ValueChanged<AmountType> onSelected;
+
+  /// Defaults to the surface color, which stands out on a white card.
+  final Color? backgroundColor;
 
   static const List<AmountType> _amountTypes = [
     AmountType.piece,
@@ -24,7 +27,7 @@ class AmountTypePicker extends StatelessWidget {
     final textStyle = CustomTextStyles.of(context).medium14;
     return Container(
       padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(color: colors.surface, borderRadius: BorderRadius.circular(12)),
+      decoration: BoxDecoration(color: backgroundColor ?? colors.surface, borderRadius: BorderRadius.circular(12)),
       child: Row(
         spacing: 6,
         children: [

@@ -30,4 +30,17 @@ class CategoryDatasource {
   Future<int> createCategory({required String title, required int color}) {
     return _database.into(_database.categoryTable).insert(CategoryTableCompanion.insert(title: title, color: color));
   }
+
+  Future<bool> updateCategory({required int id, required String title, required int color}) async {
+    final updatedRows = await (_database.update(_database.categoryTable)..where((t) => t.id.equals(id))).write(
+      CategoryTableCompanion(title: Value(title), color: Value(color)),
+    );
+    return updatedRows > 0;
+  }
+
+  /// Its products move to the default category.
+  Future<bool> deleteCategory(int id) async {
+    final deletedRows = await (_database.delete(_database.categoryTable)..where((t) => t.id.equals(id))).go();
+    return deletedRows > 0;
+  }
 }

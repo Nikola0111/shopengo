@@ -21,4 +21,12 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Future<int> createCategory({required String title, required Color color}) {
     return _categoryDatasource.createCategory(title: title, color: color.toARGB32());
   }
+
+  @override
+  Future<bool> updateCategory({required int id, required String title, required Color color}) {
+    return _categoryDatasource.updateCategory(id: id, title: title, color: color.toARGB32());
+  }
+
+  @override
+  Future<bool> deleteCategory(int id) => _categoryDatasource.deleteCategory(id);
 }
