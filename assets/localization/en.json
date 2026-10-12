@@ -70,6 +70,13 @@
     "saveAndAdd": "Save and add to list",
     "manageCategories": "Manage categories"
   },
+  "editProductSheet": {
+    "title": "Edit product",
+    "back": "Back",
+    "editCategories": "Edit",
+    "save": "Save changes",
+    "delete": "Delete product"
+  },
   "categoriesSheet": {
     "title": "Categories",
     "back": "Back",

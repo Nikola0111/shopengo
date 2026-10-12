@@ -1,15 +1,10 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shopengo/core/presentation/style/custom_colors.dart';
 import 'package:shopengo/feature/category/domain/model/category_model.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/amount_type_picker.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/category_selection_chip.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_product_card_header.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_product_save_button.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/new_product_section_label.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/new_product_card/product_details_fields.dart';
 
 /// Offers to create a product named [name], expanding to pick its unit and category before saving.
 class NewProductCard extends StatelessWidget {
@@ -63,26 +58,14 @@ class NewProductCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(14, 15, 14, 14),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          NewProductSectionLabel(text: LocaleKeys.addProductSheet_unit.tr()),
-                          const SizedBox(height: 8),
-                          AmountTypePicker(selectedAmountType: amountType, onSelected: onAmountTypeSelected),
-                          const SizedBox(height: 14),
-                          NewProductSectionLabel(text: LocaleKeys.addProductSheet_category.tr()),
-                          const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 6,
-                            runSpacing: 6,
-                            children: [
-                              for (final category in categories)
-                                CategorySelectionChip(
-                                  category: category,
-                                  isSelected: category.id == categoryId,
-                                  onPressed: () => onCategorySelected(category.id),
-                                ),
-                              NewCategoryChip(onPressed: onNewCategoryPressed),
-                            ],
+                          ProductDetailsFields(
+                            amountType: amountType,
+                            onAmountTypeSelected: onAmountTypeSelected,
+                            categories: categories,
+                            categoryId: categoryId,
+                            onCategorySelected: onCategorySelected,
+                            onNewCategoryPressed: onNewCategoryPressed,
                           ),
                           const SizedBox(height: 14),
                           NewProductSaveButton(onPressed: onSavePressed),

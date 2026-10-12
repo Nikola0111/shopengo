@@ -31,6 +31,7 @@ class CustomColors {
   Color get bodyText => Theme.of(_context).extension<CustomColorScheme>()!.bodyText!;
   Color get quantityText => Theme.of(_context).extension<CustomColorScheme>()!.quantityText!;
   Color get checkboxBorder => Theme.of(_context).extension<CustomColorScheme>()!.checkboxBorder!;
+  Color get danger => Theme.of(_context).extension<CustomColorScheme>()!.danger!;
 }
 
 @immutable
@@ -63,6 +64,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     required this.bodyText,
     required this.quantityText,
     required this.checkboxBorder,
+    required this.danger,
   });
 
   const new classic({
@@ -93,6 +95,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     this.bodyText = const Color(0xFF6E6A8C),
     this.quantityText = const Color(0xFF4A4664),
     this.checkboxBorder = const Color(0xFFC9C3E8),
+    this.danger = const Color(0xFFC8372D),
   });
 
   final Color? primary;
@@ -122,6 +125,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
   final Color? bodyText;
   final Color? quantityText;
   final Color? checkboxBorder;
+  final Color? danger;
 
   @override
   ThemeExtension<CustomColorScheme> copyWith({
@@ -152,6 +156,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
     Color? bodyText,
     Color? quantityText,
     Color? checkboxBorder,
+    Color? danger,
   }) {
     return CustomColorScheme(
       primary: primary ?? this.primary,
@@ -181,6 +186,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       bodyText: bodyText ?? this.bodyText,
       quantityText: quantityText ?? this.quantityText,
       checkboxBorder: checkboxBorder ?? this.checkboxBorder,
+      danger: danger ?? this.danger,
     );
   }
 
@@ -217,6 +223,7 @@ class CustomColorScheme extends ThemeExtension<CustomColorScheme> {
       bodyText: Color.lerp(bodyText, other.bodyText, t),
       quantityText: Color.lerp(quantityText, other.quantityText, t),
       checkboxBorder: Color.lerp(checkboxBorder, other.checkboxBorder, t),
+      danger: Color.lerp(danger, other.danger, t),
     );
   }
 }

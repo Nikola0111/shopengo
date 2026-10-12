@@ -91,6 +91,34 @@ class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
       );
     });
 
+    on<ShoppingUpdateProductEvent>((event, emit) async {
+      final product = event.product.copyWith(name: event.product.name.trim());
+      if (!state.isAvailableProductName(product.name, productId: product.id)) {
+        return;
+      }
+
+      await _productRepository.updateProduct(product);
+      // The category may have changed, which changes product counts.
+      emit(
+        state.copyWith(
+          products: await _productRepository.getAllProducts(),
+          categories: await _categoryRepository.getAllCategories(),
+        ),
+      );
+    });
+
+    on<ShoppingDeleteProductEvent>((event, emit) async {
+      await _productRepository.deleteProduct(event.productId);
+      emit(
+        await _withReloadedCart(
+          state.copyWith(
+            products: await _productRepository.getAllProducts(),
+            categories: await _categoryRepository.getAllCategories(),
+          ),
+        ),
+      );
+    });
+
     on<ShoppingCreateCategoryEvent>((event, emit) async {
       final title = event.title.trim();
       if (title.isEmpty) {

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:equatable/equatable.dart';
 import 'package:shopengo/feature/product/domain/model/amount_type.dart';
+import 'package:shopengo/feature/product/domain/model/product_model.dart';
 
 abstract class ShoppingEvent extends Equatable {
   @override
@@ -46,6 +47,24 @@ class ShoppingSubmitProductEvent extends ShoppingEvent {
 
   @override
   List<Object?> get props => [productName, amountType, categoryId];
+}
+
+/// Saves the edited [product]'s name, unit and category.
+class ShoppingUpdateProductEvent extends ShoppingEvent {
+  new({required this.product});
+  final ProductModel product;
+
+  @override
+  List<Object?> get props => [product];
+}
+
+/// Deletes the product, taking it off every store's list.
+class ShoppingDeleteProductEvent extends ShoppingEvent {
+  new({required this.productId});
+  final int productId;
+
+  @override
+  List<Object?> get props => [productId];
 }
 
 class ShoppingCreateCategoryEvent extends ShoppingEvent {

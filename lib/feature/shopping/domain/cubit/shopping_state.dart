@@ -46,6 +46,13 @@ class ShoppingState with _$ShoppingState {
     return normalizedQuery.isNotEmpty && products.every((e) => e.name.toUpperCase() != normalizedQuery);
   }
 
+  /// Whether [name] is non-blank and no product other than the one with [productId] has it, ignoring case.
+  bool isAvailableProductName(String name, {required int productId}) {
+    final normalizedName = name.trim().toUpperCase();
+    return normalizedName.isNotEmpty &&
+        products.every((e) => e.id == productId || e.name.toUpperCase() != normalizedName);
+  }
+
   /// Products in this store's cart, grouped by category in category order. Empty categories are left out.
   List<({CategoryModel category, List<ShoppingListItemModel> items})> get shoppingList {
     final items = [

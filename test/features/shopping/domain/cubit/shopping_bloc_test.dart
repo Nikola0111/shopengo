@@ -202,6 +202,57 @@ void main() {
   );
 
   blocTest<ShoppingBloc, ShoppingState>(
+    'should save an edited product with a trimmed name and refresh category counts',
+    setUp: () {
+      final editedMilk = milk.copyWith(name: 'Mleko 2%', amountType: AmountType.pack, categoryId: baby.id);
+      when(productRepository.updateProduct(editedMilk)).thenAnswer((_) async => true);
+      when(productRepository.getAllProducts()).thenAnswer((_) async => [editedMilk, bread]);
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other, baby]);
+    },
+    build: buildBloc,
+    seed: () => ShoppingState(products: [milk, bread], categories: [other]),
+    act: (bloc) => bloc.add(
+      ShoppingUpdateProductEvent(
+        product: milk.copyWith(name: ' Mleko 2% ', amountType: AmountType.pack, categoryId: baby.id),
+      ),
+    ),
+    expect: () => [
+      ShoppingState(
+        products: [milk.copyWith(name: 'Mleko 2%', amountType: AmountType.pack, categoryId: baby.id), bread],
+        categories: [other, baby],
+      ),
+    ],
+  );
+
+  blocTest<ShoppingBloc, ShoppingState>(
+    'should keep a product unchanged when edited to a blank or taken name',
+    build: buildBloc,
+    seed: () => ShoppingState(products: [milk, bread]),
+    act: (bloc) => bloc
+      ..add(ShoppingUpdateProductEvent(product: milk.copyWith(name: '  ')))
+      ..add(ShoppingUpdateProductEvent(product: milk.copyWith(name: 'hleb'))),
+    expect: () => <ShoppingState>[],
+    verify: (_) => verifyNever(productRepository.updateProduct(any)),
+  );
+
+  blocTest<ShoppingBloc, ShoppingState>(
+    'should delete a product and reload products, categories and the cart',
+    setUp: () {
+      when(productRepository.deleteProduct(1)).thenAnswer((_) async => true);
+      when(productRepository.getAllProducts()).thenAnswer((_) async => [bread]);
+      when(categoryRepository.getAllCategories()).thenAnswer((_) async => [other]);
+      when(cartRepository.getCartItems(storeId)).thenAnswer((_) async => []);
+    },
+    build: buildBloc,
+    seed: () => ShoppingState(products: [milk, bread], cartQuantities: const {1: 2}),
+    act: (bloc) => bloc.add(ShoppingDeleteProductEvent(productId: 1)),
+    expect: () => [
+      ShoppingState(products: [bread], categories: [other]),
+    ],
+    verify: (_) => verify(productRepository.deleteProduct(1)).called(1),
+  );
+
+  blocTest<ShoppingBloc, ShoppingState>(
     'should create a category and reload categories',
     setUp: () {
       when(categoryRepository.createCategory(title: 'Za bebu', color: const Color(0xFF52B086)))
