@@ -27,7 +27,7 @@
     "preparation": "Preparation",
     "prepareListBeforeLeaving": "Prepare the list before you go",
     "emptyCart": "Your cart is empty",
-    "emptyCartDescription": "Tap a saved product above or type a new one below.",
+    "emptyCartDescription": "Add products to the list using the field below.",
     "addProduct": "Add product…",
     "startShopping": "Start shopping",
     "productsInList": {
