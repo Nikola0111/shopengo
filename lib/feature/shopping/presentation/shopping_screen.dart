@@ -13,6 +13,7 @@ import 'package:shopengo/feature/shopping/domain/cubit/shopping_bloc.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
 import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/add_product_sheet.dart';
+import 'package:shopengo/feature/shopping/presentation/widgets/empty_shopping_list.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/finish_shopping_sheet.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/shopping_bottom_bar.dart';
 import 'package:shopengo/feature/shopping/presentation/widgets/shopping_header.dart';
@@ -86,33 +87,34 @@ class ShoppingScreen extends StatelessWidget {
                     final shoppingList = state.shoppingList;
                     return Stack(
                       children: [
-                        ListView.separated(
-                          padding: EdgeInsets.fromLTRB(
-                            20,
-                            20,
-                            20,
-                            state.isShopping ? _shoppingBottomBarHeight : _preparationBottomBarHeight,
+                        if (shoppingList.isEmpty)
+                          const Align(alignment: Alignment.topCenter, child: EmptyShoppingList())
+                        else
+                          ListView.separated(
+                            padding: EdgeInsets.fromLTRB(
+                              20,
+                              20,
+                              20,
+                              state.isShopping ? _shoppingBottomBarHeight : _preparationBottomBarHeight,
+                            ),
+                            itemCount: shoppingList.length,
+                            separatorBuilder: (context, index) => const SizedBox(height: _sectionSpacing),
+                            itemBuilder: (context, index) {
+                              final (:category, :items) = shoppingList[index];
+                              return ShoppingListSection(
+                                category: category,
+                                items: items,
+                                isShopping: state.isShopping,
+                                onIncreasePressed: (product) =>
+                                    context.read<ShoppingBloc>().add(ShoppingAddProductEvent(productId: product.id)),
+                                onDecreasePressed: (product) => context.read<ShoppingBloc>().add(
+                                  ShoppingDecreaseQuantityEvent(productId: product.id),
+                                ),
+                                onCheckPressed: (product) =>
+                                    context.read<ShoppingBloc>().add(ShoppingToggleCheckedEvent(productId: product.id)),
+                              );
+                            },
                           ),
-                          itemCount: shoppingList.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: _sectionSpacing),
-                          itemBuilder: (context, index) {
-                            final (:category, :items) = shoppingList[index];
-                            return ShoppingListSection(
-                              category: category,
-                              items: items,
-                              isShopping: state.isShopping,
-                              onIncreasePressed: (product) => context.read<ShoppingBloc>().add(
-                                ShoppingAddProductEvent(productId: product.id),
-                              ),
-                              onDecreasePressed: (product) => context.read<ShoppingBloc>().add(
-                                ShoppingDecreaseQuantityEvent(productId: product.id),
-                              ),
-                              onCheckPressed: (product) => context.read<ShoppingBloc>().add(
-                                ShoppingToggleCheckedEvent(productId: product.id),
-                              ),
-                            );
-                          },
-                        ),
                         Positioned(
                           left: 0,
                           right: 0,

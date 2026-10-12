@@ -59,15 +59,15 @@ class HomeAppBar extends StatelessWidget {
           ),
         ],
         if (!isCreating && !isSearching) ...[
-          SizedBox(
-            width: 48,
-            height: 48,
-            child: TextButton(
-              onPressed: onSearchPressed,
-              child: Assets.icon.search.svg(),
+          // Nothing to search before the first store is added.
+          if (totalStores > 0) ...[
+            SizedBox(
+              width: 48,
+              height: 48,
+              child: TextButton(onPressed: onSearchPressed, child: Assets.icon.search.svg()),
             ),
-          ),
-          const SizedBox(width: 8),
+            const SizedBox(width: 8),
+          ],
           RoundedButton(
             icon: Icons.add,
             backgroundColor: CustomColors.of(context).background,

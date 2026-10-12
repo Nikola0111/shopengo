@@ -12,11 +12,22 @@
 
     "productsBought": "Products: {count}",
     "noShoppings": "No shoppings yet",
-    "history": "History"
+    "history": "History",
+    "emptyTitle": "You don't have any stores yet",
+    "emptyDescription": "Add a store you shop at and make your first shopping list.",
+    "addStore": "Add store"
+  },
+  "newStoreSheet": {
+    "title": "New store",
+    "done": "Done",
+    "nameHint": "e.g. Maxi, Idea, farmers market…",
+    "add": "Add store"
   },
   "shoppingPreparation": {
     "preparation": "Preparation",
     "prepareListBeforeLeaving": "Prepare the list before you go",
+    "emptyCart": "Your cart is empty",
+    "emptyCartDescription": "Add products to the list using the field below.",
     "addProduct": "Add product…",
     "startShopping": "Start shopping",
     "productsInList": {
