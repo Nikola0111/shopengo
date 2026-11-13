@@ -1,5 +1,5 @@
-import 'package:spiskalica/core/presentation/utils/app_database.dart';
 import 'package:drift/drift.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
 
 typedef ShoppingHistoryData = ({ShoppingHistoryTableData shopping, List<ShoppingHistoryItemTableData> items});
 

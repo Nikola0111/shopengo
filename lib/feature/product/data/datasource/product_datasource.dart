@@ -1,6 +1,6 @@
+import 'package:drift/drift.dart';
 import 'package:spiskalica/core/presentation/utils/app_database.dart';
 import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
-import 'package:drift/drift.dart';
 
 class ProductDatasource {
   const new(this._database);

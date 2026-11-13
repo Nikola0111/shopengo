@@ -1,12 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spiskalica/core/presentation/screens/error_screen.dart';
 import 'package:spiskalica/feature/history/presentation/history_screen.dart';
 import 'package:spiskalica/feature/home/domain/model/store_model.dart';
 import 'package:spiskalica/feature/home/presentation/home_screen.dart';
 import 'package:spiskalica/feature/shopping/presentation/shopping_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
 
 class RouterConfiguration {
   new() {

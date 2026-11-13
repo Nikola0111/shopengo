@@ -1,3 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
 import 'package:spiskalica/core/presentation/widgets/app_bottom_sheet.dart';
@@ -19,10 +23,6 @@ import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_car
 import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_card/new_product_card.dart';
 import 'package:spiskalica/feature/shopping/presentation/widgets/product_name_field.dart';
 import 'package:spiskalica/generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class AddProductSheet extends StatefulWidget {
   const new({required this.store, super.key});

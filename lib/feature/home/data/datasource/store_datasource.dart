@@ -1,5 +1,5 @@
-import 'package:spiskalica/core/presentation/utils/app_database.dart';
 import 'package:drift/drift.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
 
 class StoreDatasource {
   const new(this._database);

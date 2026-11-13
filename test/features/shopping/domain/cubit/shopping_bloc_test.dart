@@ -1,5 +1,9 @@
 import 'dart:ui';
 
+import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:spiskalica/feature/cart/data/repository/cart_repository.dart';
 import 'package:spiskalica/feature/cart/domain/model/cart_item_model.dart';
 import 'package:spiskalica/feature/category/data/repository/category_repository.dart';
@@ -13,10 +17,6 @@ import 'package:spiskalica/feature/shopping/domain/cubit/shopping_bloc.dart';
 import 'package:spiskalica/feature/shopping/domain/cubit/shopping_event.dart';
 import 'package:spiskalica/feature/shopping/domain/cubit/shopping_state.dart';
 import 'package:spiskalica/feature/shopping/domain/model/shopping_list_item_model.dart';
-import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import 'shopping_bloc_test.mocks.dart';
 

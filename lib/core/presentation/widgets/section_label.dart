@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
-import 'package:flutter/material.dart';
 
 /// Uppercase section title with a colored dot in front.
 class SectionLabel extends StatelessWidget {

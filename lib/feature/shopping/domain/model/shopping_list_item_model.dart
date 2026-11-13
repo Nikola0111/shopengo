@@ -1,5 +1,5 @@
-import 'package:spiskalica/feature/product/domain/model/product_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:spiskalica/feature/product/domain/model/product_model.dart';
 
 part '../../../../generated/feature/shopping/domain/model/shopping_list_item_model.freezed.dart';
 

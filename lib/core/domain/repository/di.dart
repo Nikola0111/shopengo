@@ -1,3 +1,4 @@
+import 'package:kiwi/kiwi.dart';
 import 'package:spiskalica/core/domain/repository/theme_repository.dart';
 import 'package:spiskalica/core/presentation/navigation/router_configuration.dart';
 import 'package:spiskalica/core/presentation/utils/app_database.dart';
@@ -16,7 +17,6 @@ import 'package:spiskalica/feature/home/data/repository/store_repository_impl.da
 import 'package:spiskalica/feature/product/data/datasource/product_datasource.dart';
 import 'package:spiskalica/feature/product/data/mapper/product_mapper.dart';
 import 'package:spiskalica/feature/product/data/repository/product_repository_impl.dart';
-import 'package:kiwi/kiwi.dart';
 
 final container = KiwiContainer();
 

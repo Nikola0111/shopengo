@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
 import 'package:spiskalica/core/presentation/utils/date_formatter.dart';
@@ -6,8 +8,6 @@ import 'package:spiskalica/core/presentation/widgets/rounded_button.dart';
 import 'package:spiskalica/core/presentation/widgets/secondary_button.dart';
 import 'package:spiskalica/feature/home/domain/model/store_model.dart';
 import 'package:spiskalica/generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 
 class StoreCard extends StatelessWidget {
   const new({

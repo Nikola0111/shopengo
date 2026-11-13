@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spiskalica/core/domain/repository/di.dart' show container;
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/feature/history/presentation/history_screen.dart';
@@ -14,9 +17,6 @@ import 'package:spiskalica/feature/home/presentation/widgets/home_text_field.dar
 import 'package:spiskalica/feature/home/presentation/widgets/new_store_sheet.dart';
 import 'package:spiskalica/feature/home/presentation/widgets/store_card.dart';
 import 'package:spiskalica/feature/shopping/presentation/shopping_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
   const new({super.key});

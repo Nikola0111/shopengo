@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spiskalica/core/domain/repository/di.dart' show container;
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/feature/cart/data/repository/cart_repository_impl.dart';
@@ -15,9 +18,6 @@ import 'package:spiskalica/feature/shopping/presentation/widgets/finish_shopping
 import 'package:spiskalica/feature/shopping/presentation/widgets/shopping_bottom_bar.dart';
 import 'package:spiskalica/feature/shopping/presentation/widgets/shopping_header.dart';
 import 'package:spiskalica/feature/shopping/presentation/widgets/shopping_list/shopping_list_section.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 class ShoppingScreen extends StatelessWidget {
   const new({required this.store, super.key});

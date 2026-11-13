@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
 import 'package:spiskalica/feature/category/domain/model/category_model.dart';
@@ -7,8 +9,6 @@ import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_car
 import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_card/new_category_chip.dart';
 import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_card/new_product_section_label.dart';
 import 'package:spiskalica/generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 
 /// Unit and category pickers shared by creating and editing a product.
 class ProductDetailsFields extends StatelessWidget {

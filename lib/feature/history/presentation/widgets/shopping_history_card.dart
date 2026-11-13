@@ -1,3 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
 import 'package:spiskalica/core/presentation/utils/date_formatter.dart';
@@ -5,8 +7,6 @@ import 'package:spiskalica/core/presentation/widgets/amount_text.dart';
 import 'package:spiskalica/feature/history/domain/model/shopping_history_model.dart';
 import 'package:spiskalica/feature/product/presentation/amount_type_extension.dart';
 import 'package:spiskalica/generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
 
 /// A finished shopping. Tapping it shows or hides the products bought in it.
 class ShoppingHistoryCard extends StatefulWidget {

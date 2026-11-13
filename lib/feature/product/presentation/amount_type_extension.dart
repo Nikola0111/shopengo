@@ -1,6 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
 import 'package:spiskalica/generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 extension AmountTypeExtension on AmountType {
   String get shortLabel => switch (this) {
