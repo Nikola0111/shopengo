@@ -1,0 +1,12 @@
+# App icon sources live in assets/launcher_icon/ (SVG masters + 1024px PNGs).
+# Regenerate with:
+#   dart pub global activate flutter_launcher_icons
+#   dart pub global run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: assets/launcher_icon/icon.png
+  android: true
+  adaptive_icon_background: assets/launcher_icon/background.png
+  adaptive_icon_foreground: assets/launcher_icon/foreground.png
+  adaptive_icon_monochrome: assets/launcher_icon/monochrome.png
+  ios: true
+  remove_alpha_ios: true
