@@ -1,10 +1,10 @@
-import 'package:basketwise/core/presentation/style/custom_colors.dart';
-import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
-import 'package:basketwise/core/presentation/utils/date_formatter.dart';
-import 'package:basketwise/core/presentation/widgets/amount_text.dart';
-import 'package:basketwise/feature/history/domain/model/shopping_history_model.dart';
-import 'package:basketwise/feature/product/presentation/amount_type_extension.dart';
-import 'package:basketwise/generated/locale_keys.g.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
+import 'package:spiskalica/core/presentation/utils/date_formatter.dart';
+import 'package:spiskalica/core/presentation/widgets/amount_text.dart';
+import 'package:spiskalica/feature/history/domain/model/shopping_history_model.dart';
+import 'package:spiskalica/feature/product/presentation/amount_type_extension.dart';
+import 'package:spiskalica/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

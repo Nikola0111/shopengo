@@ -1,5 +1,5 @@
-import 'package:basketwise/core/presentation/utils/app_database.dart';
-import 'package:basketwise/feature/cart/domain/model/cart_item_model.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/cart/domain/model/cart_item_model.dart';
 
 class CartItemMapper {
   const new();

@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:basketwise/core/domain/repository/di.dart' show initDI;
-import 'package:basketwise/generated/codegen_loader.g.dart';
+import 'package:spiskalica/core/domain/repository/di.dart' show initDI;
+import 'package:spiskalica/generated/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 

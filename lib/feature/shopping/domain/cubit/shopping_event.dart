@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:basketwise/feature/product/domain/model/amount_type.dart';
-import 'package:basketwise/feature/product/domain/model/product_model.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/feature/product/domain/model/product_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ShoppingEvent extends Equatable {

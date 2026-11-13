@@ -1,4 +1,4 @@
-package rs.basketwise.app
+package rs.spiskalica.app
 
 import io.flutter.embedding.android.FlutterActivity
 

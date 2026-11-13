@@ -1,4 +1,4 @@
-import 'package:basketwise/core/presentation/utils/amount_formatter.dart';
+import 'package:spiskalica/core/presentation/utils/amount_formatter.dart';
 import 'package:flutter/material.dart';
 
 /// An amount followed by its currency in a smaller style, e.g. 3.000 RSD.

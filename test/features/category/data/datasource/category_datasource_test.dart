@@ -1,8 +1,8 @@
-import 'package:basketwise/core/presentation/utils/app_database.dart';
-import 'package:basketwise/feature/category/data/datasource/category_datasource.dart';
-import 'package:basketwise/feature/category/domain/model/category_model.dart';
-import 'package:basketwise/feature/product/data/datasource/product_datasource.dart';
-import 'package:basketwise/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/category/data/datasource/category_datasource.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/feature/product/data/datasource/product_datasource.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 

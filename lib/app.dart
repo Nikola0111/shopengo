@@ -1,6 +1,6 @@
-import 'package:basketwise/core/domain/repository/di.dart' show container;
-import 'package:basketwise/core/domain/repository/theme_repository.dart';
-import 'package:basketwise/core/presentation/navigation/router_configuration.dart';
+import 'package:spiskalica/core/domain/repository/di.dart' show container;
+import 'package:spiskalica/core/domain/repository/theme_repository.dart';
+import 'package:spiskalica/core/presentation/navigation/router_configuration.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

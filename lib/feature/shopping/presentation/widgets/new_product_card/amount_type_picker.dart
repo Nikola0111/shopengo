@@ -1,7 +1,7 @@
-import 'package:basketwise/core/presentation/style/custom_colors.dart';
-import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
-import 'package:basketwise/feature/product/domain/model/amount_type.dart';
-import 'package:basketwise/feature/product/presentation/amount_type_extension.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/feature/product/presentation/amount_type_extension.dart';
 import 'package:flutter/material.dart';
 
 class AmountTypePicker extends StatelessWidget {

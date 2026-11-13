@@ -1,9 +1,9 @@
-import 'package:basketwise/core/presentation/style/custom_colors.dart';
-import 'package:basketwise/feature/category/domain/model/category_model.dart';
-import 'package:basketwise/feature/product/domain/model/amount_type.dart';
-import 'package:basketwise/feature/shopping/presentation/widgets/new_product_card/new_product_card_header.dart';
-import 'package:basketwise/feature/shopping/presentation/widgets/new_product_card/new_product_save_button.dart';
-import 'package:basketwise/feature/shopping/presentation/widgets/new_product_card/product_details_fields.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_card/new_product_card_header.dart';
+import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_card/new_product_save_button.dart';
+import 'package:spiskalica/feature/shopping/presentation/widgets/new_product_card/product_details_fields.dart';
 import 'package:flutter/material.dart';
 
 /// Offers to create a product named [name], expanding to pick its unit and category before saving.

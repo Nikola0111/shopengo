@@ -1,6 +1,6 @@
-import 'package:basketwise/feature/home/data/repository/store_repository.dart';
-import 'package:basketwise/feature/home/domain/cubit/home_event.dart';
-import 'package:basketwise/feature/home/domain/cubit/home_state.dart';
+import 'package:spiskalica/feature/home/data/repository/store_repository.dart';
+import 'package:spiskalica/feature/home/domain/cubit/home_event.dart';
+import 'package:spiskalica/feature/home/domain/cubit/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {

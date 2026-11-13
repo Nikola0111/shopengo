@@ -1,8 +1,8 @@
-import 'package:basketwise/feature/home/data/repository/store_repository.dart';
-import 'package:basketwise/feature/home/domain/cubit/home_bloc.dart';
-import 'package:basketwise/feature/home/domain/cubit/home_event.dart';
-import 'package:basketwise/feature/home/domain/cubit/home_state.dart';
-import 'package:basketwise/feature/home/domain/model/store_model.dart';
+import 'package:spiskalica/feature/home/data/repository/store_repository.dart';
+import 'package:spiskalica/feature/home/domain/cubit/home_bloc.dart';
+import 'package:spiskalica/feature/home/domain/cubit/home_event.dart';
+import 'package:spiskalica/feature/home/domain/cubit/home_state.dart';
+import 'package:spiskalica/feature/home/domain/model/store_model.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';

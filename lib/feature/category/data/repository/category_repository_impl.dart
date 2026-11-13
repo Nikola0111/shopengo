@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:basketwise/feature/category/data/datasource/category_datasource.dart';
-import 'package:basketwise/feature/category/data/mapper/category_mapper.dart';
-import 'package:basketwise/feature/category/data/repository/category_repository.dart';
-import 'package:basketwise/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/feature/category/data/datasource/category_datasource.dart';
+import 'package:spiskalica/feature/category/data/mapper/category_mapper.dart';
+import 'package:spiskalica/feature/category/data/repository/category_repository.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
 
 class CategoryRepositoryImpl implements CategoryRepository {
   new(this._categoryDatasource, this._categoryMapper);

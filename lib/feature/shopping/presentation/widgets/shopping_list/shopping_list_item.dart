@@ -1,7 +1,7 @@
-import 'package:basketwise/core/presentation/style/custom_colors.dart';
-import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
-import 'package:basketwise/feature/product/presentation/amount_type_extension.dart';
-import 'package:basketwise/feature/shopping/domain/model/shopping_list_item_model.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
+import 'package:spiskalica/feature/product/presentation/amount_type_extension.dart';
+import 'package:spiskalica/feature/shopping/domain/model/shopping_list_item_model.dart';
 import 'package:flutter/material.dart';
 
 /// A product on the list. Its quantity can be changed while preparing, and it can be checked off while shopping.

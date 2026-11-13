@@ -1,5 +1,5 @@
-import 'package:basketwise/core/presentation/style/custom_colors.dart';
-import 'package:basketwise/core/presentation/style/custom_text_styles.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
 import 'package:flutter/material.dart';
 
 /// Bottom sheet title with a pill button on the right.

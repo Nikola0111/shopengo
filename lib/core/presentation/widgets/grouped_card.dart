@@ -1,4 +1,4 @@
-import 'package:basketwise/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Rows on a rounded card, separated by 1px dividers.

@@ -1,5 +1,5 @@
-import 'package:basketwise/core/presentation/utils/app_database.dart';
-import 'package:basketwise/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
 import 'package:drift/drift.dart';
 
 class CategoryDatasource {

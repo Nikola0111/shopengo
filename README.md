@@ -1,4 +1,4 @@
-# BasketWise
+# Spiskalica
 
 Your designated shopping  buddy
 

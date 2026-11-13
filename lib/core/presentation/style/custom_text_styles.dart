@@ -1,4 +1,4 @@
-import 'package:basketwise/generated/fonts.gen.dart';
+import 'package:spiskalica/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextStyles {

@@ -1,5 +1,5 @@
-import 'package:basketwise/core/presentation/utils/app_database.dart';
-import 'package:basketwise/feature/home/domain/model/store_model.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/home/domain/model/store_model.dart';
 
 class StoreMapper {
   const new();

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:basketwise/app.dart';
-import 'package:basketwise/bootstrap.dart';
+import 'package:spiskalica/app.dart';
+import 'package:spiskalica/bootstrap.dart';
 
 void main() {
   unawaited(bootstrap(App.new));

@@ -1,4 +1,4 @@
-import 'package:basketwise/feature/product/domain/model/product_model.dart';
+import 'package:spiskalica/feature/product/domain/model/product_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part '../../../../generated/feature/shopping/domain/model/shopping_list_item_model.freezed.dart';
