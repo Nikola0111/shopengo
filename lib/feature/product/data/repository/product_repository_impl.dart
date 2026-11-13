@@ -1,8 +1,8 @@
-import 'package:shopengo/feature/product/data/datasource/product_datasource.dart';
-import 'package:shopengo/feature/product/data/mapper/product_mapper.dart';
-import 'package:shopengo/feature/product/data/repository/product_repository.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
+import 'package:spiskalica/feature/product/data/datasource/product_datasource.dart';
+import 'package:spiskalica/feature/product/data/mapper/product_mapper.dart';
+import 'package:spiskalica/feature/product/data/repository/product_repository.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/feature/product/domain/model/product_model.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   new(this._productDatasource, this._productMapper);

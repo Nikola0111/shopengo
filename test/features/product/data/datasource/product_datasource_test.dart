@@ -1,9 +1,9 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/product/data/datasource/product_datasource.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/feature/product/data/datasource/product_datasource.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
 
 void main() {
   late ProductDatasource datasource;

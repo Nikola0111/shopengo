@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
 
 class SheetDragHandle extends StatelessWidget {
   const new({super.key});

@@ -2,17 +2,17 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shopengo/core/domain/repository/di.dart' show container;
-import 'package:shopengo/core/presentation/style/custom_colors.dart';
-import 'package:shopengo/core/presentation/style/custom_text_styles.dart';
-import 'package:shopengo/feature/history/data/repository/history_repository_impl.dart';
-import 'package:shopengo/feature/history/domain/cubit/history_bloc.dart';
-import 'package:shopengo/feature/history/domain/cubit/history_event.dart';
-import 'package:shopengo/feature/history/domain/cubit/history_state.dart';
-import 'package:shopengo/feature/history/presentation/widgets/history_header.dart';
-import 'package:shopengo/feature/history/presentation/widgets/shopping_history_card.dart';
-import 'package:shopengo/feature/home/domain/model/store_model.dart';
-import 'package:shopengo/generated/locale_keys.g.dart';
+import 'package:spiskalica/core/domain/repository/di.dart' show container;
+import 'package:spiskalica/core/presentation/style/custom_colors.dart';
+import 'package:spiskalica/core/presentation/style/custom_text_styles.dart';
+import 'package:spiskalica/feature/history/data/repository/history_repository_impl.dart';
+import 'package:spiskalica/feature/history/domain/cubit/history_bloc.dart';
+import 'package:spiskalica/feature/history/domain/cubit/history_event.dart';
+import 'package:spiskalica/feature/history/domain/cubit/history_state.dart';
+import 'package:spiskalica/feature/history/presentation/widgets/history_header.dart';
+import 'package:spiskalica/feature/history/presentation/widgets/shopping_history_card.dart';
+import 'package:spiskalica/feature/home/domain/model/store_model.dart';
+import 'package:spiskalica/generated/locale_keys.g.dart';
 
 /// A store's finished shoppings, newest first, with what was bought and spent in each.
 class HistoryScreen extends StatelessWidget {

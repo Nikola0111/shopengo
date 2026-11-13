@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shopengo/core/presentation/widgets/grouped_card.dart';
-import 'package:shopengo/core/presentation/widgets/section_label.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/category/presentation/category_model_extension.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
-import 'package:shopengo/feature/shopping/domain/model/shopping_list_item_model.dart';
-import 'package:shopengo/feature/shopping/presentation/widgets/shopping_list/shopping_list_item.dart';
+import 'package:spiskalica/core/presentation/widgets/grouped_card.dart';
+import 'package:spiskalica/core/presentation/widgets/section_label.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/feature/category/presentation/category_model_extension.dart';
+import 'package:spiskalica/feature/product/domain/model/product_model.dart';
+import 'package:spiskalica/feature/shopping/domain/model/shopping_list_item_model.dart';
+import 'package:spiskalica/feature/shopping/presentation/widgets/shopping_list/shopping_list_item.dart';
 
 /// A category's products on the shopping list.
 class ShoppingListSection extends StatelessWidget {

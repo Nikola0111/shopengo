@@ -1,4 +1,4 @@
-# shopengo
+# Spiskalica
 
 Your designated shopping  buddy
 

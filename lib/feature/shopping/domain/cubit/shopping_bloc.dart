@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopengo/feature/cart/data/repository/cart_repository.dart';
-import 'package:shopengo/feature/category/data/repository/category_repository.dart';
-import 'package:shopengo/feature/category/domain/model/category_model.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
-import 'package:shopengo/feature/product/data/repository/product_repository.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_event.dart';
-import 'package:shopengo/feature/shopping/domain/cubit/shopping_state.dart';
+import 'package:spiskalica/feature/cart/data/repository/cart_repository.dart';
+import 'package:spiskalica/feature/category/data/repository/category_repository.dart';
+import 'package:spiskalica/feature/category/domain/model/category_model.dart';
+import 'package:spiskalica/feature/home/data/repository/store_repository.dart';
+import 'package:spiskalica/feature/product/data/repository/product_repository.dart';
+import 'package:spiskalica/feature/shopping/domain/cubit/shopping_event.dart';
+import 'package:spiskalica/feature/shopping/domain/cubit/shopping_state.dart';
 
 class ShoppingBloc extends Bloc<ShoppingEvent, ShoppingState> {
   new(

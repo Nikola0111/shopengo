@@ -1,5 +1,5 @@
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/cart/domain/model/cart_item_model.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/cart/domain/model/cart_item_model.dart';
 
 class CartItemMapper {
   const new();

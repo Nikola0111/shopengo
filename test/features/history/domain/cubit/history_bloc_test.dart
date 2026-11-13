@@ -2,13 +2,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:shopengo/feature/history/data/repository/history_repository.dart';
-import 'package:shopengo/feature/history/domain/cubit/history_bloc.dart';
-import 'package:shopengo/feature/history/domain/cubit/history_event.dart';
-import 'package:shopengo/feature/history/domain/cubit/history_state.dart';
-import 'package:shopengo/feature/history/domain/model/shopping_history_item_model.dart';
-import 'package:shopengo/feature/history/domain/model/shopping_history_model.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/feature/history/data/repository/history_repository.dart';
+import 'package:spiskalica/feature/history/domain/cubit/history_bloc.dart';
+import 'package:spiskalica/feature/history/domain/cubit/history_event.dart';
+import 'package:spiskalica/feature/history/domain/cubit/history_state.dart';
+import 'package:spiskalica/feature/history/domain/model/shopping_history_item_model.dart';
+import 'package:spiskalica/feature/history/domain/model/shopping_history_model.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
 
 import 'history_bloc_test.mocks.dart';
 

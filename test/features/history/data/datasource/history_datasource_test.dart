@@ -1,11 +1,11 @@
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/cart/data/datasource/cart_datasource.dart';
-import 'package:shopengo/feature/history/data/datasource/history_datasource.dart';
-import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
-import 'package:shopengo/feature/product/data/datasource/product_datasource.dart';
-import 'package:shopengo/feature/product/domain/model/amount_type.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/cart/data/datasource/cart_datasource.dart';
+import 'package:spiskalica/feature/history/data/datasource/history_datasource.dart';
+import 'package:spiskalica/feature/home/data/datasource/store_datasource.dart';
+import 'package:spiskalica/feature/product/data/datasource/product_datasource.dart';
+import 'package:spiskalica/feature/product/domain/model/amount_type.dart';
 
 void main() {
   late AppDatabase database;

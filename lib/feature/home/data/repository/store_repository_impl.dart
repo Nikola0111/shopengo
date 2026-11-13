@@ -1,7 +1,7 @@
-import 'package:shopengo/feature/home/data/datasource/store_datasource.dart';
-import 'package:shopengo/feature/home/data/mapper/store_mapper.dart';
-import 'package:shopengo/feature/home/data/repository/store_repository.dart';
-import 'package:shopengo/feature/home/domain/model/store_model.dart';
+import 'package:spiskalica/feature/home/data/datasource/store_datasource.dart';
+import 'package:spiskalica/feature/home/data/mapper/store_mapper.dart';
+import 'package:spiskalica/feature/home/data/repository/store_repository.dart';
+import 'package:spiskalica/feature/home/domain/model/store_model.dart';
 
 class StoreRepositoryImpl implements StoreRepository {
   new(this._storeDatasource, this._storeMapper);

@@ -1,4 +1,4 @@
-package com.example.shopengo
+package rs.spiskalica.app
 
 import io.flutter.embedding.android.FlutterActivity
 

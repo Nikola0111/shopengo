@@ -1,5 +1,5 @@
-import 'package:shopengo/core/presentation/utils/app_database.dart';
-import 'package:shopengo/feature/product/domain/model/product_model.dart';
+import 'package:spiskalica/core/presentation/utils/app_database.dart';
+import 'package:spiskalica/feature/product/domain/model/product_model.dart';
 
 class ProductMapper {
   const new();
